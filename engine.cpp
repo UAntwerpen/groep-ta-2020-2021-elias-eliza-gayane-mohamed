@@ -18,6 +18,7 @@ int main(int argc, char const* argv[]) {
                 cout << line << endl;
             }
         }
+        rtfdjgjfdjgd
         txt_file.close();
     }
     return 0;
