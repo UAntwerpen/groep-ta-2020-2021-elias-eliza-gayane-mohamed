@@ -5,6 +5,8 @@ set(CMAKE_CXX_STANDARD 14)
 
 add_executable(PYDE
         engine.cpp
+        HTML.cpp
+        HTML.h
         automata/DFA_elias.cpp
         automata/DFA_elias.h
         automata/NFA_elias.cpp

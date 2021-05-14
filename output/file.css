@@ -1,0 +1,22 @@
+body {
+    font-family: 'Courier New', monospace;
+	}
+
+a{
+    color: aliceblue;
+    text-decoration: none;
+}
+a:hover{
+    color: azure;
+}
+
+td {
+    padding-left: 10px;
+    padding-right: 10px;
+    height: 100%;
+ }
+
+header {
+    background: #555;
+    color: white;
+}
