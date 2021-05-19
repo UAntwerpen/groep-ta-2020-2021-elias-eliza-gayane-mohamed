@@ -39,7 +39,6 @@ void HTML::make_HTML_file(const map<int, vector<pair<string, string>>> &text, st
             string begin = "<span style=\"color: #5f5e5e;\">" + to_string(it->first) + "</span>";
             html_file << begin;
             for(int i = 0; i < it->second.size(); i++){
-                cout << "spatie" << endl;
                 if (i > 0 && i < it->second.size()-1){
                     if(it->second[i-1].first != "("&& it->second[i].first != ")" && it->second[i].first != "(" && it->second[i].first != ":"){
                         html_file << " ";
@@ -62,7 +61,6 @@ void HTML::make_HTML_file(const map<int, vector<pair<string, string>>> &text, st
                 else{
                     html_file << it->second[i].first;
                 }
-                cout << it->second[i].first << endl;
             }
             html_file << "\n<br>";
         }
