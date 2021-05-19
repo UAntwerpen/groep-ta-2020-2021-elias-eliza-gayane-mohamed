@@ -1,0 +1,9 @@
+# Small program to check which of the 3 given numbers is the largest
+
+def max_num(num1, num2, num3):
+    if num1 >= num2 and num1 >= num3:   # You can also compare strings, booleans
+        return num1
+    elif num2 >= num1 and num2 >= num3:
+        return num2
+    else:
+        return num3

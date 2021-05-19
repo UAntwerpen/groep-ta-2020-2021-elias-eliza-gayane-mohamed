@@ -1,0 +1,29 @@
+from math import *
+
+###Exercise1
+def area_of_circle(r):
+    return pi * r**2
+
+###Exercise2
+def is_priem(x):
+    if x == 0:
+        return False
+    if x == 1:
+        return False
+    if x == 2:
+        return True
+    for i in range(2, x):
+        if x % i == 0:
+            return False
+    return True
+
+###Exercise3
+def fibonacci(n):
+    if n < 0:
+        print("Incorrect input")
+    elif n == 0:
+        return 0
+    elif n == 1 or n == 2:
+        return 1
+    else:
+        return Fibonacci(n-1) + Fibonacci(n-2)
