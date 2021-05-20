@@ -14,6 +14,8 @@ void NFA::readfile(string){
     /// We gaan eerst alle componenten van de NFA bepalen de quintuple: {Q,E,§,q0,F}
     type = j["type"];
 
+    Color = j["color"];
+
     for (int i = 0; i < j["alphabet"].size(); ++i) {
         string name = j["alphabet"][i];
         alphabet.push_back(name);
@@ -337,4 +339,8 @@ DFA NFA::toDFA(){
 
     DFA dfa("DFA",DFA_transitions,DFA_alphabet,DFA_states,DFA_start_state,DFA_final_states);
     return dfa;
+}
+
+const string &NFA::getColor() const {
+    return Color;
 }

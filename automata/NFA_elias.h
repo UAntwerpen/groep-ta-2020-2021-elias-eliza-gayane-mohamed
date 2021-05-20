@@ -17,6 +17,7 @@ using json = nlohmann::json;
 
 class NFA{
 private:
+    string Color;
     string type;
     string inputfile;
     map<string,vector<vector<string>>> transitie_tabel;
@@ -43,6 +44,8 @@ public:
     void print();
     void print_tabel(); // Dit is een methode voor mezelf om de NFA in tabelvorm weer te geven
     DFA toDFA();
+
+    const string &getColor() const;
 };
 
 #endif //UNTITLED6_NFA_H

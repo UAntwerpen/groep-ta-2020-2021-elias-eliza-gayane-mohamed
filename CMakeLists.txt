@@ -9,6 +9,8 @@ add_executable(PYDE
         HTML.h
         Parser.cpp
         Parser.h
+        Safe.cpp
+        Safe.h
         automata/DFA_elias.cpp
         automata/DFA_elias.h
         automata/NFA_elias.cpp

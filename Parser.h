@@ -17,7 +17,7 @@ public:
     Parser(const char *filename);
     vector<string> split_line(string &s, char d);
 
-    const map<int, vector<string>> &getParsedFile() const;
+    map<int, vector<string>> &getParsedFile() const;
 
 
 private:

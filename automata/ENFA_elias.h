@@ -16,6 +16,7 @@ using json = nlohmann::json;
 
 class ENFA{
 private:
+    string Color;
     string type;
     string eplsilontransitie;
     vector<string> alphabet;
@@ -49,5 +50,7 @@ public:
     void print();
     void print_tabel(); // Dit is een methode voor mezelf om de ENFA in tabelvorm weer te geven
     DFA toDFA();
+
+    const string &getColor() const;
 };
 #endif //UNTITLED6_ENFA_H

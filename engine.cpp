@@ -8,66 +8,54 @@
 #include "automata/RE_elias.h"
 #include "HTML.h"
 #include "Parser.h"
+#include "Safe.h"
 
 using namespace std;
 
 int main(int argc, char const* argv[]) {
 
+    /// voegen alle files even toe aan een vector voor de html file te genereren.
     vector<string> alle_files;
     for(int i = 1; i < argc; i++) {
         alle_files.push_back(argv[i]);
     }
 
+    /// het opstellen van de safe
+    vector<const char*> alle_NFAs = {"input/NFA/def_NFA.json", "input/NFA/for_NFA.json", "input/NFA/getallen_NFA.json",
+                                     "input/NFA/return_NFA.json", "input/NFA/string_quotes_NFA.json", "input/NFA/while_NFA.json"};
+    Safe safe(alle_NFAs);
+
+    /// het parsen van de files
     for(int i = 1; i < argc; i++){
         Parser parser(argv[i]);
-        const map<int, vector<string>>& parsed_file = parser.getParsedFile();
+        map<int, vector<string>> parsed_file = parser.getParsedFile();
 
-
-
-
-
-
-
-
-
-        /// dit is nog wat testcode:
-        map<int, vector<pair<string, string>>> text;
-        if(i == 1){
-            text[1].push_back(make_pair("hallo", "no_color"));
-            text[1].push_back(make_pair("ik", "#FAF207"));
-            text[1].push_back(make_pair("ben", "no_color"));
-            text[1].push_back(make_pair("Elias", "#55FA07"));
-            text[2].push_back(make_pair("def", "#ca7531"));
-            text[2].push_back(make_pair("functie", "#ffc66d"));
-            text[2].push_back(make_pair("(", "no_color"));
-            text[2].push_back(make_pair("parameter", "no_color"));
-            text[2].push_back(make_pair(")", "no_color"));
-            text[2].push_back(make_pair(":", "no_color"));
+        map<int, vector<pair<string, string>>> text_for_html;
+        /// halen de regexen uit de safe
+        vector<pair<RE, string>> vector_safe = safe.getSafe();
+        for(int j = 0; j < parsed_file.size(); j++){ // k is de lijn waaruit we lezen
+            for(int k= 0; k < parsed_file[j].size(); k++) {
+                string word = parsed_file[j][k];
+                bool herkend = false;
+                for(int l = 0;  l < vector_safe.size(); l++) {
+                    RE regex = vector_safe[l].first;
+                    string color = vector_safe[l].second;
+                    ENFA e_nfa = regex.toENFA();
+                    DFA dfa = e_nfa.toDFA();
+                    if (dfa.accepts(word)) {
+                        text_for_html[k].push_back(make_pair(word, color));
+                        herkend = true;
+                    }
+                }
+                if(!herkend){
+                    text_for_html[k].push_back(make_pair(word, "no_color"));
+                }
+            }
         }
-        if(i == 2) {
-            text[1].push_back(make_pair("hallo", "no_color"));
-            text[1].push_back(make_pair("ik", "#FAF207"));
-            text[1].push_back(make_pair("ben", "no_color"));
-            text[1].push_back(make_pair("Eliza", "#07FAED"));
-        }
-        if(i == 3) {
-            text[1].push_back(make_pair("#", "#fcc9a9"));
-            text[1].push_back(make_pair("This", "#fcc9a9"));
-            text[1].push_back(make_pair("program", "#fcc9a9"));
-            text[1].push_back(make_pair("prints", "#fcc9a9"));
-            text[1].push_back(make_pair("hello,", "#fcc9a9"));
-            text[1].push_back(make_pair("world!", "#fcc9a9"));
-            text[2].push_back(make_pair("", "no_color"));
-            text[3].push_back(make_pair("print", "#8888c6"));
-            text[3].push_back(make_pair("(", "no_color"));
-            text[3].push_back(make_pair("\"Hello, world!\"", "#5b7c57"));
-            text[3].push_back(make_pair(")", "no_color"));
-        }
-        /// tot hier
 
-        // genereert een html file met van de text
-        // om in de IDE te kunnen switchen naar meerdere files geef je ook een lijst met alle files mee
-        HTML html_file(text, argv[i] ,alle_files);
+        /// genereert een html file met van de text
+        /// om in de IDE te kunnen switchen naar meerdere files geef je ook een lijst met alle files mee
+        HTML html_file(text_for_html, argv[i] ,alle_files);
     }
     return 0;
 }

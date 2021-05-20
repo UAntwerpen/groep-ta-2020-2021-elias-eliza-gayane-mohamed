@@ -13,6 +13,8 @@ void ENFA::readfile(string){
     /// We gaan eerst alle componenten van de ENFA bepalen de quintuple: {Q,E,§,q0,F}
     type = j["type"];
 
+    Color = j["color"];
+
     eplsilontransitie = j["eps"];
 
     for (int i = 0; i < j["alphabet"].size(); ++i) {
@@ -400,4 +402,8 @@ ENFA::ENFA(const string &type, const string &eplsilontransitie, const vector<str
            const vector<vector<string>> &transitions) : type(type), eplsilontransitie(eplsilontransitie),
            alphabet(alphabet), states(states), start_state(startState), final_states(finalStates), transitions(transitions) {
     maak_transitie_tabel(transitions);
+}
+
+const string &ENFA::getColor() const {
+    return Color;
 }

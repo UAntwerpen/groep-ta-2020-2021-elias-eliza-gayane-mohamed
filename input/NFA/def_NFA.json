@@ -1,5 +1,6 @@
 {
   "type": "NFA",
+  "color": "#e07822",
   "alphabet": [
     "d", "e", "f"
   ],
