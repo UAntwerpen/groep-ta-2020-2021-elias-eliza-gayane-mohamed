@@ -13,6 +13,26 @@
       "name": "B",
       "starting": false,
       "accepting": true
+    },
+    {
+      "name": "C",
+      "starting": false,
+      "accepting": false
+    },
+    {
+      "name": "D",
+      "starting": false,
+      "accepting": true
+    },
+    {
+      "name": "E",
+      "starting": false,
+      "accepting": true
+    },
+    {
+      "name": "dead",
+      "starting": false,
+      "accepting": false
     }
   ],
   "transitions": [
@@ -67,6 +87,11 @@
       "input": "9"
     },
     {
+      "from": "A",
+      "to": "C",
+      "input": "."
+    },
+    {
       "from": "B",
       "to": "B",
       "input": "0"
@@ -118,8 +143,228 @@
     },
     {
       "from": "B",
-      "to": "B",
+      "to": "E",
       "input": "."
+    },
+    {
+      "from": "C",
+      "to": "D",
+      "input": "0"
+    },
+    {
+      "from": "C",
+      "to": "D",
+      "input": "1"
+    },
+    {
+      "from": "C",
+      "to": "D",
+      "input": "2"
+    },
+    {
+      "from": "C",
+      "to": "D",
+      "input": "3"
+    },
+    {
+      "from": "C",
+      "to": "D",
+      "input": "4"
+    },
+    {
+      "from": "C",
+      "to": "D",
+      "input": "5"
+    },
+    {
+      "from": "C",
+      "to": "D",
+      "input": "6"
+    },
+    {
+      "from": "C",
+      "to": "D",
+      "input": "7"
+    },
+    {
+      "from": "C",
+      "to": "D",
+      "input": "8"
+    },
+    {
+      "from": "C",
+      "to": "D",
+      "input": "9"
+    },
+    {
+      "from": "C",
+      "to": "dead",
+      "input": "."
+    },
+    {
+      "from": "D",
+      "to": "D",
+      "input": "0"
+    },
+    {
+      "from": "D",
+      "to": "D",
+      "input": "1"
+    },
+    {
+      "from": "D",
+      "to": "D",
+      "input": "2"
+    },
+    {
+      "from": "D",
+      "to": "D",
+      "input": "3"
+    },
+    {
+      "from": "D",
+      "to": "D",
+      "input": "4"
+    },
+    {
+      "from": "D",
+      "to": "D",
+      "input": "5"
+    },
+    {
+      "from": "D",
+      "to": "D",
+      "input": "6"
+    },
+    {
+      "from": "D",
+      "to": "D",
+      "input": "7"
+    },
+    {
+      "from": "D",
+      "to": "D",
+      "input": "8"
+    },
+    {
+      "from": "D",
+      "to": "D",
+      "input": "9"
+    },
+    {
+      "from": "D",
+      "to": "dead",
+      "input": "."
+    },
+    {
+      "from": "E",
+      "to": "E",
+      "input": "0"
+    },
+    {
+      "from": "E",
+      "to": "E",
+      "input": "1"
+    },
+    {
+      "from": "E",
+      "to": "E",
+      "input": "2"
+    },
+    {
+      "from": "E",
+      "to": "E",
+      "input": "3"
+    },
+    {
+      "from": "E",
+      "to": "E",
+      "input": "4"
+    },
+    {
+      "from": "E",
+      "to": "E",
+      "input": "5"
+    },
+    {
+      "from": "E",
+      "to": "E",
+      "input": "6"
+    },
+    {
+      "from": "E",
+      "to": "E",
+      "input": "7"
+    },
+    {
+      "from": "E",
+      "to": "E",
+      "input": "8"
+    },
+    {
+      "from": "E",
+      "to": "E",
+      "input": "9"
+    },
+    {
+      "from": "E",
+      "to": "dead",
+      "input": "."
+    },
+    {
+      "from": "dead",
+      "to": "dead",
+      "input": "."
+    },
+    {
+      "from": "dead",
+      "to": "dead",
+      "input": "0"
+    },
+    {
+      "from": "dead",
+      "to": "dead",
+      "input": "1"
+    },
+    {
+      "from": "dead",
+      "to": "dead",
+      "input": "2"
+    },
+    {
+      "from": "dead",
+      "to": "dead",
+      "input": "3"
+    },
+    {
+      "from": "dead",
+      "to": "dead",
+      "input": "4"
+    },
+    {
+      "from": "dead",
+      "to": "dead",
+      "input": "5"
+    },
+    {
+      "from": "dead",
+      "to": "dead",
+      "input": "6"
+    },
+    {
+      "from": "dead",
+      "to": "dead",
+      "input": "7"
+    },
+    {
+      "from": "dead",
+      "to": "dead",
+      "input": "8"
+    },
+    {
+      "from": "dead",
+      "to": "dead",
+      "input": "9"
     }
   ]
 }
