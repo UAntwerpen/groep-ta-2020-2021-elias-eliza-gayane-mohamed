@@ -8,6 +8,7 @@ HTML::HTML(const map<int, vector<pair<string, string>>> &text, const char *filen
 
 
 void HTML::make_HTML_file(const map<int, vector<pair<string, string>>> &text, string filename, const vector<string> &alleFiles){
+    // de vele \t en \n zijn om de html file die gegenereerd wordt nog leesbaar te maken
     std::ofstream html_file;
     size_t lastindex = filename.find_last_of(".");
     string filename_ = filename.substr(0, lastindex);
@@ -36,7 +37,7 @@ void HTML::make_HTML_file(const map<int, vector<pair<string, string>>> &text, st
         html_file << "\n\t</table>\n</header>\n";
         html_file << "<table  style=\"color:white\">";
         for (auto it = text.begin(); it != text.end(); ++it){
-            html_file << "\t<tr>\n\t\t<td>\n\t\t\t";
+            html_file << "\n\t<tr>\n\t\t<td>\n\t\t\t";
             string begin = "<span style=\"color: #5f5e5e;\">" + to_string(it->first) + "</span>";
             html_file << begin;
             html_file << "\n\t\t</td>\n\t\t<td>\n\t\t\t";
@@ -51,7 +52,7 @@ void HTML::make_HTML_file(const map<int, vector<pair<string, string>>> &text, st
                     html_file << it->second[i].first;
                 }
             }
-            html_file << "\n\t\t</td>\n\t</tr>\n";
+            html_file << "\n\t\t</td>\n\t</tr>";
         }
         html_file << "\n</table>\n</body>\n</html>";
     }
