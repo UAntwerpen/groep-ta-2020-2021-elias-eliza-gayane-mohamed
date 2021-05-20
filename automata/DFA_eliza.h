@@ -1,4 +1,3 @@
-//Naam: ELiza Gashi     Studentennr: s0194220
 #ifndef SO1_DFA_H
 #define SO1_DFA_H
 
@@ -10,20 +9,25 @@
 #include <fstream>
 using namespace std;
 
-class DFA{
+struct State {
+    string name;
+    map<string, State*> transitions;
+};
+
+class DFA {
 public:
     string type;
-    vector<string> states;  //Set of states
-    string start_state;   //First state
-    vector<string> last_states;   //last state
-    map<string, map<char, string>> transitions;
-    string alphabet; //input symbols
+    vector<State*> states;
+    State* start_state;
+    vector<State*> last_states;
+    string alphabet;
 
-    DFA(string file_name);
+    DFA(const string &file_name);
     void print();
+    ~DFA();
+    bool is_start_state(const State* state) const;
+    bool is_accepting_state(const State* state) const;
     bool accepts(const string &input);
-    bool is_startingstate(const string& state) const;
-    bool is_acceptingstate(const string& state) const;
 };
 
 #endif //SO1_DFA_H
