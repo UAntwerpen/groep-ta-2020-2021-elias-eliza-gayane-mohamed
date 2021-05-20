@@ -1,8 +1,8 @@
 {
   "type": "NFA",
-  "color": "#e07822",
+  "color": "#4a3c8c",
   "alphabet": [
-    "f", "o", "r"
+    "s", "t", "r"
   ],
   "states": [
     {
@@ -30,12 +30,12 @@
     {
       "from": "0",
       "to": "1",
-      "input": "f"
+      "input": "s"
     },
     {
       "from": "1",
       "to": "2",
-      "input": "o"
+      "input": "t"
     },
     {
       "from": "2",
