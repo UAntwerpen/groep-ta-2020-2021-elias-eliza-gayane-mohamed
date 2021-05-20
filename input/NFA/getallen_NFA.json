@@ -1,0 +1,125 @@
+{
+  "type": "NFA",
+  "alphabet": [
+    "0", "1", "2", "3", "4", "5", "6", "7", "8", "9","."
+  ],
+  "states": [
+    {
+      "name": "A",
+      "starting": true,
+      "accepting": false
+    },
+    {
+      "name": "B",
+      "starting": false,
+      "accepting": true
+    }
+  ],
+  "transitions": [
+    {
+      "from": "A",
+      "to": "B",
+      "input": "0"
+    },
+    {
+      "from": "A",
+      "to": "B",
+      "input": "1"
+    },
+    {
+      "from": "A",
+      "to": "B",
+      "input": "2"
+    },
+    {
+      "from": "A",
+      "to": "B",
+      "input": "3"
+    },
+    {
+      "from": "A",
+      "to": "B",
+      "input": "4"
+    },
+    {
+      "from": "A",
+      "to": "B",
+      "input": "5"
+    },
+    {
+      "from": "A",
+      "to": "B",
+      "input": "6"
+    },
+    {
+      "from": "A",
+      "to": "B",
+      "input": "7"
+    },
+    {
+      "from": "A",
+      "to": "B",
+      "input": "8"
+    },
+    {
+      "from": "A",
+      "to": "B",
+      "input": "9"
+    },
+    {
+      "from": "B",
+      "to": "B",
+      "input": "0"
+    },
+    {
+      "from": "B",
+      "to": "B",
+      "input": "1"
+    },
+    {
+      "from": "B",
+      "to": "B",
+      "input": "2"
+    },
+    {
+      "from": "B",
+      "to": "B",
+      "input": "3"
+    },
+    {
+      "from": "B",
+      "to": "B",
+      "input": "4"
+    },
+    {
+      "from": "B",
+      "to": "B",
+      "input": "5"
+    },
+    {
+      "from": "B",
+      "to": "B",
+      "input": "6"
+    },
+    {
+      "from": "B",
+      "to": "B",
+      "input": "7"
+    },
+    {
+      "from": "B",
+      "to": "B",
+      "input": "8"
+    },
+    {
+      "from": "B",
+      "to": "B",
+      "input": "9"
+    },
+    {
+      "from": "B",
+      "to": "B",
+      "input": "."
+    }
+  ]
+}

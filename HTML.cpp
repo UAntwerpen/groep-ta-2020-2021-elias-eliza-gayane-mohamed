@@ -64,7 +64,7 @@ void HTML::make_HTML_file(const map<int, vector<pair<string, string>>> &text, st
             }
             html_file << "\n<br>";
         }
-        html_file << "</p>\n</body>\n</html>";
+        html_file << "\n</p>\n</body>\n</html>";
     }
     html_file.close();
 }
