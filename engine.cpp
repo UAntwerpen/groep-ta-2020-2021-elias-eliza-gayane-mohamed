@@ -21,9 +21,14 @@ int main(int argc, char const* argv[]) {
     }
 
     /// het opstellen van de safe
-    vector<const char*> alle_NFAs = {"input/NFA/def_NFA.json", "input/NFA/for_NFA.json", "input/NFA/getallen_NFA.json",
-                                     "input/NFA/return_NFA.json", "input/NFA/string_quotes_NFA.json", "input/NFA/while_NFA.json"};
-    Safe safe(alle_NFAs);
+    //vector<const char*> alle_NFAs = {"../input/NFA/def_NFA.json", "../input/NFA/for_NFA.json", "../input/NFA/getallen_NFA.json",
+    // "../input/NFA/return_NFA.json", "../input/NFA/string_quotes_NFA.json", "../input/NFA/while_NFA.json"};
+    //Safe safe(alle_NFAs);
+    RE re1("if", 'e');
+    RE re2("elif", 'p');
+    RE re3("import", 'e');
+    vector<pair<RE, string>> test_save = {make_pair(re1, "#e07822"), make_pair(re2, "#e07822"), make_pair(re3, "#e07822")};
+
 
     /// het parsen van de files
     for(int i = 1; i < argc; i++){
@@ -32,8 +37,9 @@ int main(int argc, char const* argv[]) {
 
         map<int, vector<pair<string, string>>> text_for_html;
         /// halen de regexen uit de safe
-        vector<pair<RE, string>> vector_safe = safe.getSafe();
-        for(int j = 0; j < parsed_file.size(); j++){ // k is de lijn waaruit we lezen
+        //vector<pair<RE, string>> vector_safe = safe.getSafe();
+        vector<pair<RE, string>> vector_safe = test_save;
+        for(int j = 0; j < parsed_file.size(); j++){ // j is de lijn waaruit we lezen
             for(int k= 0; k < parsed_file[j].size(); k++) {
                 string word = parsed_file[j][k];
                 bool herkend = false;
@@ -43,12 +49,12 @@ int main(int argc, char const* argv[]) {
                     ENFA e_nfa = regex.toENFA();
                     DFA dfa = e_nfa.toDFA();
                     if (dfa.accepts(word)) {
-                        text_for_html[k].push_back(make_pair(word, color));
+                        text_for_html[j].push_back(make_pair(word, color));
                         herkend = true;
                     }
                 }
                 if(!herkend){
-                    text_for_html[k].push_back(make_pair(word, "no_color"));
+                    text_for_html[j].push_back(make_pair(word, "no_color"));
                 }
             }
         }

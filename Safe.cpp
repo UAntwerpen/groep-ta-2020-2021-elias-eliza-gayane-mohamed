@@ -6,12 +6,14 @@ Safe::Safe(const vector<const char *> &nfAs) : NFAs(nfAs) {
 }
 
 void Safe::make_safe(vector<const char *> NFAs){
-    for(int i = 1; i < NFAs.size(); i++){
+    for(int i = 0; i < NFAs.size(); i++){
+        cout << NFAs[i] << endl;
         NFA nfa(NFAs[i]);
         string color = nfa.getColor();
+        ofstream elias_dfa;
         DFA dfa = nfa.toDFA();
-        //RE re = dfa.toRE(); // methode moet nog gemaakt worden
-        RE re("voorbeeld",'d');
+        //RE re = dfa.toRe();
+        RE re("fdfdsd", 'e');
         safe.push_back(make_pair(re,color));
     }
 }

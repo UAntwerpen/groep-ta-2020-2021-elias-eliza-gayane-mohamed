@@ -42,7 +42,7 @@ vector<string> Parser::split_line(string &s, char d) {
     return words;
 }
 
-map<int, vector<string>> &Parser::getParsedFile() const{
+map<int, vector<string>> &Parser::getParsedFile(){
     return parsed_file;
 }
 

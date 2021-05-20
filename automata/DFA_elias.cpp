@@ -91,6 +91,7 @@ bool DFA::isgeldig(string s){
             }
         }
     }
+    /*
     if (foutsymbool == true){
         cout << "symbool(en): ";
         for (int i = 0; i < foute_symbolen.size()-1; ++i){
@@ -101,6 +102,7 @@ bool DFA::isgeldig(string s){
 
         return false;
     }
+     */
     return true;
 }
 

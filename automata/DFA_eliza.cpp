@@ -2,8 +2,8 @@
 #include <iomanip>
 #include <fstream>
 #include <algorithm>
-#include "DFA.h"
-#include "json.hpp"
+#include "DFA_eliza.h"
+#include "../json.hpp"
 
 using json = nlohmann::json;
 

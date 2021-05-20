@@ -11,7 +11,7 @@ void HTML::make_HTML_file(const map<int, vector<pair<string, string>>> &text, st
     std::ofstream html_file;
     size_t lastindex = filename.find_last_of(".");
     string filename_ = filename.substr(0, lastindex);
-    string file = "output/" + filename_ + ".html";
+    string file = "../../output/" + filename_ + ".html";
     html_file.open(file);
     if (html_file.is_open()) {
         html_file << "<!DOCTYPE html>\n<html>\n<head>\n<link href=\"file.css\" rel=\"stylesheet\" type=\"text/css\">\n<title>PYDE</title>\n</head>\n<body style=\"background-color:#232323;\">\n";
@@ -34,24 +34,13 @@ void HTML::make_HTML_file(const map<int, vector<pair<string, string>>> &text, st
             html_file << "\n\t\t</td>";
         }
         html_file << "\n\t</table>\n</header>\n";
-        html_file << "<p style=\"color:white;line-height:1.5\">";
+        html_file << "<table  style=\"color:white\">";
         for (auto it = text.begin(); it != text.end(); ++it){
+            html_file << "\t<tr>\n\t\t<td>\n\t\t\t";
             string begin = "<span style=\"color: #5f5e5e;\">" + to_string(it->first) + "</span>";
             html_file << begin;
+            html_file << "\n\t\t</td>\n\t\t<td>\n\t\t\t";
             for(int i = 0; i < it->second.size(); i++){
-                if (i > 0 && i < it->second.size()-1){
-                    if(it->second[i-1].first != "("&& it->second[i].first != ")" && it->second[i].first != "(" && it->second[i].first != ":"){
-                        html_file << " ";
-                    }
-                }
-                else if (i == it->second.size()-1){
-                    if(it->second[it->second.size()-1].first != "(" && it->second[it->second.size()-1].first != ")"  && it->second[it->second.size()-1].first != ":"){
-                        html_file << " ";
-                    }
-                }
-                else{
-                    html_file << " ";
-                }
                 if(it->second[i].second != "no_color"){
                     string color_begin = "<span style=\"color: " + it->second[i].second + ";\">";
                     string word = it->second[i].first;
@@ -62,9 +51,9 @@ void HTML::make_HTML_file(const map<int, vector<pair<string, string>>> &text, st
                     html_file << it->second[i].first;
                 }
             }
-            html_file << "\n<br>";
+            html_file << "\n\t\t</td>\n\t</tr>\n";
         }
-        html_file << "\n</p>\n</body>\n</html>";
+        html_file << "\n</table>\n</body>\n</html>";
     }
     html_file.close();
 }

@@ -13,10 +13,11 @@ a:hover{
 td {
     padding-left: 10px;
     padding-right: 10px;
-    height: 100%;
+    padding-bottom: 2px;
  }
 
 header {
     background: #555;
     color: white;
 }
+

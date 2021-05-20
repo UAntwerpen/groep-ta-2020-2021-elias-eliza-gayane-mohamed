@@ -9,8 +9,8 @@
 #include <vector>
 #include <map>
 #include <set>
-#include "automata/NFA_elias.h"
 #include "automata/DFA_elias.h"
+#include "automata/NFA_elias.h"
 #include "automata/RE_elias.h"
 
 using namespace std;
