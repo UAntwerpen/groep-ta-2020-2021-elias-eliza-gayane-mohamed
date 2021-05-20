@@ -16,28 +16,27 @@ Parser::Parser(const char *filename) {
         cerr << "Error opening file " << filename << "." << endl;
     }
     /// dit heb ik erbij gedaan
-    for(int i = 0; i < line_list.size(); i++) {
-        parsed_file[i] = split_line(line_list[i], ' ');
+    for(int i = 1; i <= line_list.size(); i++) {
+        parsed_file[i] = split_line(line_list[i]);
     }
     /// tot hier
 
     txt_file.close();
 }
 
-vector<string> Parser::split_line(string &s, char d) {
-    for(int i = 0; i < s.size(); i++) {
-        if(s[i] == '#' || s[i] == ' ' || s[i] == '\"') continue;
-        if (!isalnum(s[i])) {
-            s.insert(s.begin() + i, ' ');
-            s.insert(s.begin() + i + 2, ' ');
-            i++;
-        }
-    }
-    istringstream iss(s);
-    string word;
+vector<string> Parser::split_line(string &s) {
     vector<string> words;
-    while(getline(iss, word, d)){
-        words.push_back(word);
+    string word;
+    for(int i = 0; i < s.size(); i++){
+        if(!isalnum(s[i]) || (!isalnum(word[0]) && !word.empty())){
+            words.emplace_back(word);
+            word.clear();
+        }
+        word += s[i];
+        if(i == s.size() - 1) words.emplace_back(word);
+    }
+    for(int i = 0; i < words.size(); i++){
+        if(words[i].empty()) words.erase(words.begin() + i);
     }
     return words;
 }

@@ -8,21 +8,18 @@
 #include <string>
 #include <vector>
 #include <map>
-#include <set>
 
 using namespace std;
 
 class Parser {
 public:
     Parser(const char *filename);
-    vector<string> split_line(string &s, char d);
-
+    vector<string> split_line(string &s);
     map<int, vector<string>> &getParsedFile();
-
 
 private:
     map<int, string> line_list;
-    map<int, vector<string> > parsed_file;
+    map<int, vector<string>> parsed_file;
 };
 
 
