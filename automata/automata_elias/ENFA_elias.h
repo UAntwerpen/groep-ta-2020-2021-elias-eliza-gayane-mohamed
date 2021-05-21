@@ -46,6 +46,8 @@ public:
                const vector<string> &states, const string &startState, const vector<string> &finalStates,
                const vector<vector<string>> &transitions);
 
+    ENFA_elias();
+
     bool accepts(string s);
     void print();
     void print_tabel(); // Dit is een methode voor mezelf om de ENFA_elias in tabelvorm weer te geven

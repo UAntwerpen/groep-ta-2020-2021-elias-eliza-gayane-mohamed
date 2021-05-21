@@ -32,7 +32,13 @@ class RE_elias {
 public:
     RE_elias(const string &regex, char epsilon);
 
+    RE_elias();
+
     ENFA_elias toENFA();
+
+    const string &getRegex() const;
+
+    char getEpsilon() const;
 
 private:
     void make_transitions();

@@ -23,6 +23,9 @@ public:
     string alphabet;
 
     DFA_eliza(const string &file_name);
+
+    DFA_eliza();
+
     void print();
     ~DFA_eliza();
     bool is_start_state(const State* state) const;

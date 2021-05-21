@@ -40,6 +40,9 @@ private:
 public:
 
     NFA_elias(const string &inputfile);
+
+    NFA_elias();
+
     bool accepts(string s);
     void print();
     void print_tabel(); // Dit is een methode voor mezelf om de NFA_elias in tabelvorm weer te geven

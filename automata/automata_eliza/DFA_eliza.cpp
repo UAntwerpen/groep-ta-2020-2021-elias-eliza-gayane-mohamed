@@ -1,6 +1,6 @@
 #include <algorithm>
 #include "DFA_eliza.h"
-#include "json.hpp"
+#include "../../json.hpp"
 
 using json = nlohmann::json;
 
@@ -87,3 +87,5 @@ DFA_eliza::~DFA_eliza() {
         delete state;
     }
 }
+
+DFA_eliza::DFA_eliza() {}

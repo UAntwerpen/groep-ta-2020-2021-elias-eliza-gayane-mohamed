@@ -616,3 +616,5 @@ bool DFA_elias::operator == (const DFA_elias &other){
     }
     return false;
 }
+
+DFA_elias::DFA_elias() {}

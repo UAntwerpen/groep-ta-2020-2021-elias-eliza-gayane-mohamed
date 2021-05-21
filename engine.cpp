@@ -4,8 +4,10 @@
 #include <string>
 #include <iostream>
 #include <cmath>
-#include "automata/automata_elias/DFA_elias.h"
-#include "automata/automata_elias/RE_elias.h"
+#include "automata/wrappers/wrapper_DFA.h"
+#include "automata/wrappers/wrapper_NFA.h"
+#include "automata/wrappers/wrapper_ENFA.h"
+#include "automata/wrappers/wrapper_RE.h"
 #include "HTML.h"
 #include "Parser.h"
 #include "Safe.h"

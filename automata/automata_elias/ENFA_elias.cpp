@@ -407,3 +407,5 @@ ENFA_elias::ENFA_elias(const string &type, const string &eplsilontransitie, cons
 const string &ENFA_elias::getColor() const {
     return Color;
 }
+
+ENFA_elias::ENFA_elias() {}

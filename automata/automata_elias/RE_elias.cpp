@@ -385,3 +385,13 @@ ENFA_elias RE_elias::toENFA(){
     get_final_states(regextree,finalestates,test);
     return ENFA_elias("ENFA_elias", epsilon_, alphabet, states, startstaat, finalestates, transitions);
 }
+
+const string &RE_elias::getRegex() const {
+    return regex;
+}
+
+char RE_elias::getEpsilon() const {
+    return epsilon;
+}
+
+RE_elias::RE_elias() {}

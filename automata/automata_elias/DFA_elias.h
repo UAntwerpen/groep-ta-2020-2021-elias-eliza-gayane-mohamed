@@ -45,6 +45,8 @@ public:
     DFA_elias(const string &type, const vector<vector<string>> &transitions, const vector<string> &alphabet,
               const vector<string> &states, const string &startState, const vector<string> &finalStates);
 
+    DFA_elias();
+
     bool accepts(string s);
     void print();
     void print_tabel(); // Dit is een methode voor mezelf om de NFA_elias in tabelvorm weer te geven

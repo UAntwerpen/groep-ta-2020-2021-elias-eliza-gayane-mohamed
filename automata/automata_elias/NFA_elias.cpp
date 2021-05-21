@@ -344,3 +344,5 @@ DFA_elias NFA_elias::toDFA(){
 const string &NFA_elias::getColor() const {
     return Color;
 }
+
+NFA_elias::NFA_elias() {}
