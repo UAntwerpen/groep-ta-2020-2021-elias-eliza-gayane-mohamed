@@ -1,16 +1,16 @@
 #include "DFA_elias.h"
 
-DFA::DFA(const string &inputfile) : inputfile(inputfile) {
+DFA_elias::DFA_elias(const string &inputfile) : inputfile(inputfile) {
 
     readfile(inputfile);
 }
 
-void DFA::readfile(string){
+void DFA_elias::readfile(string){
     ifstream input(inputfile);
     json j;
     input >> j;
 
-    /// We gaan eerst alle componenten van de DFA bepalen de quintuple: {Q,E,§,q0,F}
+    /// We gaan eerst alle componenten van de DFA_elias bepalen de quintuple: {Q,E,§,q0,F}
     type = j["type"];
 
     for (int i = 0; i < j["alphabet"].size(); ++i) {
@@ -51,7 +51,7 @@ void DFA::readfile(string){
     maak_transitie_tabel(transitions);
 }
 
-void DFA::maak_transitie_tabel(vector<vector<string>> transitions){
+void DFA_elias::maak_transitie_tabel(vector<vector<string>> transitions){
     for (int i = 0; i < states.size(); ++i) {
         vector<vector<string>> overgangen;
         for (int j = 0; j < transitions.size(); ++j){
@@ -66,7 +66,7 @@ void DFA::maak_transitie_tabel(vector<vector<string>> transitions){
     }
 }
 
-string DFA::go_to(vector<vector<string>> transitions ,string current_state,string s){
+string DFA_elias::go_to(vector<vector<string>> transitions , string current_state, string s){
     for (int i = 0; i < transitions.size(); ++i){
         //cout << "from: " << transitions[i][0] << " to: " << transitions[i][1] << " input: " << transitions[i][2] << endl;
         if (current_state == transitions[i][0] && transitions[i][2] == s){
@@ -76,7 +76,7 @@ string DFA::go_to(vector<vector<string>> transitions ,string current_state,strin
     return "";
 }
 
-bool DFA::isgeldig(string s){
+bool DFA_elias::isgeldig(string s){
     bool foutsymbool = false;
     vector<string> foute_symbolen;
     for (int i = 0; i < s.size(); ++i) {
@@ -106,7 +106,7 @@ bool DFA::isgeldig(string s){
     return true;
 }
 
-bool DFA::accepts(string s) {
+bool DFA_elias::accepts(string s) {
     if (this->isgeldig(s) == false){
         return false;
     }
@@ -124,7 +124,7 @@ bool DFA::accepts(string s) {
     return false;
 }
 
-void DFA::print_tabel() {
+void DFA_elias::print_tabel() {
     cout << type << ":\t";
     for (int i = 0; i < alphabet.size(); ++i){
         cout << " " << alphabet[i] << "\t";
@@ -157,14 +157,14 @@ void DFA::print_tabel() {
     }
 }
 
-bool DFA::isStartState(string state){
+bool DFA_elias::isStartState(string state){
     if(state == start_state){
         return true;
     }
     return false;
 }
 
-bool DFA::isFinalState(vector<string> final_states_, string state){
+bool DFA_elias::isFinalState(vector<string> final_states_, string state){
     for(string final_state:final_states_){
         if (state == final_state){
             return true;
@@ -174,7 +174,7 @@ bool DFA::isFinalState(vector<string> final_states_, string state){
 }
 
 
-void DFA::print(){
+void DFA_elias::print(){
     json j2;
     j2["type"] = type;
     j2["alphabet"] = alphabet;
@@ -226,8 +226,8 @@ vector<vector<string>> maketabel(vector<string> states){
     return tabel;
 }
 
-DFA::DFA(const string &type, const vector<vector<string>> &transitions, const vector<string> &alphabet,
-         const vector<string> &states, const string &startState, const vector<string> &finalStates) : type(type),
+DFA_elias::DFA_elias(const string &type, const vector<vector<string>> &transitions, const vector<string> &alphabet,
+                     const vector<string> &states, const string &startState, const vector<string> &finalStates) : type(type),
          transitions(transitions),alphabet(alphabet),states(states),start_state(startState),final_states(finalStates) {
     maak_transitie_tabel(transitions);
     // we initialiseren een lege tabel
@@ -334,7 +334,7 @@ vector<vector<string>> equivalent(vector<vector<string>> tabel){
     return equivalent_;
 }
 
-// functie die van een bepaalde staten een DFA string maakt
+// functie die van een bepaalde staten een DFA_elias string maakt
 string to_dfa_staat(vector<string> eqiuvalent_states){
     if(!eqiuvalent_states.empty()){
         // We gaan de vector omzetten naar een staat van de vorm {x,y,...}
@@ -352,7 +352,7 @@ string to_dfa_staat(vector<string> eqiuvalent_states){
 }
 
 // methode die het table filling algoritme uitvoert
-vector<vector<string>> DFA::table_filling_algoritme(vector<vector<string>>transitions, vector<string> final_states, vector<string> states, vector<vector<string>> &minimized){
+vector<vector<string>> DFA_elias::table_filling_algoritme(vector<vector<string>>transitions, vector<string> final_states, vector<string> states, vector<vector<string>> &minimized){
     // een tabel is een matrix en ziet er als volgt uit [[x,y,teken],[z,y,teken],...]
     minimized = maketabel(states);
 
@@ -401,7 +401,7 @@ vector<vector<string>> DFA::table_filling_algoritme(vector<vector<string>>transi
 }
 
 // functie die de tabel print
-void DFA::printTable(){
+void DFA_elias::printTable(){
     int counter = 1;
     while (counter < states.size()){
         for (int i = 1; i < states.size(); i++) {
@@ -452,7 +452,7 @@ void printTable_equils(vector<string> states, vector<vector<string>> minimized_t
     cout << states[states.size()-2]<< endl;
 }
 
-// functie die de overeenkomstige staat van de neiuwe geminimaliseerde DFA terug geeft
+// functie die de overeenkomstige staat van de neiuwe geminimaliseerde DFA_elias terug geeft
 string get_overeenlomstige_nieuwe_staat(vector<string> newDFAstates, string staat){
     for (int i = 0; i < newDFAstates.size(); i++){
         for (int j = 0; j < newDFAstates[i].size(); j++) {
@@ -465,8 +465,8 @@ string get_overeenlomstige_nieuwe_staat(vector<string> newDFAstates, string staa
     }
 }
 
-// methode die de nieuwe DFA transities bepaald
-vector<string> DFA::DFAtransitions(vector<string> newDFAstates,string from, vector<string> &DFA_states, string input){
+// methode die de nieuwe DFA_elias transities bepaald
+vector<string> DFA_elias::DFAtransitions(vector<string> newDFAstates, string from, vector<string> &DFA_states, string input){
     // We maken een transitie aan bestaande uit [[from],[to],[input]]
     vector<string> transition;
     vector<string> DFAstaat;
@@ -490,8 +490,8 @@ vector<string> DFA::DFAtransitions(vector<string> newDFAstates,string from, vect
     return transition;
 }
 
-// methode die een DFA minimaliseerd door middle van het table filling algoritme
-DFA DFA::minimize(){
+// methode die een DFA_elias minimaliseerd door middle van het table filling algoritme
+DFA_elias DFA_elias::minimize(){
 
     // tabel is een matrix en ziet er als volgt uit [[x,y,teken],[z,y,teken],...]
     vector<vector<string>> tabel = this->table_filling_algoritme(transitions,final_states,states,minimized_tabel);
@@ -549,12 +549,12 @@ DFA DFA::minimize(){
     // newDFAtransitions is een matrix en ziet er als volgt uit [[from:{staat1},to:{staat2},input:symbool],[from:{staat1},to:{staat3},input:symbool],...]
     vector<vector<string>> newDFAtransitions;
 
-    // DFA states is een lijst met strings die de staten bijhoud.
+    // DFA_elias states is een lijst met strings die de staten bijhoud.
     vector<string> DFA_states;
     DFA_states.push_back(DFAstartstate);
     bool verwerken = true;
     int counter = 0;
-    // We blijven de staten verwerken tot alle staten een transitie in de DFA hebben
+    // We blijven de staten verwerken tot alle staten een transitie in de DFA_elias hebben
     while (verwerken){
         for(int i = 0; i < alphabet.size(); ++i){
             // een DFA_transition bestaat uit [[from],[to],[input]]
@@ -567,12 +567,12 @@ DFA DFA::minimize(){
     }
 
     cout << endl;
-    DFA dfa("DFA",newDFAtransitions,alphabet,DFA_states,DFAstartstate,DFA_final_states);
+    DFA_elias dfa("DFA_elias", newDFAtransitions, alphabet, DFA_states, DFAstartstate, DFA_final_states);
     return dfa;
 }
 
-// methode die nagaat of 2 DFA's gelijk zijn
-bool DFA::operator == (const DFA &other){
+// methode die nagaat of 2 DFA_elias's gelijk zijn
+bool DFA_elias::operator == (const DFA_elias &other){
     vector<string> allestaten;
     vector<string> allfinalstates;
     vector<vector<string>> alletransities;
@@ -598,8 +598,8 @@ bool DFA::operator == (const DFA &other){
     vector<vector<string>> tabel = this->table_filling_algoritme(alletransities,allfinalstates,allestaten,tablefilling);
     printTable_equils(allestaten,tabel);
 
-    // Om te kijken of 2 DFA's gelijk zijn moeten we kijken naar de startstaten
-    // Als deze equivalent zijn volgens het table fillig algoritme dan zijn de DFA's equivalent
+    // Om te kijken of 2 DFA_elias's gelijk zijn moeten we kijken naar de startstaten
+    // Als deze equivalent zijn volgens het table fillig algoritme dan zijn de DFA_elias's equivalent
     vector<vector<string>> equivalent;
     for (int i = 0; i < tabel.size(); ++i){
         if (tabel[i][2] == "-"){

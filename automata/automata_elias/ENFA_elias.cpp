@@ -111,7 +111,7 @@ bool ENFA::isgeldig(string s){
 }
 
 bool ENFA::accepts(string s) {
-    DFA dfa = this->toDFA();
+    DFA_elias dfa = this->toDFA();
     return dfa.accepts(s);
 }
 
@@ -291,7 +291,7 @@ vector<string> ENFA::DFAtransitions(string from, vector<string> &DFA_states, vec
     // We voegen from al toe
     transition.push_back(from);
     // We ittereren over de staat en bekijken de individuele ENFA transitions bv: {1,3} ->{4} en ->{2} dus wordt dit {4,2}
-    // De 4 en 2 worden aan een tijdelijke vector DFA staat toegevoegd en later met de toDFAstate naar een string omgezet
+    // De 4 en 2 worden aan een tijdelijke vector DFA_elias staat toegevoegd en later met de toDFAstate naar een string omgezet
     // [4,2] -> {2,4}
     vector<string> from_ = parse_state(from);
     for(int j = 0; j < from_.size(); ++j){
@@ -355,7 +355,7 @@ vector<string> ENFA::get_closure(string state){
     return closure_of_state;
 }
 
-DFA ENFA::toDFA(){
+DFA_elias ENFA::toDFA(){
     vector<vector<string>> DFA_transitions;
     vector<string> DFA_alphabet = alphabet;
     vector<string> DFA_states;
@@ -366,12 +366,12 @@ DFA ENFA::toDFA(){
     }
 
 
-    // DFA states is een lijst met strings die de staten bijhoud.
+    // DFA_elias states is een lijst met strings die de staten bijhoud.
     DFA_states.push_back(toDFAstate_(get_closure(start_state)));
     bool verwerken = true;
     bool deathstate = false;
     int counter = 0;
-    // We blijven de staten verwerken tot alle staten een transitie in de DFA hebben
+    // We blijven de staten verwerken tot alle staten een transitie in de DFA_elias hebben
     while (verwerken){
         for(int i = 0; i < alphabet.size(); ++i){
             // een DFA_transition bestaat uit [[from],[to],[input]]
@@ -393,7 +393,7 @@ DFA ENFA::toDFA(){
             DFA_transitions.push_back(transition);
         }
     }
-    DFA dfa("DFA",DFA_transitions,DFA_alphabet,DFA_states,DFA_start_state,DFA_final_states);
+    DFA_elias dfa("DFA_elias", DFA_transitions, DFA_alphabet, DFA_states, DFA_start_state, DFA_final_states);
     return dfa;
 }
 

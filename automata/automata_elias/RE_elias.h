@@ -7,7 +7,7 @@
 #include <vector>
 #include <iomanip>
 #include <algorithm>
-#include "../json.hpp"
+#include "../../json.hpp"
 #include "ENFA_elias.h"
 
 using namespace std;

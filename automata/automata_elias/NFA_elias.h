@@ -1,5 +1,6 @@
-#ifndef UNTITLED6_ENFA_H
-#define UNTITLED6_ENFA_H
+#ifndef UNTITLED6_NFA_H
+#define UNTITLED6_NFA_H
+
 
 #include <iostream>
 #include <fstream>
@@ -7,25 +8,24 @@
 #include <vector>
 #include <iomanip>
 #include <algorithm>
-#include "../json.hpp"
+#include "../../json.hpp"
 #include "DFA_elias.h"
 
 using namespace std;
 
 using json = nlohmann::json;
 
-class ENFA{
+class NFA{
 private:
     string Color;
     string type;
-    string eplsilontransitie;
+    string inputfile;
+    map<string,vector<vector<string>>> transitie_tabel;
+    vector<vector<string>> transitions;
     vector<string> alphabet;
     vector<string> states;
     string start_state;
     vector<string> final_states;
-    vector<vector<string>> transitions;
-    string inputfile;
-    map<string,vector<vector<string>>> transitie_tabel;
 
 
     void maak_transitie_tabel(vector<vector<string>> transitions);
@@ -36,21 +36,16 @@ private:
     bool isFinalState(string state);
     bool hasTransitionon(string state,string transitie);
     vector<string> DFAtransitions(string state, vector<string> &DFA_states,vector<string> &final_states, string alphabet, bool &deadstate);
-    vector<string> get_closure(string startstate);
 
 public:
 
-    ENFA(const string &inputfile);
-
-    ENFA(const string &type, const string &eplsilontransitie, const vector<string> &alphabet,
-         const vector<string> &states, const string &startState, const vector<string> &finalStates,
-         const vector<vector<string>> &transitions);
-
+    NFA(const string &inputfile);
     bool accepts(string s);
     void print();
-    void print_tabel(); // Dit is een methode voor mezelf om de ENFA in tabelvorm weer te geven
-    DFA toDFA();
+    void print_tabel(); // Dit is een methode voor mezelf om de NFA in tabelvorm weer te geven
+    DFA_elias toDFA();
 
     const string &getColor() const;
 };
-#endif //UNTITLED6_ENFA_H
+
+#endif //UNTITLED6_NFA_H

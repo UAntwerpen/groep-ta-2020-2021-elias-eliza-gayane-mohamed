@@ -11,12 +11,16 @@ add_executable(PYDE
         Parser.h
         Safe.cpp
         Safe.h
-        automata/DFA_elias.cpp
-        automata/DFA_elias.h
-        automata/NFA_elias.cpp
-        automata/NFA_elias.h
-        automata/ENFA_elias.h
-        automata/ENFA_elias.cpp
-        automata/RE_elias.h
-        automata/RE_elias.cpp
+        automata/automata_eliza/DFA_eliza.cpp
+        automata/automata_eliza/DFA_eliza.h
+        automata/automata_elias/DFA_elias.cpp
+        automata/automata_elias/DFA_elias.h
+        automata/automata_elias/NFA_elias.cpp
+        automata/automata_elias/NFA_elias.h
+        automata/automata_elias/ENFA_elias.h
+        automata/automata_elias/ENFA_elias.cpp
+        automata/automata_elias/RE_elias.h
+        automata/automata_elias/RE_elias.cpp
+        automata/wrappers/wrapper_DFA.cpp
+        automata/wrappers/wrapper_DFA.h
         json.hpp)

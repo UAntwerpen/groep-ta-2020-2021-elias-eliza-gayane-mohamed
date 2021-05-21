@@ -9,13 +9,13 @@
 #include <vector>
 #include <iomanip>
 #include <algorithm>
-#include "../json.hpp"
+#include "../../json.hpp"
 
 using namespace std;
 
 using json = nlohmann::json;
 
-class DFA{
+class DFA_elias{
 private:
 
     string type;
@@ -36,23 +36,23 @@ private:
     bool isStartState(string state);
     bool isFinalState(vector<string> final_states,string state);
     vector<vector<string>> table_filling_algoritme(vector<vector<string>>transitions, vector<string> final_states, vector<string> states, vector<vector<string>> &minimized); // methode die het table filling algoritme uitvoert
-    vector<string> DFAtransitions(vector<string> newDFAstates,string from, vector<string> &DFA_states, string alphabet); // methode die de nieuwe DFA transities bepaald
+    vector<string> DFAtransitions(vector<string> newDFAstates,string from, vector<string> &DFA_states, string alphabet); // methode die de nieuwe DFA_elias transities bepaald
 
 public:
 
-    DFA(const string &inputfile);
+    DFA_elias(const string &inputfile);
 
-    DFA(const string &type, const vector<vector<string>> &transitions, const vector<string> &alphabet,
-        const vector<string> &states, const string &startState, const vector<string> &finalStates);
+    DFA_elias(const string &type, const vector<vector<string>> &transitions, const vector<string> &alphabet,
+              const vector<string> &states, const string &startState, const vector<string> &finalStates);
 
     bool accepts(string s);
     void print();
     void print_tabel(); // Dit is een methode voor mezelf om de NFA in tabelvorm weer te geven
     void printTable();
 
-    bool operator == (const DFA &other);
+    bool operator == (const DFA_elias &other);
 
-    DFA minimize();
+    DFA_elias minimize();
 
 };
 
