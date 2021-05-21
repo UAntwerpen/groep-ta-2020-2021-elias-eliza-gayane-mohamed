@@ -15,7 +15,7 @@ using namespace std;
 
 using json = nlohmann::json;
 
-class NFA{
+class NFA_elias{
 private:
     string Color;
     string type;
@@ -39,10 +39,10 @@ private:
 
 public:
 
-    NFA(const string &inputfile);
+    NFA_elias(const string &inputfile);
     bool accepts(string s);
     void print();
-    void print_tabel(); // Dit is een methode voor mezelf om de NFA in tabelvorm weer te geven
+    void print_tabel(); // Dit is een methode voor mezelf om de NFA_elias in tabelvorm weer te geven
     DFA_elias toDFA();
 
     const string &getColor() const;

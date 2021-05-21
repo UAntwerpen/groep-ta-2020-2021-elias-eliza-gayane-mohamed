@@ -2,14 +2,14 @@
 
 
 
-RE::RE(const string &regex, char epsilon) : regex(regex), epsilon(epsilon) {
+RE_elias::RE_elias(const string &regex, char epsilon) : regex(regex), epsilon(epsilon) {
     aantal_states = 1;
     make_transitions();
     //vector<int> staten;
     //print(regextree, staten);
 }
 
-void RE::print(node* current, vector<int> staten){
+void RE_elias::print(node* current, vector<int> staten){
     staten.push_back(current->nummer);
     if(current->left){
         cout << "from: " << current->nummer << "\nto: " << current->left->nummer << "\nsymbool: " << current->transition_symbol << endl;
@@ -162,7 +162,7 @@ void maak_lus_toe(node* current, char epsilon, int &aantal_states){
     }
 }
 
-void RE::make_transitions(){
+void RE_elias::make_transitions(){
     bool ishaakjeingelezen = false;
     bool beginhaakje = false;
     int haakjescounter = 0;
@@ -372,7 +372,7 @@ void get_final_states(node* current, vector<string> &finale_states, vector<int> 
     }
 }
 
-ENFA RE::toENFA(){
+ENFA_elias RE_elias::toENFA(){
     vector<vector<string>> transitions;
     get_transitions(regextree,transitions);
     string epsilon_;
@@ -383,5 +383,5 @@ ENFA RE::toENFA(){
     vector<string> finalestates;
     vector<int> test;
     get_final_states(regextree,finalestates,test);
-    return ENFA("ENFA",epsilon_,alphabet,states,startstaat,finalestates,transitions);
+    return ENFA_elias("ENFA_elias", epsilon_, alphabet, states, startstaat, finalestates, transitions);
 }

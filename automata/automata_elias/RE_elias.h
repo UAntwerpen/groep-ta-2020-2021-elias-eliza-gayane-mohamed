@@ -28,11 +28,11 @@ struct node{
     int nummer;
 };
 
-class RE {
+class RE_elias {
 public:
-    RE(const string &regex, char epsilon);
+    RE_elias(const string &regex, char epsilon);
 
-    ENFA toENFA();
+    ENFA_elias toENFA();
 
 private:
     void make_transitions();

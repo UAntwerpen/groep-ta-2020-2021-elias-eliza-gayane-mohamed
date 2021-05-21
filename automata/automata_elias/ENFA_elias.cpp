@@ -1,16 +1,16 @@
 #include "ENFA_elias.h"
 
-ENFA::ENFA(const string &inputfile) : inputfile(inputfile) {
+ENFA_elias::ENFA_elias(const string &inputfile) : inputfile(inputfile) {
 
     readfile(inputfile);
 }
 
-void ENFA::readfile(string){
+void ENFA_elias::readfile(string){
     ifstream input(inputfile);
     json j;
     input >> j;
 
-    /// We gaan eerst alle componenten van de ENFA bepalen de quintuple: {Q,E,§,q0,F}
+    /// We gaan eerst alle componenten van de ENFA_elias bepalen de quintuple: {Q,E,§,q0,F}
     type = j["type"];
 
     Color = j["color"];
@@ -55,7 +55,7 @@ void ENFA::readfile(string){
     maak_transitie_tabel(transitions);
 }
 
-void ENFA::maak_transitie_tabel(vector<vector<string>> transitions){
+void ENFA_elias::maak_transitie_tabel(vector<vector<string>> transitions){
     for (int i = 0; i < states.size(); ++i) {
         vector<vector<string>> overgangen;
         for (int j = 0; j < transitions.size(); ++j){
@@ -71,7 +71,7 @@ void ENFA::maak_transitie_tabel(vector<vector<string>> transitions){
     }
 }
 
-vector<string> ENFA::go_to(string current_state,string s){
+vector<string> ENFA_elias::go_to(string current_state, string s){
     vector<string> returnwaarde;
     vector<vector<string>> transition = transitie_tabel[current_state];
     for (int i = 0; i < transition.size(); ++i){
@@ -82,7 +82,7 @@ vector<string> ENFA::go_to(string current_state,string s){
     return returnwaarde;
 }
 
-bool ENFA::isgeldig(string s){
+bool ENFA_elias::isgeldig(string s){
     bool foutsymbool = false;
     vector<string> foute_symbolen;
     for (int i = 0; i < s.size(); ++i) {
@@ -110,12 +110,12 @@ bool ENFA::isgeldig(string s){
     return true;
 }
 
-bool ENFA::accepts(string s) {
+bool ENFA_elias::accepts(string s) {
     DFA_elias dfa = this->toDFA();
     return dfa.accepts(s);
 }
 
-bool ENFA::hasTransitionon(string state,string transitie){
+bool ENFA_elias::hasTransitionon(string state, string transitie){
     for (map<string,vector<vector<string>>>::iterator it=transitie_tabel.begin(); it!=transitie_tabel.end(); ++it){
         if(it->first == state){
             for (int i = 0; i < it->second.size(); ++i){
@@ -128,8 +128,8 @@ bool ENFA::hasTransitionon(string state,string transitie){
     return false;
 }
 
-// Dit is een methode die ik zelf heb gemaakt om de ENFA in tabelvorm weer te geven
-void ENFA::print_tabel() {
+// Dit is een methode die ik zelf heb gemaakt om de ENFA_elias in tabelvorm weer te geven
+void ENFA_elias::print_tabel() {
     cout << type << ":\t";
     for (int i = 0; i < alphabet.size(); ++i){
         cout << " " << alphabet[i] << "\t";
@@ -191,7 +191,7 @@ void ENFA::print_tabel() {
     }
 }
 
-bool ENFA::isStartState(string state){
+bool ENFA_elias::isStartState(string state){
     if(state == start_state){
         return true;
     }
@@ -214,7 +214,7 @@ vector<string> parse_state(string state){
     return returnwaarde;
 }
 
-bool ENFA::isFinalState(string state){
+bool ENFA_elias::isFinalState(string state){
     vector<string> states_;
     if(state.size() >= 3){
         states_ = parse_state(state);
@@ -238,7 +238,7 @@ bool ENFA::isFinalState(string state){
 }
 
 
-void ENFA::print(){
+void ENFA_elias::print(){
     json j2;
     j2["type"] = type;
     j2["eps"] = eplsilontransitie;
@@ -284,13 +284,13 @@ string toDFAstate_(vector<string> ENFAstates){
     }
 }
 
-vector<string> ENFA::DFAtransitions(string from, vector<string> &DFA_states, vector<string> &final_states, string input, bool &deathstate){
+vector<string> ENFA_elias::DFAtransitions(string from, vector<string> &DFA_states, vector<string> &final_states, string input, bool &deathstate){
     // We maken een transitie aan bestaande uit [[from],[to],[input]]
     vector<string> transition;
     vector<string> DFAstaat;
     // We voegen from al toe
     transition.push_back(from);
-    // We ittereren over de staat en bekijken de individuele ENFA transitions bv: {1,3} ->{4} en ->{2} dus wordt dit {4,2}
+    // We ittereren over de staat en bekijken de individuele ENFA_elias transitions bv: {1,3} ->{4} en ->{2} dus wordt dit {4,2}
     // De 4 en 2 worden aan een tijdelijke vector DFA_elias staat toegevoegd en later met de toDFAstate naar een string omgezet
     // [4,2] -> {2,4}
     vector<string> from_ = parse_state(from);
@@ -328,7 +328,7 @@ vector<string> ENFA::DFAtransitions(string from, vector<string> &DFA_states, vec
     return transition;
 }
 
-vector<string> ENFA::get_closure(string state){
+vector<string> ENFA_elias::get_closure(string state){
     vector<string> closure_of_state;
     closure_of_state.push_back(state);
     bool found_closure = false;
@@ -355,7 +355,7 @@ vector<string> ENFA::get_closure(string state){
     return closure_of_state;
 }
 
-DFA_elias ENFA::toDFA(){
+DFA_elias ENFA_elias::toDFA(){
     vector<vector<string>> DFA_transitions;
     vector<string> DFA_alphabet = alphabet;
     vector<string> DFA_states;
@@ -397,13 +397,13 @@ DFA_elias ENFA::toDFA(){
     return dfa;
 }
 
-ENFA::ENFA(const string &type, const string &eplsilontransitie, const vector<string> &alphabet,
-           const vector<string> &states, const string &startState, const vector<string> &finalStates,
-           const vector<vector<string>> &transitions) : type(type), eplsilontransitie(eplsilontransitie),
+ENFA_elias::ENFA_elias(const string &type, const string &eplsilontransitie, const vector<string> &alphabet,
+                       const vector<string> &states, const string &startState, const vector<string> &finalStates,
+                       const vector<vector<string>> &transitions) : type(type), eplsilontransitie(eplsilontransitie),
            alphabet(alphabet), states(states), start_state(startState), final_states(finalStates), transitions(transitions) {
     maak_transitie_tabel(transitions);
 }
 
-const string &ENFA::getColor() const {
+const string &ENFA_elias::getColor() const {
     return Color;
 }

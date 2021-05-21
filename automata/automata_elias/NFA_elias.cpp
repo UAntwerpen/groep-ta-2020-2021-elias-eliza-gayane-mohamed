@@ -1,17 +1,17 @@
 
 #include "NFA_elias.h"
 
-NFA::NFA(const string &inputfile) : inputfile(inputfile) {
+NFA_elias::NFA_elias(const string &inputfile) : inputfile(inputfile) {
 
     readfile(inputfile);
 }
 
-void NFA::readfile(string){
+void NFA_elias::readfile(string){
     ifstream input(inputfile);
     json j;
     input >> j;
 
-    /// We gaan eerst alle componenten van de NFA bepalen de quintuple: {Q,E,§,q0,F}
+    /// We gaan eerst alle componenten van de NFA_elias bepalen de quintuple: {Q,E,§,q0,F}
     type = j["type"];
 
     Color = j["color"];
@@ -54,7 +54,7 @@ void NFA::readfile(string){
     maak_transitie_tabel(transitions);
 }
 
-void NFA::maak_transitie_tabel(vector<vector<string>> transitions){
+void NFA_elias::maak_transitie_tabel(vector<vector<string>> transitions){
     for (int i = 0; i < states.size(); ++i) {
         vector<vector<string>> overgangen;
         for (int j = 0; j < transitions.size(); ++j){
@@ -70,7 +70,7 @@ void NFA::maak_transitie_tabel(vector<vector<string>> transitions){
     }
 }
 
-vector<string> NFA::go_to(string current_state,string s){
+vector<string> NFA_elias::go_to(string current_state, string s){
     vector<string> returnwaarde;
     vector<vector<string>> transition = transitie_tabel[current_state];
     for (int i = 0; i < transition.size(); ++i){
@@ -81,7 +81,7 @@ vector<string> NFA::go_to(string current_state,string s){
     return returnwaarde;
 }
 
-bool NFA::isgeldig(string s){
+bool NFA_elias::isgeldig(string s){
     bool foutsymbool = false;
     vector<string> foute_symbolen;
     for (int i = 0; i < s.size(); ++i) {
@@ -109,7 +109,7 @@ bool NFA::isgeldig(string s){
     return true;
 }
 
-bool NFA::accepts(string s) {
+bool NFA_elias::accepts(string s) {
     if (this->isgeldig(s) == false){
         return false;
     }
@@ -137,7 +137,7 @@ bool NFA::accepts(string s) {
     return false;
 }
 
-bool NFA::hasTransitionon(string state,string transitie){
+bool NFA_elias::hasTransitionon(string state, string transitie){
     for (map<string,vector<vector<string>>>::iterator it=transitie_tabel.begin(); it!=transitie_tabel.end(); ++it){
         if(it->first == state){
             for (int i = 0; i < it->second.size(); ++i){
@@ -150,8 +150,8 @@ bool NFA::hasTransitionon(string state,string transitie){
     return false;
 }
 
-// Dit is een methode die ik zelf heb gemaakt om de NFA in tabelvorm weer te geven
-void NFA::print_tabel() {
+// Dit is een methode die ik zelf heb gemaakt om de NFA_elias in tabelvorm weer te geven
+void NFA_elias::print_tabel() {
     cout << type << ":\t";
     for (int i = 0; i < alphabet.size(); ++i){
         cout << " " << alphabet[i] << "\t";
@@ -194,14 +194,14 @@ void NFA::print_tabel() {
     }
 }
 
-bool NFA::isStartState(string state){
+bool NFA_elias::isStartState(string state){
     if(state == start_state){
         return true;
     }
     return false;
 }
 
-bool NFA::isFinalState(string state){
+bool NFA_elias::isFinalState(string state){
     for (int i = 0; i < state.size(); ++i){
         for(string final_state:final_states){
             string staat;
@@ -215,7 +215,7 @@ bool NFA::isFinalState(string state){
 }
 
 
-void NFA::print(){
+void NFA_elias::print(){
     json j2;
     j2["type"] = type;
     j2["alphabet"] = alphabet;
@@ -260,13 +260,13 @@ string toDFAstate(vector<string> NFAstates){
     }
 }
 
-vector<string> NFA::DFAtransitions(string from, vector<string> &DFA_states, vector<string> &final_states, string input, bool &deathstate){
+vector<string> NFA_elias::DFAtransitions(string from, vector<string> &DFA_states, vector<string> &final_states, string input, bool &deathstate){
     // We maken een transitie aan bestaande uit [[from],[to],[input]]
     vector<string> transition;
     vector<string> DFAstaat;
     // We voegen from al toe
     transition.push_back(from);
-    // We ittereren over de staat en bekijken de individuele NFA transitions bv: {1,3} ->{4} en ->{2} dus wordt dit {4,2}
+    // We ittereren over de staat en bekijken de individuele NFA_elias transitions bv: {1,3} ->{4} en ->{2} dus wordt dit {4,2}
     // De 4 en 2 worden aan een tijdelijke vector DFA_elias staat toegevoegd en later met de toDFAstate naar een string omgezet
     // [4,2] -> {2,4}
     for(int j = 0; j < from.size(); ++j){
@@ -300,7 +300,7 @@ vector<string> NFA::DFAtransitions(string from, vector<string> &DFA_states, vect
     return transition;
 }
 
-DFA_elias NFA::toDFA(){
+DFA_elias NFA_elias::toDFA(){
     vector<vector<string>> DFA_transitions;
     vector<string> DFA_alphabet = alphabet;
     vector<string> DFA_states;
@@ -341,6 +341,6 @@ DFA_elias NFA::toDFA(){
     return dfa;
 }
 
-const string &NFA::getColor() const {
+const string &NFA_elias::getColor() const {
     return Color;
 }

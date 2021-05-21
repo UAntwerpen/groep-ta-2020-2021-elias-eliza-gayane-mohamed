@@ -47,7 +47,7 @@ public:
 
     bool accepts(string s);
     void print();
-    void print_tabel(); // Dit is een methode voor mezelf om de NFA in tabelvorm weer te geven
+    void print_tabel(); // Dit is een methode voor mezelf om de NFA_elias in tabelvorm weer te geven
     void printTable();
 
     bool operator == (const DFA_elias &other);

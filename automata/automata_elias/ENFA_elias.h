@@ -14,7 +14,7 @@ using namespace std;
 
 using json = nlohmann::json;
 
-class ENFA{
+class ENFA_elias{
 private:
     string Color;
     string type;
@@ -40,15 +40,15 @@ private:
 
 public:
 
-    ENFA(const string &inputfile);
+    ENFA_elias(const string &inputfile);
 
-    ENFA(const string &type, const string &eplsilontransitie, const vector<string> &alphabet,
-         const vector<string> &states, const string &startState, const vector<string> &finalStates,
-         const vector<vector<string>> &transitions);
+    ENFA_elias(const string &type, const string &eplsilontransitie, const vector<string> &alphabet,
+               const vector<string> &states, const string &startState, const vector<string> &finalStates,
+               const vector<vector<string>> &transitions);
 
     bool accepts(string s);
     void print();
-    void print_tabel(); // Dit is een methode voor mezelf om de ENFA in tabelvorm weer te geven
+    void print_tabel(); // Dit is een methode voor mezelf om de ENFA_elias in tabelvorm weer te geven
     DFA_elias toDFA();
 
     const string &getColor() const;
