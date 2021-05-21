@@ -197,7 +197,6 @@ void RE_elias::make_transitions(){
             node* newfirstnode = new node(false,false, false, false, epsilon, nullptr,nullptr, nullptr,aantal_states);
             current = ga_naar_starthaakje(current);
             node* go_to = current;
-
             current = ga_naar_eindthaakje(current);
             //cout << current->nummer << "," << current->left << "," <<  current->right << endl;
             node* end = current->right;
@@ -209,10 +208,23 @@ void RE_elias::make_transitions(){
                 regextree = newfirstnode;
                 current->start = false;
             }
-            newfirstnode->left = current;
-            current->prev = newfirstnode;
-            newfirstnode->right = end;
-            current = current->prev;
+            if(current->prev){
+                if(current->prev->left = current){
+                    current->prev->left = newfirstnode;
+                    newfirstnode->prev = current->prev;
+                }
+                else if(current->prev->right = current){
+                    current->prev->right = newfirstnode;
+                    newfirstnode->prev = current->prev->right;
+                }
+                else{
+                   cout << "hier mag ik niet komen" << endl;
+                }
+                newfirstnode->left = current;
+                current->prev = newfirstnode;
+                newfirstnode->right = end;
+                current = ga_naar_eindthaakje(current)->right;
+            }
         }
         else if(regex[i] == '+'){
             if (ishaakjeingelezen){
@@ -223,6 +235,9 @@ void RE_elias::make_transitions(){
                 }
 
             }
+            else{
+                current = ga_naar_startstaat(current);
+            }
             aantal_states += 1;
             node* newnode = new node(false,false, false, false,epsilon, nullptr,nullptr, nullptr,aantal_states);
             aantal_states += 1;
@@ -232,7 +247,6 @@ void RE_elias::make_transitions(){
                 regextree = newnode;
                 current->start = false;
                 if (current->starthaakje){
-
                     newnode->starthaakje = true;
                     current->starthaakje = false;
 
@@ -241,6 +255,9 @@ void RE_elias::make_transitions(){
             else{
                 current->prev->right = newnode;
                 newnode->prev = current->prev;
+                if(current->prev->left == current){
+                    current->prev->left = NULL;
+                }
                 if (current->starthaakje){
 
                     newnode->starthaakje = true;
@@ -261,9 +278,9 @@ void RE_elias::make_transitions(){
             node* newnode = new node(false,false, false, false, epsilon, nullptr,nullptr, nullptr,aantal_states);
             current->left = newnode;
             newnode->prev = current;
-            current->transition_symbol = regex[i];
+            newnode->transition_symbol = regex[i];
             if(beginhaakje){
-                current->starthaakje = true;
+                newnode->starthaakje = true;
                 beginhaakje = false;
             }
             current = current->left;

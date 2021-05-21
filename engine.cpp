@@ -29,7 +29,8 @@ int main(int argc, char const* argv[]) {
     RE re1("if", 'e');
     RE re2("elif", 'p');
     RE re3("import", 'e');
-    vector<pair<RE, string>> test_save = {make_pair(re1, "#e07822"), make_pair(re2, "#e07822"), make_pair(re3, "#e07822")};
+    RE re4("\"(E+n+t+e+r+ +s+c+o+d+u+m+b+f+i+:)*\"", '5');
+    vector<pair<RE, string>> test_save = {make_pair(re1, "#e07822"), make_pair(re2, "#e07822"), make_pair(re3, "#e07822"),  make_pair(re4, "#72bf45")};;
 
 
     /// het parsen van de files
