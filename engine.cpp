@@ -5,7 +5,7 @@
 #include <iostream>
 #include <cmath>
 #include "automata/automata_elias/DFA_elias.h"
-#include "automata/RE_elias.h"
+#include "automata/automata_elias/RE_elias.h"
 #include "HTML.h"
 #include "Parser.h"
 #include "Safe.h"

@@ -23,4 +23,10 @@ add_executable(PYDE
         automata/automata_elias/RE_elias.cpp
         automata/wrappers/wrapper_DFA.cpp
         automata/wrappers/wrapper_DFA.h
+        automata/wrappers/wrapper_NFA.cpp
+        automata/wrappers/wrapper_NFA.h
+        automata/wrappers/wrapper_ENFA.cpp
+        automata/wrappers/wrapper_ENFA.h
+        automata/wrappers/wrapper_RE.cpp
+        automata/wrappers/wrapper_RE.h
         json.hpp)
