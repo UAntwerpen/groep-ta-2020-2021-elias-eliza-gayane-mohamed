@@ -27,10 +27,21 @@ Parser::Parser(const char *filename) {
 vector<string> Parser::split_line(string &s) {
     vector<string> words;
     string word;
+    bool dubble_quotes = false;
+    bool hashtag = false;
     for(int i = 0; i < s.size(); i++){
-        if(!isalnum(s[i]) || (!isalnum(word[0]) && !word.empty())){
+        if((!isalnum(s[i]) || (!isalnum(word[0]) && !word.empty())) && !dubble_quotes && !hashtag){
             words.emplace_back(word);
             word.clear();
+        }
+        if(s[i] == '#' && !dubble_quotes){
+            hashtag = true;
+        }
+        if(s[i] == '\"' && dubble_quotes){
+            dubble_quotes = false;
+        }
+        else if(s[i] == '\"' && !dubble_quotes){
+            dubble_quotes = true;
         }
         word += s[i];
         if(i == s.size() - 1) words.emplace_back(word);

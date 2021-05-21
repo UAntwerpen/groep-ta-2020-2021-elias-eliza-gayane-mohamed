@@ -49,7 +49,13 @@ void HTML::make_HTML_file(const map<int, vector<pair<string, string>>> &text, st
                     html_file << color_begin + word + color_end;
                 }
                 else{
-                    html_file << it->second[i].first;
+                    if(it->second[i].first == " "){
+                        html_file << "&nbsp;";
+                    }
+                    else{
+                        html_file << it->second[i].first;
+                    };
+
                 }
             }
             html_file << "\n\t\t</td>\n\t</tr>";
