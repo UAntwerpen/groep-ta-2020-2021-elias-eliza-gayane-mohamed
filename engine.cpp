@@ -29,9 +29,19 @@ int main(int argc, char const* argv[]) {
     RE re1("if", 'e');
     RE re2("elif", 'p');
     RE re3("import", 'e');
-    RE re4("\"(E+n+t+e+r+ +s+c+o+d+u+m+b+f+i+:)*\"", '5');
+    RE re4("\"(a+b+c+d+e+f+g+h+i+j+k+l+m+n+o+p+q+r+s+t+u+v+w+x+y+z+A+B+C+D+E+F+G+H+I+J+K+L+M+N+O+P+Q+R+S+T+U+V+W+X+Y+Z+:+ +-+/+)*\"", '5');
     vector<pair<RE, string>> test_save = {make_pair(re1, "#e07822"), make_pair(re2, "#e07822"), make_pair(re3, "#e07822"),  make_pair(re4, "#72bf45")};;
 
+    //vector<pair<RE, string>> vector_safe = safe.getSafe();
+    vector<pair<RE, string>> vector_safe = test_save;
+    vector<pair<DFA, string>> dfa_s;
+    for(int i = 0; i < vector_safe.size(); i++) {
+        RE regex = vector_safe[i].first;
+        string color = vector_safe[i].second;
+        ENFA e_nfa = regex.toENFA();
+        DFA dfa = e_nfa.toDFA();
+        dfa_s.push_back(make_pair(dfa, color));
+    }
 
     /// het parsen van de files
     for(int i = 1; i < argc; i++){
@@ -40,18 +50,13 @@ int main(int argc, char const* argv[]) {
 
         map<int, vector<pair<string, string>>> text_for_html;
         /// halen de regexen uit de safe
-        //vector<pair<RE, string>> vector_safe = safe.getSafe();
-        vector<pair<RE, string>> vector_safe = test_save;
         for(int j = 0; j < parsed_file.size(); j++){ // j is de lijn waaruit we lezen
             for(int k= 0; k < parsed_file[j].size(); k++) {
                 string word = parsed_file[j][k];
                 bool herkend = false;
-                for(int l = 0;  l < vector_safe.size(); l++) {
-                    RE regex = vector_safe[l].first;
-                    string color = vector_safe[l].second;
-                    ENFA e_nfa = regex.toENFA();
-                    DFA dfa = e_nfa.toDFA();
-                    if (dfa.accepts(word)) {
+                for(int l = 0;  l < dfa_s.size(); l++) {
+                    string color = dfa_s[l].second;
+                    if (dfa_s[l].first.accepts(word)) {
                         text_for_html[j].push_back(make_pair(word, color));
                         herkend = true;
                     }
