@@ -1,0 +1,96 @@
+{
+  "type": "NFA",
+  "color": "#e07822",
+  "alphabet": [
+    "e", "l", "s", "i", "f"
+  ],
+  "states": [
+    {
+      "name": "0",
+      "starting": true,
+      "accepting": false
+    },
+    {
+      "name": "1",
+      "starting": false,
+      "accepting": false
+    },
+    {
+      "name": "2",
+      "starting": false,
+      "accepting": false
+    },
+    {
+      "name": "3",
+      "starting": false,
+      "accepting": false
+    },
+    {
+      "name": "4",
+      "starting": false,
+      "accepting": true
+    },
+    {
+      "name": "5",
+      "starting": false,
+      "accepting": false
+    },
+    {
+      "name": "6",
+      "starting": false,
+      "accepting": false
+    },
+    {
+      "name": "7",
+      "starting": false,
+      "accepting": false
+    },
+    {
+      "name": "8",
+      "starting": false,
+      "accepting": true
+    }
+  ],
+  "transitions": [
+    {
+      "from": "0",
+      "to": "1",
+      "input": "e"
+    },
+    {
+      "from": "1",
+      "to": "2",
+      "input": "l"
+    },
+    {
+      "from": "2",
+      "to": "3",
+      "input": "s"
+    },
+    {
+      "from": "3",
+      "to": "4",
+      "input": "e"
+    },
+    {
+      "from": "0",
+      "to": "5",
+      "input": "e"
+    },
+    {
+      "from": "5",
+      "to": "6",
+      "input": "l"
+    },
+    {
+      "from": "6",
+      "to": "7",
+      "input": "i"
+    },
+    {
+      "from": "7",
+      "to": "8",
+      "input": "f"
+    }
+  ]
+}
