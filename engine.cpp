@@ -29,7 +29,7 @@ int main(int argc, char const* argv[]) {
     RE re1("if", 'e');
     RE re2("elif", 'p');
     RE re3("import", 'e');
-    RE re4("\"(a+b+c+d+e+f+g+h+i+j+k+l+m+n+o+p+q+r+s+t+u+v+w+x+y+z)*\"", '5');
+    RE re4("\"(a+b+c+d+e+f+g+h+i+j+k+l+m+n+o+p+q+r+s+t+u+v+w+x+y+z+A+B+C+D+E+F+G+H+I+J+K+L+M+N+O+P+Q+R+S+T+U+V+W+X+Y+Z+ +-+:)*\"", '5');
     vector<pair<RE, string>> test_save = {make_pair(re1, "#e07822"), make_pair(re2, "#e07822"), make_pair(re3, "#e07822"),  make_pair(re4, "#72bf45")};;
 
     //vector<pair<RE, string>> vector_safe = safe.getSafe();

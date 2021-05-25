@@ -76,6 +76,16 @@ string DFA_elias::go_to(vector<vector<string>> transitions , string current_stat
     return "";
 }
 
+string DFA_elias::goes_to(string current_state, string s){
+    for (int i = 0; i < transitie_tabel[current_state].size(); ++i){
+        //cout << "from: " << transitions[i][0] << " to: " << transitions[i][1] << " input: " << transitions[i][2] << endl;
+        if (current_state == transitie_tabel[current_state][i][0] && transitie_tabel[current_state][i][2] == s){
+            return transitie_tabel[current_state][i][1];
+        }
+    }
+    return "";
+}
+
 bool DFA_elias::isgeldig(string s){
     bool foutsymbool = false;
     vector<string> foute_symbolen;
@@ -209,17 +219,13 @@ bool isintabel(vector<vector<string>> tabel,vector<string> subset){
 }
 
 // funtie die een tabel initialiseerd voor het table filling algoritme
-vector<vector<string>> maketabel(vector<string> states){
-    vector<vector<string>> tabel;
+map<pair<string,string>,string> maketabel(vector<string> states){
+    map<pair<string,string>,string> tabel;
     sort(states.begin(), states.end());
     states.erase(std::unique(states.begin(), states.end()), states.end());
     for (int i = 0; i < states.size()-1; ++i){
         for (int j = i+1; j < states.size(); ++j){
-            vector<string> combinatie;
-            combinatie.push_back(states[i]);
-            combinatie.push_back(states[j]);
-            combinatie.push_back("-");
-            tabel.push_back(combinatie);
+            tabel[make_pair(states[i],states[j])] = "-";
         }
     }
     return tabel;
@@ -229,41 +235,16 @@ DFA_elias::DFA_elias(const string &type, const vector<vector<string>> &transitio
                      const vector<string> &states, const string &startState, const vector<string> &finalStates) : type(type),
          transitions(transitions),alphabet(alphabet),states(states),start_state(startState),final_states(finalStates) {
     maak_transitie_tabel(transitions);
-    // we initialiseren een lege tabel
-    minimized_tabel = maketabel(states);
-}
 
-// functie die kruisjes plaatst op een bepaalde combinatie van staten
-void zet_kruisje(vector<vector<string>> &tabel, vector<string> combinatie){
-    for (int i = 0; i < tabel.size(); ++i){
-        string staat1 = tabel[i][0];
-        string staat2 = tabel[i][1];
-        string teken =  tabel[i][2];
-        vector<string> anderecombinatie;
-        anderecombinatie.push_back(staat1);
-        anderecombinatie.push_back(staat2);
-        anderecombinatie.push_back(teken);
-        sort(anderecombinatie.begin(),anderecombinatie.end());
-        sort(combinatie.begin(),combinatie.end());
-        if (anderecombinatie == combinatie){
-            tabel[i][2] = "X";
-        }
-    }
 }
 
 // functie die nagaat of een bepaalde combinatie een kruisje heeft
-bool heeft_kruisje(vector<vector<string>> &tabel, vector<string> combinatie){
-    for (int i = 0; i < tabel.size(); ++i){
-        string staat1 = tabel[i][0];
-        string staat2 = tabel[i][1];
-        string staat3 = combinatie[0];
-        string staat4 = combinatie[1];
-
-        if ((staat1 == staat3 && staat2 == staat4) || (staat1  == staat4  && staat2  == staat3)){
-            if (tabel[i][2] == "X"){
-                return true;
-            }
-        }
+bool heeft_kruisje(map<pair<string,string>,string> &tabel, pair<string,string> combinatie1, pair<string,string> combinatie2){
+    if(tabel[combinatie1] == "X"){
+        return true;
+    }
+    else if(tabel[combinatie2] == "X"){
+        return true;
     }
     return false;
 }
@@ -282,17 +263,12 @@ string vind_teken(vector<string> combinatie, vector<vector<string>> tabel){
 }
 
 // functie die 2 tabellen met elkaar vergelijkt
-bool compare(vector<vector<string>> tabel, vector<vector<string>> vorige_tabel){
+bool compare(map<pair<string,string>,string> tabel, map<pair<string,string>,string> vorige_tabel){
     // we gaan de 2 tabellen vergeijken
     bool gelijk = true;
-    for (int i = 0; i < tabel.size(); ++i){
-        string staat1 = tabel[i][0];
-        string staat2 = tabel[i][1];
-        string teken1 = tabel[i][2];
-        string staat3 = vorige_tabel[i][0];
-        string staat4 = vorige_tabel[i][1];
-        string teken2 = vorige_tabel[i][2];
-        if((staat1 == staat3 && staat2 == staat4) && (teken1 != teken2)){
+    for (std::map<pair<string,string>,string>::iterator it=tabel.begin(); it!=tabel.end(); ++it){
+
+        if(it->second != vorige_tabel[it->first]){
             gelijk = false;
         }
     }
@@ -351,59 +327,60 @@ string to_dfa_staat(vector<string> eqiuvalent_states){
 }
 
 // methode die het table filling algoritme uitvoert
-vector<vector<string>> DFA_elias::table_filling_algoritme(vector<vector<string>>transitions, vector<string> final_states, vector<string> states, vector<vector<string>> &minimized){
+vector<vector<string>> DFA_elias::table_filling_algoritme(vector<vector<string>> transitions, vector<string> final_states, vector<string> states, map<pair<string,string>,string> &minimized){
     // een tabel is een matrix en ziet er als volgt uit [[x,y,teken],[z,y,teken],...]
 
     minimized = maketabel(states);
 
     // eerst gaan we alle ongelijke paren er uit halen
     // dit zijn de combinaties tussen de staten waarbij een staat finaal is en de andere niet
-    for (int i = 0; i < minimized.size(); ++i){
-        string staat1 = minimized[i][0];
-        string staat2 = minimized[i][1];
+    for (std::map<pair<string,string>,string>::iterator it=minimized.begin(); it!=minimized.end(); ++it){
+        string staat1 = it->first.first;
+        string staat2 = it->first.second;
         if((isFinalState(final_states,staat1) && !isFinalState(final_states,staat2))){
-            zet_kruisje(minimized, minimized[i]);
+            it->second = "X";
         }
         else if(!isFinalState(final_states,staat1) && isFinalState(final_states,staat2)){
-            zet_kruisje(minimized, minimized[i]);
+            it->second = "X";
         }
     }
 
     // Daarna gaan we kijken naar waar de combinatie van staten gaan en als deze combinatie van staten een kruisje heeft
     // dan gaan we bij die combinatie ook een kruisje zetten.
-    vector<vector<string>> vorige_tabel = minimized;
+    map<pair<string,string>,string>  vorige_tabel = minimized;
     bool voorwaarde = true;
-    cout << "in_while_loop" << endl;
-    while (voorwaarde){
-        for (int i = 0; i < minimized.size(); ++i){
-            string teken = minimized[i][2];
+    while (voorwaarde) {
+        for (std::map<pair<string, string>, string>::iterator it = minimized.begin(); it != minimized.end(); ++it) {
+            string teken = it->second;
             // als er nog geen kruisje staat gaan we vergelijken;
-            if (teken == "-"){
-                string staat1 = minimized[i][0];
-                string staat2 = minimized[i][1];
-                for (int j = 0; j < alphabet.size(); ++j){
-                    vector<string> combinatie;
-                    string volgende_staat1 = go_to(transitions,staat1,alphabet[j]);
-                    string volgende_staat2 = go_to(transitions,staat2,alphabet[j]);
-                    combinatie.push_back(volgende_staat1);
-                    combinatie.push_back(volgende_staat2);
-                    if(heeft_kruisje(minimized, combinatie)) {
-                        zet_kruisje(minimized, minimized[i]);
+            if (teken == "-") {
+                for (int j = 0; j < alphabet.size(); ++j) {
+
+                    string volgende_staat1 = goes_to(it->first.first, alphabet[j]);
+                    string volgende_staat2 = goes_to(it->first.second, alphabet[j]);
+                    if (heeft_kruisje(minimized, make_pair(volgende_staat1, volgende_staat2),make_pair(volgende_staat2, volgende_staat1))){
+                        it->second = "X";
+                        break;
                     }
                 }
             }
         }
-        cout << "1" << endl;
         // We blijven doorgaan in de while loop tot dat de vorige tabel en de huidige tabel gelijk zijn
         // Dit zal betekenen dat alle mogelijke kruisjes gezet zijn
-        if (compare(minimized,vorige_tabel)){
+        if (compare(minimized, vorige_tabel)) {
             voorwaarde = false;
         }
-        cout << "2" << endl;
         vorige_tabel = minimized;
     }
-    cout << "uit_while_loop" << endl;
-    return minimized;
+    vector<vector<string>> returnvector;
+    for (std::map<pair<string, string>, string>::iterator it = minimized.begin(); it != minimized.end(); ++it) {
+        vector<string> tussenstap;
+        tussenstap.push_back(it->first.first);
+        tussenstap.push_back(it->first.second);
+        tussenstap.push_back(it->second);
+        returnvector.push_back(tussenstap);
+    }
+    return returnvector;
 }
 
 // functie die de tabel print
@@ -413,15 +390,9 @@ void DFA_elias::printTable(){
         for (int i = 1; i < states.size(); i++) {
             cout << states[i] << "\t";
             for (int j = 0; j < counter-1; ++j) {
-                vector<string> combinatie;
-                combinatie.push_back(states[i]);
-                combinatie.push_back(states[j]);
-                cout << vind_teken(combinatie, minimized_tabel) << "\t";
+                cout << minimized_tabel[make_pair(states[i],states[j])] << "\t";
             }
-            vector<string> combinatie;
-            combinatie.push_back(states[i]);
-            combinatie.push_back(states[counter-1]);
-            cout << vind_teken(combinatie, minimized_tabel) << endl;
+            cout << minimized_tabel[make_pair(states[i],states[counter-1])] << "\t";
             counter += 1;
         }
     }
@@ -519,6 +490,7 @@ DFA_elias DFA_elias::minimize(){
     // eqiuvalent_states is een matrix en ziet er als volgt uit [[equivalente_staat1,equivalente_staat2,.. ],[equivalente_staat3,equivalente_staat4,.. ],...]
     vector<vector<string>> eqiuvalent_states = equivalent(tabel);
     cout << "table filling is klaar" << endl;
+
     // newDFAstates is een vector en ziet er als volgt uit [{staat1},{staat2}...]
     vector<string> newDFAstates;
     for (int i = 0; i < states.size(); i++) {
@@ -582,7 +554,6 @@ DFA_elias DFA_elias::minimize(){
             verwerken = false;
         }
     }
-
     DFA_elias dfa("DFA_elias", newDFAtransitions, alphabet, DFA_states, DFAstartstate, DFA_final_states);
     return dfa;
 }
@@ -610,7 +581,7 @@ bool DFA_elias::operator == (const DFA_elias &other){
     for (int i = 0; i < other.final_states.size(); ++i){
         allfinalstates.push_back(other.final_states[i]);
     }
-    vector<vector<string>> tablefilling = maketabel(allestaten);
+    map<pair<string,string>,string> tablefilling = maketabel(allestaten);
     vector<vector<string>> tabel = this->table_filling_algoritme(alletransities,allfinalstates,allestaten,tablefilling);
     printTable_equils(allestaten,tabel);
 

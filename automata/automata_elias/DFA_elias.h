@@ -26,7 +26,7 @@ private:
     vector<string> states;
     string start_state;
     vector<string> final_states;
-    vector<vector<string>> minimized_tabel;
+    map<pair<string,string>,string> minimized_tabel;
 
 
     void maak_transitie_tabel(vector<vector<string>> transitions);
@@ -35,8 +35,9 @@ private:
     bool isgeldig(string s); // kijkt of de inputstring geldig is.
     bool isStartState(string state);
     bool isFinalState(vector<string> final_states,string state);
-    vector<vector<string>> table_filling_algoritme(vector<vector<string>>transitions, vector<string> final_states, vector<string> states, vector<vector<string>> &minimized); // methode die het table filling algoritme uitvoert
+    vector<vector<string>> table_filling_algoritme(vector<vector<string>>transitions, vector<string> final_states, vector<string> states,  map<pair<string,string>,string> &minimized); // methode die het table filling algoritme uitvoert
     vector<string> DFAtransitions(vector<string> newDFAstates,string from, vector<string> &DFA_states, string alphabet); // methode die de nieuwe DFA_elias transities bepaald
+    string goes_to(string current_state, string s);
 
 public:
 
