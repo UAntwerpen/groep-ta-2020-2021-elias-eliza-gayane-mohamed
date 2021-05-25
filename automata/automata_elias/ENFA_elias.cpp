@@ -355,6 +355,20 @@ vector<string> ENFA_elias::get_closure(string state){
     return closure_of_state;
 }
 
+void vervang_states(map<string,string> map,vector<vector<string>> &transitions,vector<string> &states,vector<string> &final_states,string &start_state){
+    for(int i = 0; i < transitions.size(); ++i){
+        transitions[i][0] = map[transitions[i][0]];
+        transitions[i][1] = map[transitions[i][1]];
+    }
+    for(int i = 0; i < states.size(); ++i){
+        states[i]= map[states[i]];
+    }
+    for(int i = 0; i < final_states.size(); ++i){
+        final_states[i]= map[final_states[i]];
+    }
+    start_state = map[start_state];
+}
+
 DFA_elias ENFA_elias::toDFA(){
     vector<vector<string>> DFA_transitions;
     vector<string> DFA_alphabet = alphabet;
@@ -366,12 +380,12 @@ DFA_elias ENFA_elias::toDFA(){
     }
 
 
-    // DFA_elias states is een lijst met strings die de staten bijhoud.
+    // DFA states is een lijst met strings die de staten bijhoud.
     DFA_states.push_back(toDFAstate_(get_closure(start_state)));
     bool verwerken = true;
     bool deathstate = false;
     int counter = 0;
-    // We blijven de staten verwerken tot alle staten een transitie in de DFA_elias hebben
+    // We blijven de staten verwerken tot alle staten een transitie in de DFA hebben
     while (verwerken){
         for(int i = 0; i < alphabet.size(); ++i){
             // een DFA_transition bestaat uit [[from],[to],[input]]
@@ -393,7 +407,19 @@ DFA_elias ENFA_elias::toDFA(){
             DFA_transitions.push_back(transition);
         }
     }
-    DFA_elias dfa("DFA_elias", DFA_transitions, DFA_alphabet, DFA_states, DFA_start_state, DFA_final_states);
+    // we gaan de staten versimpelen
+
+    vector<vector<string>> simple_DFA_transitions = DFA_transitions;    // transitions
+    vector<string> simple_DFA_states = DFA_states;                      // states
+    string simple_DFA_start_state = DFA_start_state;                    // startstate
+    vector<string> simple_DFA_final_states = DFA_final_states;          // final state
+
+    map<string,string> simple_DFA_state_map;
+    for(int i = 0; i < DFA_states.size(); ++i){
+        simple_DFA_state_map[DFA_states[i]] = to_string(i+1);
+    }
+    vervang_states(simple_DFA_state_map, simple_DFA_transitions, simple_DFA_states, simple_DFA_final_states, simple_DFA_start_state);
+    DFA_elias dfa("DFA",simple_DFA_transitions,DFA_alphabet,simple_DFA_states,simple_DFA_start_state,simple_DFA_final_states);
     return dfa;
 }
 

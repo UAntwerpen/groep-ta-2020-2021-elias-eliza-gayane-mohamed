@@ -211,16 +211,15 @@ bool isintabel(vector<vector<string>> tabel,vector<string> subset){
 // funtie die een tabel initialiseerd voor het table filling algoritme
 vector<vector<string>> maketabel(vector<string> states){
     vector<vector<string>> tabel;
-    for (int i = 0; i < states.size(); ++i){
-        for (int j = 0; j < states.size(); ++j){
+    sort(states.begin(), states.end());
+    states.erase(std::unique(states.begin(), states.end()), states.end());
+    for (int i = 0; i < states.size()-1; ++i){
+        for (int j = i+1; j < states.size(); ++j){
             vector<string> combinatie;
             combinatie.push_back(states[i]);
             combinatie.push_back(states[j]);
             combinatie.push_back("-");
-
-            if (!isintabel(tabel,combinatie)){
-                tabel.push_back(combinatie);
-            }
+            tabel.push_back(combinatie);
         }
     }
     return tabel;
@@ -354,6 +353,7 @@ string to_dfa_staat(vector<string> eqiuvalent_states){
 // methode die het table filling algoritme uitvoert
 vector<vector<string>> DFA_elias::table_filling_algoritme(vector<vector<string>>transitions, vector<string> final_states, vector<string> states, vector<vector<string>> &minimized){
     // een tabel is een matrix en ziet er als volgt uit [[x,y,teken],[z,y,teken],...]
+
     minimized = maketabel(states);
 
     // eerst gaan we alle ongelijke paren er uit halen
@@ -361,7 +361,10 @@ vector<vector<string>> DFA_elias::table_filling_algoritme(vector<vector<string>>
     for (int i = 0; i < minimized.size(); ++i){
         string staat1 = minimized[i][0];
         string staat2 = minimized[i][1];
-        if((isFinalState(final_states,staat1) && !isFinalState(final_states,staat2)) || (!isFinalState(final_states,staat1) && isFinalState(final_states,staat2))){
+        if((isFinalState(final_states,staat1) && !isFinalState(final_states,staat2))){
+            zet_kruisje(minimized, minimized[i]);
+        }
+        else if(!isFinalState(final_states,staat1) && isFinalState(final_states,staat2)){
             zet_kruisje(minimized, minimized[i]);
         }
     }
@@ -370,13 +373,14 @@ vector<vector<string>> DFA_elias::table_filling_algoritme(vector<vector<string>>
     // dan gaan we bij die combinatie ook een kruisje zetten.
     vector<vector<string>> vorige_tabel = minimized;
     bool voorwaarde = true;
+    cout << "in_while_loop" << endl;
     while (voorwaarde){
         for (int i = 0; i < minimized.size(); ++i){
-            string staat1 = minimized[i][0];
-            string staat2 = minimized[i][1];
             string teken = minimized[i][2];
             // als er nog geen kruisje staat gaan we vergelijken;
             if (teken == "-"){
+                string staat1 = minimized[i][0];
+                string staat2 = minimized[i][1];
                 for (int j = 0; j < alphabet.size(); ++j){
                     vector<string> combinatie;
                     string volgende_staat1 = go_to(transitions,staat1,alphabet[j]);
@@ -389,14 +393,16 @@ vector<vector<string>> DFA_elias::table_filling_algoritme(vector<vector<string>>
                 }
             }
         }
-
+        cout << "1" << endl;
         // We blijven doorgaan in de while loop tot dat de vorige tabel en de huidige tabel gelijk zijn
         // Dit zal betekenen dat alle mogelijke kruisjes gezet zijn
         if (compare(minimized,vorige_tabel)){
             voorwaarde = false;
         }
+        cout << "2" << endl;
         vorige_tabel = minimized;
     }
+    cout << "uit_while_loop" << endl;
     return minimized;
 }
 
@@ -452,13 +458,30 @@ void printTable_equils(vector<string> states, vector<vector<string>> minimized_t
     cout << states[states.size()-2]<< endl;
 }
 
+vector<string> parse_state_(string state){
+    vector<string> returnwaarde;
+    std::string s = state.substr(1,state.size()-2);
+    std::string delimiter = ",";
+
+    size_t pos = 0;
+    std::string token;
+    while ((pos = s.find(delimiter)) != std::string::npos) {
+        token = s.substr(0, pos);
+        s.erase(remove(s.begin(), s.end(), ' '), s.end());
+        returnwaarde.push_back(token);
+        s.erase(0, pos + delimiter.length());
+    }
+    s.erase(remove(s.begin(), s.end(), ' '), s.end());
+    returnwaarde.push_back(s);
+    return returnwaarde;
+}
+
 // functie die de overeenkomstige staat van de neiuwe geminimaliseerde DFA_elias terug geeft
 string get_overeenlomstige_nieuwe_staat(vector<string> newDFAstates, string staat){
     for (int i = 0; i < newDFAstates.size(); i++){
-        for (int j = 0; j < newDFAstates[i].size(); j++) {
-            string state;
-            state.push_back(newDFAstates[i][j]);
-            if (staat == state){
+        vector<string> appartre_states = parse_state_(newDFAstates[i]);
+        for (int j = 0; j < appartre_states.size(); j++) {
+            if (staat == appartre_states[j]){
                 return newDFAstates[i];
             }
         }
@@ -471,16 +494,14 @@ vector<string> DFA_elias::DFAtransitions(vector<string> newDFAstates, string fro
     vector<string> transition;
     vector<string> DFAstaat;
     transition.push_back(from);
+    vector<string> from_ = parse_state_(from);
     string to;
-    for(int i = 0; i < from.size(); ++i){
-        string state_;
-        state_ = from[i];
-        if (state_ != "{" and state_ != "}" and state_ != ","){
-            // we gaan kijken naar waar de staten in de dfa gaan en dan gaan we de overeenkomstige nieuwe staat bepalen die we gevonden hebben door het table filling algoritme
-            to = get_overeenlomstige_nieuwe_staat(newDFAstates, this->go_to(transitions,state_,input));
-            transition.push_back(to);
-            break;
-        }
+    for(int i = 0; i < from_.size(); ++i){
+        string state_ = from_[i];
+        // we gaan kijken naar waar de staten in de dfa gaan en dan gaan we de overeenkomstige nieuwe staat bepalen die we gevonden hebben door het table filling algoritme
+        to = get_overeenlomstige_nieuwe_staat(newDFAstates, this->go_to(transitions,state_,input));
+        transition.push_back(to);
+        break;
     }
     // We gaan geen dubbele staten toevoegen aan de DFA_states
     if (find(DFA_states.begin(), DFA_states.end(),to) == DFA_states.end()){
@@ -497,7 +518,7 @@ DFA_elias DFA_elias::minimize(){
     vector<vector<string>> tabel = this->table_filling_algoritme(transitions,final_states,states,minimized_tabel);
     // eqiuvalent_states is een matrix en ziet er als volgt uit [[equivalente_staat1,equivalente_staat2,.. ],[equivalente_staat3,equivalente_staat4,.. ],...]
     vector<vector<string>> eqiuvalent_states = equivalent(tabel);
-
+    cout << "table filling is klaar" << endl;
     // newDFAstates is een vector en ziet er als volgt uit [{staat1},{staat2}...]
     vector<string> newDFAstates;
     for (int i = 0; i < states.size(); i++) {
@@ -505,9 +526,9 @@ DFA_elias DFA_elias::minimize(){
         for (int j = 0; j < eqiuvalent_states.size(); j++) {
             if(find(eqiuvalent_states[j].begin(),eqiuvalent_states[j].end(),states[i]) != eqiuvalent_states[j].end()){
                 string staat = to_dfa_staat(eqiuvalent_states[j]);
+                found = true;
                 if(find(newDFAstates.begin(),newDFAstates.end(),staat) == newDFAstates.end()){
                     newDFAstates.push_back(staat);
-                    found = true;
                 }
             }
         }
@@ -521,26 +542,22 @@ DFA_elias DFA_elias::minimize(){
 
     string DFAstartstate;
     for (int i = 0; i < newDFAstates.size(); i++){
-        for (int j = 0; j < newDFAstates[i].size(); j++){
-            string state;
-            state.push_back(newDFAstates[i][j]);
-            if(state == start_state){
-                DFAstartstate = newDFAstates[i];
+        vector<string> states = parse_state_(newDFAstates[i]);
+        for (int j = 0; j < states.size(); j++){
+            if(states[i] == start_state){
+                DFAstartstate = "{"+states[i]+"}";
             }
         }
     }
 
     vector<string> DFA_final_states;
     for (int i = 0; i < newDFAstates.size(); i++){
-        for (int j = 0; j < final_states.size(); j++){
-
-            for (int k = 0; k < newDFAstates[i].size(); k++){
-                string state;
-                state.push_back(newDFAstates[i][k]);
-                if (state != "{" && state != "}" && state != ","){
-                    if(state == final_states[j] && find(DFA_final_states.begin(),DFA_final_states.end(),newDFAstates[i]) == DFA_final_states.end()){
-                        DFA_final_states.push_back(newDFAstates[i]);
-                    }
+        vector<string> geparsed = parse_state_(newDFAstates[i]);
+        for (int j = 0; j < geparsed.size(); j++){
+            if(isFinalState(final_states,geparsed[j])){
+                string final_state = get_overeenlomstige_nieuwe_staat(newDFAstates, geparsed[j]);
+                if(find(DFA_final_states.begin(),DFA_final_states.end(),final_state) == DFA_final_states.end()){
+                    DFA_final_states.push_back(final_state);
                 }
             }
         }
@@ -566,7 +583,6 @@ DFA_elias DFA_elias::minimize(){
         }
     }
 
-    cout << endl;
     DFA_elias dfa("DFA_elias", newDFAtransitions, alphabet, DFA_states, DFAstartstate, DFA_final_states);
     return dfa;
 }

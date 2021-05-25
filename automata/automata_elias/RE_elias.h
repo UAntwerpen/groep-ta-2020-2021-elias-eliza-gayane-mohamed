@@ -14,11 +14,11 @@ using namespace std;
 
 
 struct node{
-    node(bool starthaakje, bool eindhaakje, bool start, bool final,
+    node(pair<bool,int> starthaakje, pair<bool,int> eindhaakje, bool start, bool final,
          char transitionSymbol, node *left, node *right, node *prev, int nummer);
 
-    bool starthaakje;
-    bool eindhaakje;
+    pair<bool,int> starthaakje;
+    pair<bool,int> eindhaakje;
     bool start;
     bool final;
     char transition_symbol;

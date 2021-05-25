@@ -26,34 +26,40 @@ void RE_elias::print(node* current, vector<int> staten){
 }
 
 
-node* ga_naar_starthaakje(node* current){
+node* ga_naar_starthaakje(node* current, int nr){
     //cout << "ga_naar_starthaakje: " << current->transition_symbol << endl;
     bool found = false;
     while (!found){
-        if(current->starthaakje){
+        if(current->starthaakje.first && current->starthaakje.second == nr){
             found = true;
             //cout << "return_starthaakje: " << current->transition_symbol << endl;
             return current;
         }
         else{
             current = current->prev;
-            //cout << "tussenstap: " << current->transition_symbol << endl;
+            //cout << "tussenstap: " << current->nummer << endl;
         }
     }
 }
 
-node* ga_naar_eindthaakje(node* current){
+node* ga_naar_eindthaakje(node* current,int nr){
     //cout << "ga_naar_starthaakje: " << current->transition_symbol << endl;
     bool found = false;
     while (!found){
-        if(current->eindhaakje){
+        //cout << current->nummer << "  " << current->eindhaakje.first << "    " << current->eindhaakje.second  << " = " << nr << endl;
+        if(current->eindhaakje.first && current->eindhaakje.second == nr){
             found = true;
             //cout << "return_starthaakje: " << current->transition_symbol << endl;
             return current;
         }
         else{
-            current = current->left;
-            //cout << "tussenstap: " << current->transition_symbol << endl;
+            if(current->right){
+                current = current->right;
+            }
+            else{
+                current = current->left;
+            }
+            //cout << "tussenstap: " << current->nummer << endl;
         }
     }
 }
@@ -93,18 +99,25 @@ void get_alle_states_zonder_transities(node* current, vector<node*> &staten_zond
     }
 }
 
-void maak_lus_toe(node* current, char epsilon, int &aantal_states){
+void maak_lus_toe(node* current, char epsilon, int &aantal_states, int nr){
     //cout << "aanroep: " << current->transition_symbol << endl;
     aantal_states += 1;
-    node* finalnode = new node(false,true, false, false,epsilon, nullptr,nullptr, nullptr, aantal_states);
-
+    node* finalnode = new node(make_pair(false, 0),make_pair(true, nr), false, false,epsilon, nullptr,nullptr, nullptr, aantal_states);
     bool all_conected = false;
     bool lastnode = false;
     vector<node*> tussennode;
     int counter = 0;
     while (!all_conected){
-        while (current->left != nullptr) {
+        if(current->left != nullptr){
             current = current->left;
+        }
+        while (current->left != nullptr) {
+            if(current->right){
+                current = current->right;
+            }
+            else {
+                current = current->left;
+            }
         }
         if(lastnode){
             if(!tussennode.empty()){
@@ -122,7 +135,7 @@ void maak_lus_toe(node* current, char epsilon, int &aantal_states){
             for (int i = 0; i < counter; ++i) {
                 if(i == 0){
                     aantal_states += 1;
-                    node* newnode = new node(false,false, false, false,epsilon, nullptr,nullptr, nullptr, aantal_states);
+                    node* newnode = new node(make_pair(false, 0),make_pair(false, 0), false, false,epsilon, nullptr,nullptr, nullptr, aantal_states);
                     current->left = newnode;
 
                     newnode->prev = current;
@@ -140,7 +153,7 @@ void maak_lus_toe(node* current, char epsilon, int &aantal_states){
         }
         current->left = finalnode;
         finalnode->prev = current;
-        current = ga_naar_starthaakje(current);
+        current = ga_naar_starthaakje(current, nr);
         for (int i = 0; i < counter; ++i) {
             current = current->right;
         }
@@ -163,105 +176,148 @@ void maak_lus_toe(node* current, char epsilon, int &aantal_states){
 }
 
 void RE_elias::make_transitions(){
-    bool ishaakjeingelezen = false;
-    bool beginhaakje = false;
-    int haakjescounter = 0;
-    node* current = new node(false,false, true, false,epsilon, nullptr,nullptr, nullptr, aantal_states);
+    int nr_haakje = 0;
+
+    node* current = new node(make_pair(false, 0),make_pair(false, 0), true, false,epsilon, nullptr,nullptr, nullptr, aantal_states);
     regextree = current;
     current->start = true;
     current->transition_symbol = epsilon;
+    vector<bool> is_haakje_ingelezen_stack;
     for(int i = 0; i < regex.size(); ++i){
         //cout << regex[i] << endl;
         if(regex[i] == '('){
-            beginhaakje = true;
-            ishaakjeingelezen = true;
-            haakjescounter += 1;
+
+            nr_haakje += 1;
+            is_haakje_ingelezen_stack.push_back(true);
+
+            aantal_states += 1;
+            node* newnode = new node(make_pair(false, 0),make_pair(false, 0), false, false, epsilon, nullptr,nullptr, nullptr,aantal_states);
+            current->left = newnode;
+            newnode->prev = current;
+
+            newnode->starthaakje.first = true;
+            newnode->starthaakje.second = nr_haakje;
+
+            current = current->left;
+
         }
         else if(regex[i] == ')'){
-            if (ishaakjeingelezen){
-                current = ga_naar_starthaakje(current);
+            if (is_haakje_ingelezen_stack[is_haakje_ingelezen_stack.size()-1]){
+                current = ga_naar_starthaakje(current, nr_haakje);
+                is_haakje_ingelezen_stack.pop_back();
             }
-            maak_lus_toe(current, epsilon, aantal_states);
-            ishaakjeingelezen = false;
-            current = ga_naar_eindthaakje(current);
+            maak_lus_toe(current, epsilon, aantal_states, nr_haakje);
+            current = ga_naar_eindthaakje(current, nr_haakje);
+            if(i < regex.size()-1){
+                if(!(regex[i+1] == '*')){
+                    nr_haakje -= 1;
+                }
+            }
             aantal_states += 1;
-            node* newlastnode = new node(false,false, false, false, epsilon, nullptr,nullptr, nullptr,aantal_states);
+            node* newlastnode = new node(make_pair(false, 0),make_pair(false, 0), false, false, epsilon, nullptr,nullptr, nullptr,aantal_states);
             //cout << current->nummer << endl;
-            current->right = newlastnode;
+
+            current->left = newlastnode;
             newlastnode->prev = current;
-            current = current->right;
+
+            current = current->left;
 
         }
         else if(regex[i] == '*'){
             aantal_states += 1;
-            node* newfirstnode = new node(false,false, false, false, epsilon, nullptr,nullptr, nullptr,aantal_states);
-            current = ga_naar_starthaakje(current);
+            node* newfirstnode = new node(make_pair(false, 0),make_pair(false, 0), false, false, epsilon, nullptr,nullptr, nullptr,aantal_states);
+            current = ga_naar_starthaakje(current, nr_haakje);
             node* go_to = current;
-            current = ga_naar_eindthaakje(current);
+            current = ga_naar_eindthaakje(current,nr_haakje);
             //cout << current->nummer << "," << current->left << "," <<  current->right << endl;
-            node* end = current->right;
+            node* end = current->left;
             //cout << end->nummer << endl;
+            current->right = current->left;
             current->left = go_to;
-            current = ga_naar_starthaakje(current);
+            current = ga_naar_starthaakje(current, nr_haakje);
             if (current->start) {
                 newfirstnode->start = true;
                 regextree = newfirstnode;
                 current->start = false;
             }
             if(current->prev){
-                if(current->prev->left = current){
+                if(current->prev->left == current){
                     current->prev->left = newfirstnode;
                     newfirstnode->prev = current->prev;
                 }
-                else if(current->prev->right = current){
-                    current->prev->right = newfirstnode;
-                    newfirstnode->prev = current->prev->right;
+                else if(current->prev->right == current){
+                    if(current->prev->left == nullptr){
+                        current->prev->left = newfirstnode;
+                        newfirstnode->prev = current->prev;
+                        current->prev->right = nullptr;
+                    }
+                    else{
+                        current->prev->right = newfirstnode;
+                        newfirstnode->prev = current->prev;
+                    }
                 }
                 else{
-                   cout << "hier mag ik niet komen" << endl;
+                    cout << "hier mag ik niet komen" << endl;
                 }
                 newfirstnode->left = current;
                 current->prev = newfirstnode;
                 newfirstnode->right = end;
-                current = ga_naar_eindthaakje(current)->right;
+                current = ga_naar_eindthaakje(current, nr_haakje)->right;
+                nr_haakje -= 1;
             }
         }
         else if(regex[i] == '+'){
-            if (ishaakjeingelezen){
-                current = ga_naar_starthaakje(current);
-                while (current->right != nullptr) {
-                    //cout << current->transition_symbol << endl;
-                    current = current->right;
-                }
+            if(!is_haakje_ingelezen_stack.empty()){
+                if (is_haakje_ingelezen_stack[is_haakje_ingelezen_stack.size()-1]){
+                    current = ga_naar_starthaakje(current, nr_haakje);
+                    while (current->right != nullptr) {
+                        //cout << current->transition_symbol << endl;
+                        current = current->right;
+                    }
 
+                }
             }
             else{
                 current = ga_naar_startstaat(current);
             }
             aantal_states += 1;
-            node* newnode = new node(false,false, false, false,epsilon, nullptr,nullptr, nullptr,aantal_states);
+            node* newnode = new node(make_pair(false, 0),make_pair(false, 0), false, false,epsilon, nullptr,nullptr, nullptr,aantal_states);
             aantal_states += 1;
-            node* newrightnode = new node(false,false, false, false,epsilon, nullptr,nullptr, nullptr,aantal_states);
+            node* newrightnode = new node(make_pair(false, 0),make_pair(false, 0), false, false,epsilon, nullptr,nullptr, nullptr,aantal_states);
             if (current->start){
                 newnode->start = true;
                 regextree = newnode;
                 current->start = false;
-                if (current->starthaakje){
-                    newnode->starthaakje = true;
-                    current->starthaakje = false;
+                if (current->starthaakje.first){
+                    newnode->starthaakje.first = true;
+                    newnode->starthaakje.second = current->starthaakje.second;
+                    current->starthaakje.first = false;
 
                 }
             }
             else{
-                current->prev->right = newnode;
-                newnode->prev = current->prev;
                 if(current->prev->left == current){
-                    current->prev->left = NULL;
+                    current->prev->left = newnode;
+                    newnode->prev = current->prev;
                 }
-                if (current->starthaakje){
-
-                    newnode->starthaakje = true;
-                    current->starthaakje = false;
+                else if(current->prev->right == current){
+                    if(current->prev->left == nullptr){
+                        current->prev->left = newnode;
+                        newnode->prev = current->prev;
+                        current->prev->right = nullptr;
+                    }
+                    else{
+                        current->prev->right = newnode;
+                        newnode->prev = current->prev;
+                    }
+                }
+                else{
+                    cout << "hier mag ik niet komen" << endl;
+                }
+                if (current->starthaakje.first){
+                    newnode->starthaakje.first = true;
+                    newnode->starthaakje.second = current->starthaakje.second;
+                    current->starthaakje.first = false;
 
                 }
             }
@@ -275,21 +331,17 @@ void RE_elias::make_transitions(){
         }
         else{
             aantal_states += 1;
-            node* newnode = new node(false,false, false, false, epsilon, nullptr,nullptr, nullptr,aantal_states);
+            node* newnode = new node(make_pair(false, 0),make_pair(false, 0), false, false, epsilon, nullptr,nullptr, nullptr,aantal_states);
             current->left = newnode;
             newnode->prev = current;
             newnode->transition_symbol = regex[i];
-            if(beginhaakje){
-                newnode->starthaakje = true;
-                beginhaakje = false;
-            }
             current = current->left;
         }
     }
     // alle eindjes verbinden
     vector<node*> staten_zonder_trasities;
     aantal_states += 1;
-    node* final_state = new node(false,false, false, true, epsilon, nullptr,nullptr, nullptr, aantal_states);
+    node* final_state = new node(make_pair(false, 0),make_pair(false, 0), false, true, epsilon, nullptr,nullptr, nullptr, aantal_states);
     current = ga_naar_startstaat(current);
     vector<int> controlevector;
     get_alle_states_zonder_transities(current, staten_zonder_trasities, controlevector);
@@ -300,12 +352,12 @@ void RE_elias::make_transitions(){
 }
 
 
-node::node(bool starthaakje_, bool eindhaakje_, bool start, bool final,
+node::node(pair<bool,int> starthaakje_, pair<bool,int> eindhaakje_, bool start, bool final,
            char transitionSymbol, node *left, node *right, node *prev, int nummer_) : starthaakje(starthaakje_),
-                                                                         eindhaakje(eindhaakje_), start(start),
-                                                                         final(final),
-                                                                         transition_symbol(transitionSymbol),
-                                                                         left(left), right(right), prev(prev) , nummer(nummer_){
+                                                                                      eindhaakje(eindhaakje_), start(start),
+                                                                                      final(final),
+                                                                                      transition_symbol(transitionSymbol),
+                                                                                      left(left), right(right), prev(prev) , nummer(nummer_){
 
 }
 
@@ -400,7 +452,7 @@ ENFA_elias RE_elias::toENFA(){
     vector<string> finalestates;
     vector<int> test;
     get_final_states(regextree,finalestates,test);
-    return ENFA_elias("ENFA_elias", epsilon_, alphabet, states, startstaat, finalestates, transitions);
+    return ENFA_elias("ENFA",epsilon_,alphabet,states,startstaat,finalestates,transitions);
 }
 
 const string &RE_elias::getRegex() const {

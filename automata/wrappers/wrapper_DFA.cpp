@@ -27,6 +27,7 @@ DFA DFA::minimize(){
     DFA_elias minimize_dfa = dfaElias;
     minimize_dfa.minimize();
     DFA return_dfa(minimize_dfa);
+    return return_dfa;
 }
 
 DFA::DFA(const DFA_elias &dfaElias) : dfaElias(dfaElias) {}
