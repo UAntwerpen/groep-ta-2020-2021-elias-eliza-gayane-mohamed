@@ -1,6 +1,6 @@
 {
   "type": "NFA",
-  "color": "#5D7FC2",
+  "color": "#A973EA",
   "alphabet": [
     "p", "r", "i", "n", "t", "o", "w"
   ],

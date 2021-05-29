@@ -133,7 +133,7 @@ int main(int argc, char const* argv[]) {
                 string word = parsed_file[j][k];
                 bool herkend = false;
                 if (def == true && word != " "){
-                    text_for_html[j].push_back(make_pair(word, "#F7C51C"));
+                    text_for_html[j].push_back(make_pair(word, "#F6D263"));
                     def = false;
                     continue;
                 }
