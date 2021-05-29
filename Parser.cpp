@@ -30,7 +30,7 @@ vector<string> Parser::split_line(string &s) {
     bool dubble_quotes = false;
     bool hashtag = false;
     for(int i = 0; i < s.size(); i++){
-        if((!isalnum(s[i]) || (!isalnum(word[0]) && !word.empty())) && !dubble_quotes && !hashtag){
+        if((!isalnum(s[i]) && s[i] != '_' || (!isalnum(word[0]) && !word.empty())) && !dubble_quotes && !hashtag){
             words.emplace_back(word);
             word.clear();
         }

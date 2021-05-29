@@ -107,17 +107,15 @@ int main(int argc, char const* argv[]) {
         DFA dfa = nfa.toDFA();
         dfa.minimize();
         if(i < vergelijk_dfa_s.size()){
-            cout << i << endl;
             if(vergelijk_dfa_s[i].first == dfa){
                 cout << "--------------juist----------------" << endl;
                 dfa_s.push_back(make_pair(dfa,color));
             }
             else{
-                cout << "--------------false----------------" << endl;
+                cout << "--------------fout----------------" << endl;
             }
         }
         else{
-            cout << i << endl;
             dfa_s.push_back(make_pair(dfa,color));
         }
     }
@@ -130,14 +128,23 @@ int main(int argc, char const* argv[]) {
         map<int, vector<pair<string, string>>> text_for_html;
         /// halen de regexen uit de safe
         for(int j = 0; j < parsed_file.size(); j++){ // j is de lijn waaruit we lezen
+            bool def = false;
             for(int k= 0; k < parsed_file[j].size(); k++) {
                 string word = parsed_file[j][k];
                 bool herkend = false;
+                if (def == true && word != " "){
+                    text_for_html[j].push_back(make_pair(word, "#F7C51C"));
+                    def = false;
+                    continue;
+                }
                 for(int l = 0;  l < dfa_s.size(); l++) {
                     string color = dfa_s[l].second;
                     if (dfa_s[l].first.accepts(word)) {
                         text_for_html[j].push_back(make_pair(word, color));
                         herkend = true;
+                        if(word == "def"){
+                            def = true;
+                        }
                     }
                 }
                 if(!herkend){
