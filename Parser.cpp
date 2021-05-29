@@ -43,7 +43,9 @@ vector<string> Parser::split_line(string &s) {
         else if(s[i] == '\"' && !dubble_quotes){
             dubble_quotes = true;
         }
-        word += s[i];
+        if(s[i] != '\r'){
+            word += s[i];
+        }
         if(i == s.size() - 1) words.emplace_back(word);
     }
     for(int i = 0; i < words.size(); i++){

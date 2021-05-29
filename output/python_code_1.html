@@ -7,7 +7,7 @@
 <body style="background-color:#232323;">
 <header>
 	<table border="1" bordercolor="dimgrey">
-		<td style="border-color: #afa8a8">
+		<td>
 			<a href="python1.html">python1.py</a>
 		</td>
 		<td>
@@ -16,7 +16,7 @@
 		<td>
 			<a href="python3.html">python3.py</a>
 		</td>
-		<td>
+		<td style="border-color: #afa8a8">
 			<a href="python_code_1.html">python_code_1.py</a>
 		</td>
 		<td>
@@ -30,7 +30,7 @@
 			<span style="color: #5f5e5e;">1</span>
 		</td>
 		<td>
-			<span style="color: #9E8DA5;"># Basic calculator program with user input</span>
+			<span style="color: #9E8DA5;"># Python program to display the Fibonacci sequence</span>
 		</td>
 	</tr>
 	<tr>
@@ -46,7 +46,7 @@
 			<span style="color: #5f5e5e;">3</span>
 		</td>
 		<td>
-			<span style="color: #e07822;">import</span>&nbsp;math
+			<span style="color: #e07822;">def</span>&nbsp;recur_fibo(n):
 		</td>
 	</tr>
 	<tr>
@@ -54,7 +54,7 @@
 			<span style="color: #5f5e5e;">4</span>
 		</td>
 		<td>
-			
+			&nbsp;&nbsp;&nbsp;<span style="color: #e07822;">if</span>&nbsp;n&nbsp;<=&nbsp;<span style="color: #91c1e6;">1</span>:
 		</td>
 	</tr>
 	<tr>
@@ -62,7 +62,7 @@
 			<span style="color: #5f5e5e;">5</span>
 		</td>
 		<td>
-			num1&nbsp;=&nbsp;<span style="color: #5D7FC2;">float</span>(<span style="color: #5D7FC2;">input</span>(<span style="color: #72bf45;">"Enter first number: "</span>))
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #e07822;">return</span>&nbsp;n
 		</td>
 	</tr>
 	<tr>
@@ -70,7 +70,7 @@
 			<span style="color: #5f5e5e;">6</span>
 		</td>
 		<td>
-			operator&nbsp;=&nbsp;<span style="color: #5D7FC2;">input</span>(<span style="color: #72bf45;">"Enter operator: "</span>)
+			&nbsp;&nbsp;&nbsp;<span style="color: #e07822;">else</span>:
 		</td>
 	</tr>
 	<tr>
@@ -78,7 +78,7 @@
 			<span style="color: #5f5e5e;">7</span>
 		</td>
 		<td>
-			num2&nbsp;=&nbsp;<span style="color: #5D7FC2;">float</span>(<span style="color: #5D7FC2;">input</span>(<span style="color: #72bf45;">"Enter second number: "</span>))
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #e07822;">return</span>(recur_fibo(n-<span style="color: #91c1e6;">1</span>)&nbsp;+&nbsp;recur_fibo(n-<span style="color: #91c1e6;">2</span>))
 		</td>
 	</tr>
 	<tr>
@@ -86,7 +86,7 @@
 			<span style="color: #5f5e5e;">8</span>
 		</td>
 		<td>
-			<span style="color: #e07822;">if</span>&nbsp;operator&nbsp;==&nbsp;<span style="color: #72bf45;">"+"</span>:
+			
 		</td>
 	</tr>
 	<tr>
@@ -94,7 +94,7 @@
 			<span style="color: #5f5e5e;">9</span>
 		</td>
 		<td>
-			&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #5D7FC2;">print</span>(num1&nbsp;+&nbsp;num2)
+			nterms&nbsp;=&nbsp;<span style="color: #91c1e6;">10</span>
 		</td>
 	</tr>
 	<tr>
@@ -102,7 +102,7 @@
 			<span style="color: #5f5e5e;">10</span>
 		</td>
 		<td>
-			<span style="color: #e07822;">elif</span>&nbsp;operator&nbsp;==&nbsp;<span style="color: #72bf45;">"-"</span>:
+			
 		</td>
 	</tr>
 	<tr>
@@ -110,7 +110,7 @@
 			<span style="color: #5f5e5e;">11</span>
 		</td>
 		<td>
-			&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #5D7FC2;">print</span>(num1&nbsp;-&nbsp;num2)
+			<span style="color: #9E8DA5;"># check if the number of terms is valid</span>
 		</td>
 	</tr>
 	<tr>
@@ -118,7 +118,7 @@
 			<span style="color: #5f5e5e;">12</span>
 		</td>
 		<td>
-			<span style="color: #e07822;">elif</span>&nbsp;operator&nbsp;==&nbsp;<span style="color: #72bf45;">"/"</span>:
+			<span style="color: #e07822;">if</span>&nbsp;nterms&nbsp;<=&nbsp;<span style="color: #91c1e6;">0</span>:
 		</td>
 	</tr>
 	<tr>
@@ -126,7 +126,7 @@
 			<span style="color: #5f5e5e;">13</span>
 		</td>
 		<td>
-			&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #5D7FC2;">print</span>(num1&nbsp;/&nbsp;num2)
+			&nbsp;&nbsp;&nbsp;<span style="color: #5D7FC2;">print</span>(<span style="color: #72bf45;">"Plese enter a positive integer"</span>)
 		</td>
 	</tr>
 	<tr>
@@ -134,7 +134,7 @@
 			<span style="color: #5f5e5e;">14</span>
 		</td>
 		<td>
-			<span style="color: #e07822;">elif</span>&nbsp;operator&nbsp;==&nbsp;<span style="color: #72bf45;">"*"</span>:
+			<span style="color: #e07822;">else</span>:
 		</td>
 	</tr>
 	<tr>
@@ -142,7 +142,7 @@
 			<span style="color: #5f5e5e;">15</span>
 		</td>
 		<td>
-			&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #5D7FC2;">print</span>(num1&nbsp;*&nbsp;num2)
+			&nbsp;&nbsp;&nbsp;<span style="color: #5D7FC2;">print</span>(<span style="color: #72bf45;">"Fibonacci sequence:"</span>)
 		</td>
 	</tr>
 	<tr>
@@ -150,7 +150,7 @@
 			<span style="color: #5f5e5e;">16</span>
 		</td>
 		<td>
-			<span style="color: #e07822;">elif</span>&nbsp;operator&nbsp;==&nbsp;<span style="color: #72bf45;">"**"</span>:
+			&nbsp;&nbsp;&nbsp;<span style="color: #e07822;">for</span>&nbsp;i&nbsp;<span style="color: #e07822;">in</span>&nbsp;<span style="color: #5D7FC2;">range</span>(nterms):
 		</td>
 	</tr>
 	<tr>
@@ -158,7 +158,7 @@
 			<span style="color: #5f5e5e;">17</span>
 		</td>
 		<td>
-			&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #5D7FC2;">print</span>(<span style="color: #5D7FC2;">pow</span>(num1,&nbsp;num2))
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #5D7FC2;">print</span>(recur_fibo(i))
 		</td>
 	</tr>
 	<tr>
@@ -166,7 +166,7 @@
 			<span style="color: #5f5e5e;">18</span>
 		</td>
 		<td>
-			<span style="color: #e07822;">else</span>:
+			
 		</td>
 	</tr>
 	<tr>
@@ -174,7 +174,7 @@
 			<span style="color: #5f5e5e;">19</span>
 		</td>
 		<td>
-			&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #5D7FC2;">print</span>(<span style="color: #72bf45;">"Invalid operator"</span>)
+			<span style="color: #9E8DA5;"># reference: https://www.programiz.com/python-programming/examples/fibonacci-recursion</span>
 		</td>
 	</tr>
 </table>

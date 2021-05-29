@@ -23,17 +23,24 @@ int main(int argc, char const* argv[]) {
     }
 
     /// het opstellen van de safe
-    //vector<const char*> alle_NFAs = {"../input/NFA/def_NFA.json", "../input/NFA/for_NFA.json", "../input/NFA/getallen_NFA.json",
-    // "../input/NFA/return_NFA.json", "../input/NFA/string_quotes_NFA.json", "../input/NFA/while_NFA.json"};
+    vector<const char*> alle_NFAs = {"../NFA/def_NFA.json", "../NFA/for_from_NFA.json", "../NFA/getallen_NFA.json",
+                                     "../NFA/return_NFA.json", "../NFA/string_quotes_NFA.json", "../NFA/while_NFA.json",
+                                     "../NFA/ascii_NFA.json","../NFA/bool_NFA.json", "../NFA/chr_NFA.json", "../NFA/dict_NFA.json",
+                                     "../NFA/else_elif_NFA.json", "../NFA/False_NFA.json","../NFA/float_NFA.json",
+                                     "../NFA/if_in_import_NFA.json", "../NFA/int_isinstance_input_NFA.json",
+                                     "../NFA/list_len_NFA.json", "../NFA/max_map_NFA.json", "../NFA/ord_open_NFA.json",
+                                     "../NFA/print_pow_NFA.json", "../NFA/range_NFA.json", "../NFA/set_str_NFA.json",
+                                     "../NFA/True_NFA.json", "../NFA/tuple_NFA.json", "../NFA/comments_NFA.json"};
+    /*
     //Safe safe(alle_NFAs);
-    RE re1("if", 'e');
-    RE re2("elif", 'p');
-    RE re3("import", 'e');
-    RE re4("\"(a+b+c+d+e+f+g+h+i+j+k+l+m+n+o+p+q+r+s+t+u+v+w+x+y+z+A+B+C+D+E+F+G+H+I+J+K+L+M+N+O+P+Q+R+S+T+U+V+W+X+Y+Z+ +-+:)*\"", '5');
-    vector<pair<RE, string>> test_save = {make_pair(re1, "#e07822"), make_pair(re2, "#e07822"), make_pair(re3, "#e07822"),  make_pair(re4, "#72bf45")};;
+    //RE re1("if", 'e');
+    //RE re2("elif", 'p');
+    //RE re3("import", 'e');
+    //RE re4("\"(a+b+c+d+e+f+g+h+i+j+k+l+m+n+o+p+q+r+s+t+u+v+w+x+y+z+A+B+C+D+E+F+G+H+I+J+K+L+M+N+O+P+Q+R+S+T+U+V+W+X+Y+Z+ +-+:)*\"", '5');
+    //vector<pair<RE, string>> test_save = {make_pair(re1, "#e07822"), make_pair(re2, "#e07822"), make_pair(re3, "#e07822"),  make_pair(re4, "#72bf45")};;
 
     //vector<pair<RE, string>> vector_safe = safe.getSafe();
-    vector<pair<RE, string>> vector_safe = test_save;
+    //vector<pair<RE, string>> vector_safe = test_save;
     vector<pair<DFA, string>> dfa_s;
     for(int i = 0; i < vector_safe.size(); i++) {
         RE regex = vector_safe[i].first;
@@ -42,6 +49,16 @@ int main(int argc, char const* argv[]) {
         DFA dfa = e_nfa.toDFA();
         dfa = dfa.minimize();
         dfa_s.push_back(make_pair(dfa, color));
+    }
+    */
+    vector<pair<DFA, string>> dfa_s;
+    for(int i = 0; i < alle_NFAs.size(); i++) {
+        NFA nfa(alle_NFAs[i]);
+        string color = nfa.getColor();
+        DFA dfa = nfa.toDFA();
+        DFA ze = dfa.minimize();
+        cout << boolalpha << (ze == dfa) << endl;
+        dfa_s.push_back(make_pair(dfa,color));
     }
 
     cout << "jeej" << endl;

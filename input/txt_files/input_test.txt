@@ -1,0 +1,36 @@
+test zin
+def
+return
+if
+elif
+else
+False
+True
+for
+in
+range
+while
+import
+bool
+ascii
+chr
+float
+from
+1
+0
+99
+0.50
+int
+isinstance
+input
+list
+len
+max
+map
+ord
+open
+print
+pow
+set
+str
+"ik ben een string"

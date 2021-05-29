@@ -201,12 +201,28 @@ bool NFA_elias::isStartState(string state){
     return false;
 }
 
+
+vector<string> parse_state__(string state){
+    vector<string> returnwaarde;
+    std::string s = state.substr(1,state.size()-2);
+    std::string delimiter = ",";
+
+    size_t pos = 0;
+    std::string token;
+    while ((pos = s.find(delimiter)) != std::string::npos) {
+        token = s.substr(0, pos);
+        returnwaarde.push_back(token);
+        s.erase(0, pos + delimiter.length());
+    }
+    returnwaarde.push_back(s);
+    return returnwaarde;
+}
+
 bool NFA_elias::isFinalState(string state){
-    for (int i = 0; i < state.size(); ++i){
+    vector<string> states = parse_state__(state);
+    for (int i = 0; i < states.size(); ++i){
         for(string final_state:final_states){
-            string staat;
-            staat = state[i];
-            if (staat == final_state){
+            if (states[i] == final_state){
                 return true;
             }
         }
@@ -266,16 +282,14 @@ vector<string> NFA_elias::DFAtransitions(string from, vector<string> &DFA_states
     vector<string> DFAstaat;
     // We voegen from al toe
     transition.push_back(from);
-    // We ittereren over de staat en bekijken de individuele NFA_elias transitions bv: {1,3} ->{4} en ->{2} dus wordt dit {4,2}
-    // De 4 en 2 worden aan een tijdelijke vector DFA_elias staat toegevoegd en later met de toDFAstate naar een string omgezet
+    // We ittereren over de staat en bekijken de individuele NFA transitions bv: {1,3} ->{4} en ->{2} dus wordt dit {4,2}
+    // De 4 en 2 worden aan een tijdelijke vector DFA staat toegevoegd en later met de toDFAstate naar een string omgezet
     // [4,2] -> {2,4}
-    for(int j = 0; j < from.size(); ++j){
-        string state_;
-        state_ = from[j];
-        if (state_ != "{" and state_ != "}" and state_ != ","){
-            vector<string> volgende_staat = (this->go_to(state_,input));
-            DFAstaat.insert(DFAstaat.end(), volgende_staat.begin(), volgende_staat.end());
-        }
+    vector<string> parsed_from = parse_state__(from);
+    for(int j = 0; j < parsed_from.size(); ++j){
+        string state_ = parsed_from[j];
+        vector<string> volgende_staat = (this->go_to(state_,input));
+        DFAstaat.insert(DFAstaat.end(), volgende_staat.begin(), volgende_staat.end());
     }
     string to = toDFAstate(DFAstaat);
     // We voegen de staat die we zijn bekomen aan de transitie toe
@@ -298,6 +312,20 @@ vector<string> NFA_elias::DFAtransitions(string from, vector<string> &DFA_states
     // dan voegen we het input symbool toe en en hebben we een volledige stransitie
     transition.push_back(input);
     return transition;
+}
+
+void vervang_states_(map<string,string> map,vector<vector<string>> &transitions,vector<string> &states,vector<string> &final_states,string &start_state){
+    for(int i = 0; i < transitions.size(); ++i){
+        transitions[i][0] = map[transitions[i][0]];
+        transitions[i][1] = map[transitions[i][1]];
+    }
+    for(int i = 0; i < states.size(); ++i){
+        states[i]= map[states[i]];
+    }
+    for(int i = 0; i < final_states.size(); ++i){
+        final_states[i]= map[final_states[i]];
+    }
+    start_state = map[start_state];
 }
 
 DFA_elias NFA_elias::toDFA(){
@@ -337,7 +365,18 @@ DFA_elias NFA_elias::toDFA(){
         }
     }
 
-    DFA_elias dfa("DFA_elias", DFA_transitions, DFA_alphabet, DFA_states, DFA_start_state, DFA_final_states);
+    vector<vector<string>> simple_DFA_transitions = DFA_transitions;    // transitions
+    vector<string> simple_DFA_states = DFA_states;                      // states
+    string simple_DFA_start_state = DFA_start_state;                    // startstate
+    vector<string> simple_DFA_final_states = DFA_final_states;          // final state
+
+    map<string,string> simple_DFA_state_map;
+    for(int i = 0; i < DFA_states.size(); ++i){
+        simple_DFA_state_map[DFA_states[i]] = "{" + to_string(i) + "}";
+    }
+    vervang_states_(simple_DFA_state_map, simple_DFA_transitions, simple_DFA_states, simple_DFA_final_states, simple_DFA_start_state);
+
+    DFA_elias dfa("DFA_elias", simple_DFA_transitions, DFA_alphabet, simple_DFA_states, simple_DFA_start_state, simple_DFA_final_states);
     return dfa;
 }
 

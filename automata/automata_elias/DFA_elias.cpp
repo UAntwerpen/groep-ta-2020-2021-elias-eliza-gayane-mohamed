@@ -489,7 +489,7 @@ DFA_elias DFA_elias::minimize(){
     vector<vector<string>> tabel = this->table_filling_algoritme(transitions,final_states,states,minimized_tabel);
     // eqiuvalent_states is een matrix en ziet er als volgt uit [[equivalente_staat1,equivalente_staat2,.. ],[equivalente_staat3,equivalente_staat4,.. ],...]
     vector<vector<string>> eqiuvalent_states = equivalent(tabel);
-    cout << "table filling is klaar" << endl;
+
 
     // newDFAstates is een vector en ziet er als volgt uit [{staat1},{staat2}...]
     vector<string> newDFAstates;
@@ -573,13 +573,17 @@ bool DFA_elias::operator == (const DFA_elias &other){
         allfinalstates.push_back(this->final_states[i]);
     }
     for (int i = 0; i < other.states.size(); ++i){
-        allestaten.push_back(other.states[i]);
+        allestaten.push_back(other.states[i]+"_");
     }
     for (int i = 0; i < other.transitions.size(); ++i){
-        alletransities.push_back(other.transitions[i]);
+        vector<string> transiti;
+        transiti.push_back(transitions[i][0]+"_");
+        transiti.push_back(transitions[i][1]+"_");
+        transiti.push_back(transitions[i][2]);
+        alletransities.push_back(transiti);
     }
     for (int i = 0; i < other.final_states.size(); ++i){
-        allfinalstates.push_back(other.final_states[i]);
+        allfinalstates.push_back(other.final_states[i]+"_");
     }
     map<pair<string,string>,string> tablefilling = maketabel(allestaten);
     vector<vector<string>> tabel = this->table_filling_algoritme(alletransities,allfinalstates,allestaten,tablefilling);
@@ -597,7 +601,8 @@ bool DFA_elias::operator == (const DFA_elias &other){
         }
     }
     for (int i = 0; i < equivalent.size(); ++i){
-        if(equivalent[i][0] == this->start_state && equivalent[i][1] == other.start_state || equivalent[i][1] == this->start_state && equivalent[i][0] == other.start_state){
+        string otherstartstate = other.start_state + "_";
+        if(equivalent[i][0] == this->start_state && equivalent[i][1] == otherstartstate || equivalent[i][1] == this->start_state && equivalent[i][0] == otherstartstate){
             return true;
         }
     }
