@@ -29,11 +29,6 @@
       "name": "E",
       "starting": false,
       "accepting": true
-    },
-    {
-      "name": "dead",
-      "starting": false,
-      "accepting": false
     }
   ],
   "transitions": [
@@ -198,11 +193,6 @@
       "input": "9"
     },
     {
-      "from": "C",
-      "to": "dead",
-      "input": "."
-    },
-    {
       "from": "D",
       "to": "D",
       "input": "0"
@@ -253,11 +243,6 @@
       "input": "9"
     },
     {
-      "from": "D",
-      "to": "dead",
-      "input": "."
-    },
-    {
       "from": "E",
       "to": "E",
       "input": "0"
@@ -305,66 +290,6 @@
     {
       "from": "E",
       "to": "E",
-      "input": "9"
-    },
-    {
-      "from": "E",
-      "to": "dead",
-      "input": "."
-    },
-    {
-      "from": "dead",
-      "to": "dead",
-      "input": "."
-    },
-    {
-      "from": "dead",
-      "to": "dead",
-      "input": "0"
-    },
-    {
-      "from": "dead",
-      "to": "dead",
-      "input": "1"
-    },
-    {
-      "from": "dead",
-      "to": "dead",
-      "input": "2"
-    },
-    {
-      "from": "dead",
-      "to": "dead",
-      "input": "3"
-    },
-    {
-      "from": "dead",
-      "to": "dead",
-      "input": "4"
-    },
-    {
-      "from": "dead",
-      "to": "dead",
-      "input": "5"
-    },
-    {
-      "from": "dead",
-      "to": "dead",
-      "input": "6"
-    },
-    {
-      "from": "dead",
-      "to": "dead",
-      "input": "7"
-    },
-    {
-      "from": "dead",
-      "to": "dead",
-      "input": "8"
-    },
-    {
-      "from": "dead",
-      "to": "dead",
       "input": "9"
     }
   ]

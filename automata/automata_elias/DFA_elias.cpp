@@ -392,7 +392,7 @@ void DFA_elias::printTable(){
             for (int j = 0; j < counter-1; ++j) {
                 cout << minimized_tabel[make_pair(states[i],states[j])] << "\t";
             }
-            cout << minimized_tabel[make_pair(states[i],states[counter-1])] << "\t";
+            cout << minimized_tabel[make_pair(states[i],states[counter-1])] << endl;
             counter += 1;
         }
     }
@@ -573,17 +573,13 @@ bool DFA_elias::operator == (const DFA_elias &other){
         allfinalstates.push_back(this->final_states[i]);
     }
     for (int i = 0; i < other.states.size(); ++i){
-        allestaten.push_back(other.states[i]+"_");
+        allestaten.push_back(other.states[i]);
     }
     for (int i = 0; i < other.transitions.size(); ++i){
-        vector<string> transiti;
-        transiti.push_back(transitions[i][0]+"_");
-        transiti.push_back(transitions[i][1]+"_");
-        transiti.push_back(transitions[i][2]);
-        alletransities.push_back(transiti);
+        alletransities.push_back(other.transitions[i]);
     }
     for (int i = 0; i < other.final_states.size(); ++i){
-        allfinalstates.push_back(other.final_states[i]+"_");
+        allfinalstates.push_back(other.final_states[i]);
     }
     map<pair<string,string>,string> tablefilling = maketabel(allestaten);
     vector<vector<string>> tabel = this->table_filling_algoritme(alletransities,allfinalstates,allestaten,tablefilling);
@@ -601,7 +597,7 @@ bool DFA_elias::operator == (const DFA_elias &other){
         }
     }
     for (int i = 0; i < equivalent.size(); ++i){
-        string otherstartstate = other.start_state + "_";
+        string otherstartstate = other.start_state;
         if(equivalent[i][0] == this->start_state && equivalent[i][1] == otherstartstate || equivalent[i][1] == this->start_state && equivalent[i][0] == otherstartstate){
             return true;
         }

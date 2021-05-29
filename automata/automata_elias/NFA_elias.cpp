@@ -322,6 +322,8 @@ void vervang_states_(map<string,string> map,vector<vector<string>> &transitions,
     for(int i = 0; i < states.size(); ++i){
         states[i]= map[states[i]];
     }
+    sort(states.begin(),states.end());
+    states.erase(std::unique(states.begin(), states.end()),states.end());
     for(int i = 0; i < final_states.size(); ++i){
         final_states[i]= map[final_states[i]];
     }
