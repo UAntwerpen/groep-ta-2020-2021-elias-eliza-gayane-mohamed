@@ -1,0 +1,36 @@
+{
+  "type": "NFA",
+  "color": "#e07822",
+  "alphabet": [
+    "a", "s"
+  ],
+  "states": [
+    {
+      "name": "0",
+      "starting": true,
+      "accepting": false
+    },
+    {
+      "name": "1",
+      "starting": false,
+      "accepting": false
+    },
+    {
+      "name": "2",
+      "starting": false,
+      "accepting": true
+    }
+  ],
+  "transitions": [
+    {
+      "from": "0",
+      "to": "1",
+      "input": "a"
+    },
+    {
+      "from": "1",
+      "to": "2",
+      "input": "s"
+    }
+  ]
+}
