@@ -100,7 +100,7 @@ sec=int(input('Geef een getal:'))
 print(int(sec/3600),'uren;',int((sec%3600)/60),'minuten;',sec%60,'seconden.')
 
 # Oef 8
-# a²+b²=c²
+# a^2+b^2=c^2
 import math
 a=int(input('Afmeting eerste zijde:'))
 b=int(input('Afmeting tweede zijde:'))

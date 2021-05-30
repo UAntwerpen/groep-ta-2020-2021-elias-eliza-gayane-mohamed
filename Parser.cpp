@@ -28,9 +28,10 @@ vector<string> Parser::split_line(string &s) {
     vector<string> words;
     string word;
     bool dubble_quotes = false;
+    bool slinge_quotes = false;
     bool hashtag = false;
     for(int i = 0; i < s.size(); i++){
-        if((!isalnum(s[i]) && s[i] != '_' || (!isalnum(word[0]) && !word.empty())) && !dubble_quotes && !hashtag){
+        if((!isalnum(s[i]) && s[i] != '_' || (!isalnum(word[0]) && !word.empty())) && !dubble_quotes && !slinge_quotes && !hashtag){
             words.emplace_back(word);
             word.clear();
         }
@@ -40,8 +41,14 @@ vector<string> Parser::split_line(string &s) {
         if(s[i] == '\"' && dubble_quotes){
             dubble_quotes = false;
         }
-        else if(s[i] == '\"' && !dubble_quotes){
+        else if(s[i] == '\"' && !dubble_quotes && !slinge_quotes){
             dubble_quotes = true;
+        }
+        if(s[i] == '\'' &&  slinge_quotes){
+            slinge_quotes = false;
+        }
+        else if(s[i] == '\'' && !slinge_quotes && !dubble_quotes){
+            slinge_quotes = true;
         }
         if(s[i] != '\r'){
             word += s[i];

@@ -48,7 +48,8 @@ int main(int argc, char const* argv[]) {
                                      "../NFA/hash_help_hex_NFA.json",
                                      "../NFA/getallen_NFA.json",
                                      "../NFA/string_quotes_NFA.json",
-                                     "../NFA/comments_NFA.json"};
+                                     "../NFA/comments_NFA.json",
+                                     "../NFA/char_quotes_NFA.json"};
 
     RE re1("def", 'E');
     RE re2("as", 'E');
