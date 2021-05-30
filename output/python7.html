@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link href="file.css" rel="stylesheet" type="text/css">
+<title>PYDE</title>
+</head>
+<body style="background-color:#232323;">
+<header>
+	<table border="1" bordercolor="dimgrey">
+		<td>
+			<a href="python1.html">python1.py</a>
+		</td>
+		<td>
+			<a href="python2.html">python2.py</a>
+		</td>
+		<td>
+			<a href="python3.html">python3.py</a>
+		</td>
+		<td>
+			<a href="python4.html">python4.py</a>
+		</td>
+		<td>
+			<a href="python5.html">python5.py</a>
+		</td>
+		<td>
+			<a href="python6.html">python6.py</a>
+		</td>
+		<td style="border-color: #afa8a8">
+			<a href="python7.html">python7.py</a>
+		</td>
+		<td>
+			<a href="python8.html">python8.py</a>
+		</td>
+	</table>
+</header>
+<table  style="color:white">
+	<tr>
+		<td>
+			<span style="color: #5f5e5e;">1</span>
+		</td>
+		<td>
+			<span style="color: #e07822;">import</span>&nbsp;matplotlib.pyplot&nbsp;<span style="color: #e07822;">as</span>&nbsp;plt
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<span style="color: #5f5e5e;">2</span>
+		</td>
+		<td>
+			<span style="color: #e07822;">from</span>&nbsp;numpy&nbsp;<span style="color: #e07822;">import</span>&nbsp;arange,&nbsp;sin,&nbsp;pi,&nbsp;cos
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<span style="color: #5f5e5e;">3</span>
+		</td>
+		<td>
+			
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<span style="color: #5f5e5e;">4</span>
+		</td>
+		<td>
+			t&nbsp;=&nbsp;<span style="color: #A973EA;">range</span>(<span style="color: #87B6D3;">1</span>,&nbsp;<span style="color: #87B6D3;">13</span>)
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<span style="color: #5f5e5e;">5</span>
+		</td>
+		<td>
+			plt.plot(t,&nbsp;sin(t),&nbsp;label='sin')
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<span style="color: #5f5e5e;">6</span>
+		</td>
+		<td>
+			plt.plot(t,&nbsp;cos(t),&nbsp;label='cos')
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<span style="color: #5f5e5e;">7</span>
+		</td>
+		<td>
+			plt.xlabel(<span style="color: #72bf45;">"maanden"</span>)
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<span style="color: #5f5e5e;">8</span>
+		</td>
+		<td>
+			plt.ylabel(<span style="color: #72bf45;">"temperatuur&nbsp;in&nbsp;F"</span>)
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<span style="color: #5f5e5e;">9</span>
+		</td>
+		<td>
+			plt.legend(loc='upper&nbsp;left')
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<span style="color: #5f5e5e;">10</span>
+		</td>
+		<td>
+			plt.savefig('plot.png')
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<span style="color: #5f5e5e;">11</span>
+		</td>
+		<td>
+			
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<span style="color: #5f5e5e;">12</span>
+		</td>
+		<td>
+			
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<span style="color: #5f5e5e;">13</span>
+		</td>
+		<td>
+			<span style="color: #9E8DA5;">#&nbsp;functies</span>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<span style="color: #5f5e5e;">14</span>
+		</td>
+		<td>
+			<span style="color: #e07822;">def</span>&nbsp;<span style="color: #F6D263;">kwadraat</span>(x):
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<span style="color: #5f5e5e;">15</span>
+		</td>
+		<td>
+			&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #e07822;">return</span>&nbsp;x&nbsp;**&nbsp;<span style="color: #87B6D3;">2</span>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<span style="color: #5f5e5e;">16</span>
+		</td>
+		<td>
+			
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<span style="color: #5f5e5e;">17</span>
+		</td>
+		<td>
+			
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<span style="color: #5f5e5e;">18</span>
+		</td>
+		<td>
+			<span style="color: #A973EA;">print</span>(kwadraat(<span style="color: #87B6D3;">5</span>))
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<span style="color: #5f5e5e;">19</span>
+		</td>
+		<td>
+			
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<span style="color: #5f5e5e;">20</span>
+		</td>
+		<td>
+			<span style="color: #9E8DA5;">#&nbsp;dit&nbsp;zijn&nbsp;de&nbsp;kaarten&nbsp;van&nbsp;ons&nbsp;blackjack&nbsp;spel</span>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<span style="color: #5f5e5e;">21</span>
+		</td>
+		<td>
+			kaarten&nbsp;=&nbsp;[<span style="color: #87B6D3;">1</span>,&nbsp;<span style="color: #87B6D3;">2</span>,&nbsp;<span style="color: #87B6D3;">3</span>,&nbsp;<span style="color: #87B6D3;">4</span>,&nbsp;<span style="color: #87B6D3;">5</span>,&nbsp;<span style="color: #87B6D3;">6</span>]&nbsp;*&nbsp;<span style="color: #87B6D3;">2</span>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<span style="color: #5f5e5e;">22</span>
+		</td>
+		<td>
+			<span style="color: #9E8DA5;">#&nbsp;print(kaarten[0])</span>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<span style="color: #5f5e5e;">23</span>
+		</td>
+		<td>
+			<span style="color: #9E8DA5;">#&nbsp;print(kaarten[1])</span>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<span style="color: #5f5e5e;">24</span>
+		</td>
+		<td>
+			<span style="color: #9E8DA5;">#&nbsp;print(kaarten[2])</span>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<span style="color: #5f5e5e;">25</span>
+		</td>
+		<td>
+			
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<span style="color: #5f5e5e;">26</span>
+		</td>
+		<td>
+			<span style="color: #9E8DA5;">#&nbsp;for&nbsp;loop&nbsp;met&nbsp;waarden</span>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<span style="color: #5f5e5e;">27</span>
+		</td>
+		<td>
+			<span style="color: #9E8DA5;">#&nbsp;for&nbsp;kaart&nbsp;in&nbsp;kaarten:</span>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<span style="color: #5f5e5e;">28</span>
+		</td>
+		<td>
+			<span style="color: #9E8DA5;">#&nbsp;&nbsp;&nbsp;print(kaart)</span>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<span style="color: #5f5e5e;">29</span>
+		</td>
+		<td>
+			
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<span style="color: #5f5e5e;">30</span>
+		</td>
+		<td>
+			kaarten&nbsp;=&nbsp;[<span style="color: #87B6D3;">1</span>,&nbsp;<span style="color: #87B6D3;">2</span>,&nbsp;<span style="color: #87B6D3;">3</span>,&nbsp;<span style="color: #87B6D3;">4</span>,&nbsp;<span style="color: #87B6D3;">5</span>,&nbsp;<span style="color: #87B6D3;">6</span>,&nbsp;<span style="color: #87B6D3;">7</span>,&nbsp;<span style="color: #87B6D3;">8</span>,&nbsp;<span style="color: #87B6D3;">9</span>,&nbsp;<span style="color: #87B6D3;">10</span>,&nbsp;<span style="color: #87B6D3;">10</span>,&nbsp;<span style="color: #87B6D3;">10</span>,&nbsp;<span style="color: #87B6D3;">10</span>]
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<span style="color: #5f5e5e;">31</span>
+		</td>
+		<td>
+			<span style="color: #A973EA;">print</span>(<span style="color: #A973EA;">len</span>(kaarten))
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<span style="color: #5f5e5e;">32</span>
+		</td>
+		<td>
+			<span style="color: #A973EA;">print</span>(kaarten.<span style="color: #A973EA;">pop</span>())
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<span style="color: #5f5e5e;">33</span>
+		</td>
+		<td>
+			<span style="color: #A973EA;">print</span>(<span style="color: #A973EA;">len</span>(kaarten))
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<span style="color: #5f5e5e;">34</span>
+		</td>
+		<td>
+			<span style="color: #A973EA;">print</span>(kaarten)
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<span style="color: #5f5e5e;">35</span>
+		</td>
+		<td>
+			
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<span style="color: #5f5e5e;">36</span>
+		</td>
+		<td>
+			kaarten_van_de_speler&nbsp;=&nbsp;[]
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<span style="color: #5f5e5e;">37</span>
+		</td>
+		<td>
+			kaarten_van_de_dealer&nbsp;=&nbsp;[]
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<span style="color: #5f5e5e;">38</span>
+		</td>
+		<td>
+			a&nbsp;=&nbsp;<span style="color: #87B6D3;">1</span>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<span style="color: #5f5e5e;">39</span>
+		</td>
+		<td>
+			a&nbsp;+=&nbsp;<span style="color: #87B6D3;">2</span>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<span style="color: #5f5e5e;">40</span>
+		</td>
+		<td>
+			
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<span style="color: #5f5e5e;">41</span>
+		</td>
+		<td>
+			
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<span style="color: #5f5e5e;">42</span>
+		</td>
+		<td>
+			<span style="color: #e07822;">def</span>&nbsp;<span style="color: #F6D263;">geef_kaart_aan_speler</span>(kaart):
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<span style="color: #5f5e5e;">43</span>
+		</td>
+		<td>
+			&nbsp;&nbsp;&nbsp;&nbsp;global&nbsp;kaarten_van_de_speler
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<span style="color: #5f5e5e;">44</span>
+		</td>
+		<td>
+			&nbsp;&nbsp;&nbsp;&nbsp;kaarten_van_de_speler&nbsp;+=&nbsp;[kaart]
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<span style="color: #5f5e5e;">45</span>
+		</td>
+		<td>
+			
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<span style="color: #5f5e5e;">46</span>
+		</td>
+		<td>
+			
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<span style="color: #5f5e5e;">47</span>
+		</td>
+		<td>
+			<span style="color: #e07822;">def</span>&nbsp;<span style="color: #F6D263;">geef_kaart_aan_dealer</span>(kaart):
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<span style="color: #5f5e5e;">48</span>
+		</td>
+		<td>
+			&nbsp;&nbsp;&nbsp;&nbsp;global&nbsp;kaarten_van_de_dealer
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<span style="color: #5f5e5e;">49</span>
+		</td>
+		<td>
+			&nbsp;&nbsp;&nbsp;&nbsp;kaarten_van_de_dealer&nbsp;+=&nbsp;[kaart]
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<span style="color: #5f5e5e;">50</span>
+		</td>
+		<td>
+			
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<span style="color: #5f5e5e;">51</span>
+		</td>
+		<td>
+			
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<span style="color: #5f5e5e;">52</span>
+		</td>
+		<td>
+			<span style="color: #e07822;">def</span>&nbsp;<span style="color: #F6D263;">delen</span>(maximum_waarde):
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<span style="color: #5f5e5e;">53</span>
+		</td>
+		<td>
+			&nbsp;&nbsp;&nbsp;&nbsp;global&nbsp;kaarten
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<span style="color: #5f5e5e;">54</span>
+		</td>
+		<td>
+			&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #9E8DA5;">#&nbsp;neem&nbsp;een&nbsp;kaart&nbsp;van&nbsp;de&nbsp;stapel</span>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<span style="color: #5f5e5e;">55</span>
+		</td>
+		<td>
+			&nbsp;&nbsp;&nbsp;&nbsp;kaart&nbsp;=&nbsp;kaarten.<span style="color: #A973EA;">pop</span>()
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<span style="color: #5f5e5e;">56</span>
+		</td>
+		<td>
+			&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #9E8DA5;">#&nbsp;geef&nbsp;een&nbsp;kaart&nbsp;aan&nbsp;de&nbsp;speler</span>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<span style="color: #5f5e5e;">57</span>
+		</td>
+		<td>
+			&nbsp;&nbsp;&nbsp;&nbsp;geef_kaart_aan_speler(kaart)
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<span style="color: #5f5e5e;">58</span>
+		</td>
+		<td>
+			&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #9E8DA5;">#&nbsp;neem&nbsp;een&nbsp;kaart&nbsp;van&nbsp;de&nbsp;stapel</span>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<span style="color: #5f5e5e;">59</span>
+		</td>
+		<td>
+			&nbsp;&nbsp;&nbsp;&nbsp;kaart&nbsp;=&nbsp;kaarten.<span style="color: #A973EA;">pop</span>()
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<span style="color: #5f5e5e;">60</span>
+		</td>
+		<td>
+			&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #9E8DA5;">#&nbsp;geef&nbsp;een&nbsp;kaart&nbsp;aan&nbsp;de&nbsp;dealer</span>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<span style="color: #5f5e5e;">61</span>
+		</td>
+		<td>
+			&nbsp;&nbsp;&nbsp;&nbsp;geef_kaart_aan_dealer(kaart)
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<span style="color: #5f5e5e;">62</span>
+		</td>
+		<td>
+			&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #9E8DA5;">#&nbsp;blijf&nbsp;kaarten&nbsp;geven&nbsp;aan&nbsp;speler&nbsp;tot&nbsp;die&nbsp;over&nbsp;de&nbsp;maximum_waarde&nbsp;zit</span>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<span style="color: #5f5e5e;">63</span>
+		</td>
+		<td>
+			&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #e07822;">while</span>&nbsp;<span style="color: #A973EA;">sum</span>(kaarten_van_de_speler)&nbsp;<=&nbsp;maximum_waarde:
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<span style="color: #5f5e5e;">64</span>
+		</td>
+		<td>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #9E8DA5;">#&nbsp;neem&nbsp;een&nbsp;kaart&nbsp;van&nbsp;de&nbsp;stapel</span>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<span style="color: #5f5e5e;">65</span>
+		</td>
+		<td>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;kaart&nbsp;=&nbsp;kaarten.<span style="color: #A973EA;">pop</span>()
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<span style="color: #5f5e5e;">66</span>
+		</td>
+		<td>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #9E8DA5;">#&nbsp;geef&nbsp;een&nbsp;kaart&nbsp;aan&nbsp;de&nbsp;speler</span>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<span style="color: #5f5e5e;">67</span>
+		</td>
+		<td>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;geef_kaart_aan_speler(kaart)
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<span style="color: #5f5e5e;">68</span>
+		</td>
+		<td>
+			
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<span style="color: #5f5e5e;">69</span>
+		</td>
+		<td>
+			&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #e07822;">if</span>&nbsp;<span style="color: #A973EA;">sum</span>(kaarten_van_de_speler)&nbsp;==&nbsp;<span style="color: #87B6D3;">21</span>:
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<span style="color: #5f5e5e;">70</span>
+		</td>
+		<td>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #e07822;">return</span>&nbsp;<span style="color: #87B6D3;">1</span>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<span style="color: #5f5e5e;">71</span>
+		</td>
+		<td>
+			&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #e07822;">if</span>&nbsp;<span style="color: #A973EA;">sum</span>(kaarten_van_de_speler)&nbsp;>&nbsp;<span style="color: #87B6D3;">21</span>:
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<span style="color: #5f5e5e;">72</span>
+		</td>
+		<td>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #e07822;">return</span>&nbsp;<span style="color: #87B6D3;">0</span>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<span style="color: #5f5e5e;">73</span>
+		</td>
+		<td>
+			
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<span style="color: #5f5e5e;">74</span>
+		</td>
+		<td>
+			&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #9E8DA5;">#&nbsp;geef&nbsp;kaarten&nbsp;aan&nbsp;dealer&nbsp;tot&nbsp;die&nbsp;boven&nbsp;de&nbsp;waarde&nbsp;van&nbsp;de&nbsp;speler&nbsp;zit</span>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<span style="color: #5f5e5e;">75</span>
+		</td>
+		<td>
+			&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #9E8DA5;">#&nbsp;als&nbsp;de&nbsp;dealer&nbsp;>&nbsp;21&nbsp;heeft,&nbsp;dan&nbsp;wint&nbsp;de&nbsp;speler</span>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<span style="color: #5f5e5e;">76</span>
+		</td>
+		<td>
+			&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #9E8DA5;">#&nbsp;als&nbsp;de&nbsp;dealer&nbsp;21&nbsp;heeft,&nbsp;dan&nbsp;verliest&nbsp;de&nbsp;speler</span>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<span style="color: #5f5e5e;">77</span>
+		</td>
+		<td>
+			&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #9E8DA5;">#&nbsp;als&nbsp;de&nbsp;dealer&nbsp;minder&nbsp;heeft&nbsp;dan&nbsp;de&nbsp;speler,&nbsp;dan&nbsp;wint&nbsp;de&nbsp;speler</span>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<span style="color: #5f5e5e;">78</span>
+		</td>
+		<td>
+			&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #9E8DA5;">#&nbsp;als&nbsp;de&nbsp;speler&nbsp;minder&nbsp;heeft&nbsp;dan&nbsp;de&nbsp;dealer,&nbsp;dan&nbsp;verliest&nbsp;de&nbsp;speler</span>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<span style="color: #5f5e5e;">79</span>
+		</td>
+		<td>
+			
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<span style="color: #5f5e5e;">80</span>
+		</td>
+		<td>
+			
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<span style="color: #5f5e5e;">81</span>
+		</td>
+		<td>
+			delen(<span style="color: #87B6D3;">16</span>)
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<span style="color: #5f5e5e;">82</span>
+		</td>
+		<td>
+			<span style="color: #9E8DA5;">#&nbsp;for&nbsp;loop&nbsp;met&nbsp;index</span>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<span style="color: #5f5e5e;">83</span>
+		</td>
+		<td>
+			<span style="color: #9E8DA5;">#&nbsp;for&nbsp;i&nbsp;in&nbsp;range(6):</span>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<span style="color: #5f5e5e;">84</span>
+		</td>
+		<td>
+			<span style="color: #9E8DA5;">#&nbsp;&nbsp;&nbsp;print(i)</span>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<span style="color: #5f5e5e;">85</span>
+		</td>
+		<td>
+			<span style="color: #9E8DA5;">#&nbsp;&nbsp;&nbsp;print(kaarten[i])</span>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<span style="color: #5f5e5e;">86</span>
+		</td>
+		<td>
+			
+		</td>
+	</tr>
+</table>
+</body>
+</html>

@@ -2,6 +2,7 @@
 #define PYDE_HTML_H
 
 #include <fstream>
+#include <algorithm>
 #include <iostream>
 #include <string>
 #include <cstring>

@@ -6,6 +6,18 @@ HTML::HTML(const map<int, vector<pair<string, string>>> &text, const char *filen
     make_HTML_file(text, filename, alleFiles);
 }
 
+void replace_spaces(string &word){
+    string new_string;
+    for(int i = 0; i < word.size(); i++){
+        if(word[i] == ' '){
+            new_string += "&nbsp;";
+        }
+        else{
+            new_string += word[i];
+        }
+    }
+    word = new_string;
+}
 
 void HTML::make_HTML_file(const map<int, vector<pair<string, string>>> &text, string filename, const vector<string> &alleFiles){
     // de vele \t en \n zijn om de html file die gegenereerd wordt nog leesbaar te maken
@@ -45,6 +57,9 @@ void HTML::make_HTML_file(const map<int, vector<pair<string, string>>> &text, st
                 if(it->second[i].second != "no_color"){
                     string color_begin = "<span style=\"color: " + it->second[i].second + ";\">";
                     string word = it->second[i].first;
+                    if(find(word.begin(), word.end(), ' ') != word.end()){
+                        replace_spaces(word);
+                    }
                     string color_end = "</span>";
                     html_file << color_begin + word + color_end;
                 }
@@ -53,9 +68,12 @@ void HTML::make_HTML_file(const map<int, vector<pair<string, string>>> &text, st
                         html_file << "&nbsp;";
                     }
                     else{
-                        html_file << it->second[i].first;
-                    };
-
+                        string word = it->second[i].first;
+                        if(find(word.begin(), word.end(), ' ') != word.end()){
+                            replace_spaces(word);
+                        }
+                        html_file << word;
+                    }
                 }
             }
             html_file << "\n\t\t</td>\n\t</tr>";

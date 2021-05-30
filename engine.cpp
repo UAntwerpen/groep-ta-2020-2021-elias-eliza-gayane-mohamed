@@ -23,6 +23,7 @@ int main(int argc, char const* argv[]) {
 
     /// het opstellen van de safe
     vector<const char*> alle_NFAs = {"../NFA/def_NFA.json",
+                                     "../NFA/as_NFA.json",
                                      "../NFA/for_from_NFA.json",
                                      "../NFA/return_NFA.json",
                                      "../NFA/while_NFA.json",
@@ -50,27 +51,28 @@ int main(int argc, char const* argv[]) {
                                      "../NFA/comments_NFA.json"};
 
     RE re1("def", 'E');
-    RE re2("f(or+rom)", 'E');
-    RE re3("return", 'E');
-    RE re4("while", 'E');
-    RE re5("e(val+xec+xtend)", 'E');
-    RE re6("a(scii+bs+ll+ppend+ny)", 'E');
-    RE re7("bool", 'E');
-    RE re8("c(hr+lear+opy+ount)", 'E');
-    RE re9("dict",'E');
-    RE re10("el(if+se)", 'E');
-    RE re11("False", 'E');
-    RE re12("float", 'E');
-    RE re13("i(sinstance+nt+nput+d+ndex+nsert+ter)", 'E');
-    RE re14("l(ist+en)", 'E');
-    RE re15("m(ax+ap+in)", 'E');
-    RE re16("o(rd+pen)", 'E');
-    RE re17("p(rint+ow+op)", 'E');
-    RE re18("r(ange+everse+eversed+emove+ound)", 'E');
-    RE re19("s(et+tr+ort+orted+um+uper)", 'E');
-    RE re20("True", 'E');
-    RE re21("t(uple+ype)", 'E');
-    RE re22("h(elp+ash+ex)", 'E');
+    RE re2("as", 'E');
+    RE re3("f(or+rom)", 'E');
+    RE re4("return", 'E');
+    RE re5("while", 'E');
+    RE re6("e(val+xec+xtend)", 'E');
+    RE re7("a(scii+bs+ll+ppend+ny)", 'E');
+    RE re8("bool", 'E');
+    RE re9("c(hr+lear+opy+ount)", 'E');
+    RE re10("dict",'E');
+    RE re11("el(if+se)", 'E');
+    RE re12("False", 'E');
+    RE re13("float", 'E');
+    RE re14("i(sinstance+nt+nput+d+ndex+nsert+ter)", 'E');
+    RE re15("l(ist+en)", 'E');
+    RE re16("m(ax+ap+in)", 'E');
+    RE re17("o(rd+pen)", 'E');
+    RE re18("p(rint+ow+op)", 'E');
+    RE re19("r(ange+everse+eversed+emove+ound)", 'E');
+    RE re20("s(et+tr+ort+orted+um+uper)", 'E');
+    RE re21("True", 'E');
+    RE re22("t(uple+ype)", 'E');
+    RE re23("h(elp+ash+ex)", 'E');
     vector<pair<RE, string>> test_save = {make_pair(re1, "#e07822"),
                                           make_pair(re2, "#e07822"),
                                           make_pair(re3, "#e07822"),
@@ -92,7 +94,8 @@ int main(int argc, char const* argv[]) {
                                           make_pair(re19, "#e07822"),
                                           make_pair(re20, "#e07822"),
                                           make_pair(re21, "#e07822"),
-                                          make_pair(re22, "#e07822")};
+                                          make_pair(re22, "#e07822"),
+                                          make_pair(re23, "#e07822")};
 
     vector<pair<DFA, string>> vergelijk_dfa_s;
     for(int i = 0; i < test_save.size(); i++) {
