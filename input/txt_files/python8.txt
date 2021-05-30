@@ -1,0 +1,114 @@
+# #Extra
+a=1
+b=2
+print(a+b)
+print(a!=2)
+print(a==1 and a<2)
+
+voornaam='kaat'
+achternaam='goedeke'
+naam=voornaam+' '  + achternaam
+print(naam)
+voornaam=input('wat is je voornaam')
+uur=0
+while uur<20:
+  uur=int(input('wat is het uur'))
+  if uur<12:
+    print('goeiemorgen',voornaam)
+  elif uur<16:
+    print('goeiemiddag',voornaam)
+    print('slaapwel',voornaam)
+
+a='I am hungry'
+print(a.count('h'))
+calories=0
+while calories<1800:
+  calories=int(input('How many calories have you consumed? '))
+  if calories<500:
+    print('Eat immediately!!!')
+  elif calories>500 and calories<1800:
+    print('You still need to eat more.')
+  elif calories>1800:
+    print('Time to exercise!')
+  elif calories==1800:
+    print('Well done for today!')
+
+
+q=[8, 6, 2, 4 ,5, 'k', 'd', 1, 6]
+q.reverse()
+print(q)
+
+g='hell yeah'
+print(g.replace('ll','123'))
+
+z=3.62182834
+print(round(z))
+
+x=5616
+y=3651
+print(x*y)
+
+uur=0
+while uur<24:
+ uur=int(input('What time is it?'))
+ if uur<12:
+   print('Good morning','Eliza','!')
+ elif uur<15:
+   print('Good afternoon','Eliza','!')
+ elif uur<24:
+   print('Good night','Eliza','!')
+
+#Oef 1
+a=5
+print(a**2)
+
+#Oef 2
+b='2'
+print('Mijn lievelingsgetal is '+'2'+'!')
+
+#Oef 3
+a=1
+b=2
+c=3
+d=4
+e=5
+gemiddelde=(a+b+c+d+e)/5
+print(gemiddelde)
+
+#Oef 4
+euro=2
+dollar=euro*1.13517686055
+print(dollar)
+pond=euro*0.855529446488
+print(pond)
+
+#Oef 5
+#°F=(°C*(9/5))+32
+Celsius=15
+Fahrenheit=(Celsius*(9/5)+32)
+print(Fahrenheit)
+
+#Oef 6
+a=17
+b=5
+deeltal=int(input('Geef een deeltal:'))
+deler=int(input('Geef een deler:'))
+print('Het quotient is dan',deeltal//deler,'en de rest is dan',deeltal%deler,'.')
+
+#Oef 7
+sec=int(input('Geef een getal:'))
+print(int(sec/3600),'uren;',int((sec%3600)/60),'minuten;',sec%60,'seconden.')
+
+# Oef 8
+# a²+b²=c²
+import math
+a=int(input('Afmeting eerste zijde:'))
+b=int(input('Afmeting tweede zijde:'))
+print('De schuine zijde is',int(math.sqrt(a**2+b**2)),'.')
+
+#Oef 9
+#Je kijkt op de klok en het is exact 14:00. Je zet een alarm dat afgaat 51 uur later. Hoe laat gaat het alarm dan af? Schrijf een programma om het algemene geval van dit probleem op te lossen. Zet de tijd nu (in uren) en het aantal uren dat je moet wachten in afzonderlijke variabelen.
+#51u=24+24+3
+tijd_nu=14
+tijd_afwachten=51
+print(tijd_afwachten%24+tijd_nu,':00')

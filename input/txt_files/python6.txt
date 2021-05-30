@@ -1,0 +1,141 @@
+import random
+import matplotlib.pyplot as plt
+from numpy import sin, cos
+
+# dit zijn de kaarten van ons blackjack spel
+kaarten = []
+
+kaarten_van_de_speler = []
+kaarten_van_de_dealer = []
+
+def initialiseer_kaarten():
+    global kaarten
+    kaarten = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10] * 6
+    random.shuffle(kaarten)
+
+
+def geef_kaart_aan_speler(kaart):
+    global kaarten_van_de_speler
+    kaarten_van_de_speler += [kaart]
+    # druk af: de speler krijgt een 2 en heeft nu een totaal van 5 (als de speler al een 3 heeft bv)
+    print("de speler krijgt een", kaart, "en heeft nu een totaal van", sum(kaarten_van_de_speler))
+
+
+def geef_kaart_aan_dealer(kaart):
+    global kaarten_van_de_dealer
+    kaarten_van_de_dealer += [kaart]
+    # druk af: de dealer krijgt een 2 en heeft nu een totaal van 5 (als de dealer al een 3 heeft bv)
+    print("de dealer krijgt een", kaart, "en heeft nu een totaal van", sum(kaarten_van_de_dealer))
+
+
+def speel_blackjack(maximum_waarde):
+    global kaarten
+    global kaarten_van_de_speler
+    global kaarten_van_de_dealer
+    # gooi kaarten van iedereen weg
+    kaarten_van_de_speler = []
+    kaarten_van_de_dealer = []
+
+    # neem een kaart van de stapel
+    kaart = kaarten.pop()
+
+    # geef een kaart aan de speler
+    geef_kaart_aan_speler(kaart)
+
+    # neem een kaart van de stapel
+    kaart = kaarten.pop()
+
+    # geef een kaart aan de dealer
+    geef_kaart_aan_dealer(kaart)
+
+    # blijf kaarten geven aan speler tot die over de maximum_waarde zit
+    while sum(kaarten_van_de_speler) <= maximum_waarde:
+        # neem een kaart van de stapel
+        kaart = kaarten.pop()
+
+        # geef een kaart aan de speler
+        geef_kaart_aan_speler(kaart)
+
+    if sum(kaarten_van_de_speler) == 21:
+        return 1
+
+    if sum(kaarten_van_de_speler) > 21:
+        return 0
+
+    # geef kaarten aan dealer tot die boven de waarde van de speler zit
+    while sum(kaarten_van_de_dealer) <= sum(kaarten_van_de_speler):
+        # neem een kaart van de stapel
+        kaart = kaarten.pop()
+
+        # geef een kaart aan de speler
+        geef_kaart_aan_dealer(kaart)
+
+    # als de dealer > 21 heeft, dan wint de speler
+    if sum(kaarten_van_de_dealer) > 21:
+        return 1
+    else:
+        return 0
+
+
+def simuleer(aantal_simulaties, maxwaarde, aantal_spelletjes):
+    # resultaten van de simulatie, de index duidt aan het hoeveelste spel het is binnen een ronde
+    # aantal_keer_gewonnen[0] staat initieel op 0, dwz dat we tijdens het eerste spel 0 keer gewonnen hebben
+    # aantal_keer_gewonnen[1] staat initieel op 0, dwz dat we tijdens het tweede spel 0 keer gewonnen hebben
+    aantal_keer_gewonnen = [0] * aantal_spelletjes
+    # i is het nummer van de simulatie
+    for i in range(aantal_simulaties):
+        print("-----------------------")
+        print("simulatie",i,"met maxwaarde",maxwaarde)
+        initialiseer_kaarten()
+        for j in range(aantal_spelletjes):
+            resultaat = speel_blackjack(maxwaarde)
+            aantal_keer_gewonnen[j] += resultaat   # TODO: druk af of de speler gewonnen of verloren heeft
+            if resultaat ==1:
+              print("de speler heeft gewonnen")
+            else:
+              print("de speler heeft verloren")
+            print(aantal_keer_gewonnen)
+            print()
+        print()
+
+    # zet om naar percentages
+    #print(aantal_keer_gewonnen)
+    # TODO zet om naar percentages
+    for i in range(aantal_spelletjes):
+      aantal_keer_gewonnen[i] /= aantal_simulaties
+    #print(aantal_keer_gewonnen)
+    return aantal_keer_gewonnen
+
+
+def maak_voorbeeld_grafiek():
+    x = range(1, 13)  # dit zijn de x-waarden
+    # label is om er achteraf een legende bij te zetten
+    # plt.plot(x, sin(x), label='sin')
+    plt.plot(x, cos(x), label='cos')
+    plt.xlabel("maanden")
+    plt.ylabel("temperatuur in F")
+    # de legende komt nu linksboven
+    plt.legend(loc='upper left')
+    # sla de grafiek op
+    plt.savefig('plot.png')
+
+
+def maak_grafiek():
+    aantal_spelletjes = 10
+    aantal_simulaties = 10
+    x = range(1,aantal_spelletjes+1)  # dit zijn de x-waarden
+    for maxwaarde in range(15,22):
+        # label is om er achteraf een legende bij te zetten
+        # TODO: maak een plot
+         plt.plot(x, simuleer(aantal_simulaties,maxwaarde,aantal_spelletjes), label='maxwaarde='+str(maxwaarde))
+    plt.xlabel("spel nummer")
+    plt.ylabel("kans om te winnen")
+    # de legende komt nu linksboven
+    plt.legend(loc='upper left')
+    # sla de grafiek op
+    plt.savefig('plot.png')
+
+
+simuleer(10, 16,10)
+# maak_voorbeeld_grafiek()
+maak_grafiek()

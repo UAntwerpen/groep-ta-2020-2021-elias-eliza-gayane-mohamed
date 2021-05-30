@@ -1,0 +1,86 @@
+import matplotlib.pyplot as plt
+from numpy import arange, sin, pi, cos
+
+t = range(1, 13)
+plt.plot(t, sin(t), label='sin')
+plt.plot(t, cos(t), label='cos')
+plt.xlabel("maanden")
+plt.ylabel("temperatuur in F")
+plt.legend(loc='upper left')
+plt.savefig('plot.png')
+
+
+# functies
+def kwadraat(x):
+    return x ** 2
+
+
+print(kwadraat(5))
+
+# dit zijn de kaarten van ons blackjack spel
+kaarten = [1, 2, 3, 4, 5, 6] * 2
+# print(kaarten[0])
+# print(kaarten[1])
+# print(kaarten[2])
+
+# for loop met waarden
+# for kaart in kaarten:
+#   print(kaart)
+
+kaarten = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
+print(len(kaarten))
+print(kaarten.pop())
+print(len(kaarten))
+print(kaarten)
+
+kaarten_van_de_speler = []
+kaarten_van_de_dealer = []
+a = 1
+a += 2
+
+
+def geef_kaart_aan_speler(kaart):
+    global kaarten_van_de_speler
+    kaarten_van_de_speler += [kaart]
+
+
+def geef_kaart_aan_dealer(kaart):
+    global kaarten_van_de_dealer
+    kaarten_van_de_dealer += [kaart]
+
+
+def delen(maximum_waarde):
+    global kaarten
+    # neem een kaart van de stapel
+    kaart = kaarten.pop()
+    # geef een kaart aan de speler
+    geef_kaart_aan_speler(kaart)
+    # neem een kaart van de stapel
+    kaart = kaarten.pop()
+    # geef een kaart aan de dealer
+    geef_kaart_aan_dealer(kaart)
+    # blijf kaarten geven aan speler tot die over de maximum_waarde zit
+    while sum(kaarten_van_de_speler) <= maximum_waarde:
+        # neem een kaart van de stapel
+        kaart = kaarten.pop()
+        # geef een kaart aan de speler
+        geef_kaart_aan_speler(kaart)
+
+    if sum(kaarten_van_de_speler) == 21:
+        return 1
+    if sum(kaarten_van_de_speler) > 21:
+        return 0
+
+    # geef kaarten aan dealer tot die boven de waarde van de speler zit
+    # als de dealer > 21 heeft, dan wint de speler
+    # als de dealer 21 heeft, dan verliest de speler
+    # als de dealer minder heeft dan de speler, dan wint de speler
+    # als de speler minder heeft dan de dealer, dan verliest de speler
+
+
+delen(16)
+# for loop met index
+# for i in range(6):
+#   print(i)
+#   print(kaarten[i])
+
