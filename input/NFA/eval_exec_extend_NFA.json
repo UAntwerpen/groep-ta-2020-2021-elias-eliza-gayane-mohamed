@@ -2,8 +2,7 @@
   "type": "NFA",
   "color": "#A973EA",
   "alphabet": [
-    "i", "n", "t", "s", "a", "c", "e",
-    "p", "u"
+    "e", "v", "a", "l", "x", "c", "t", "n", "d"
   ],
   "states": [
     {
@@ -24,12 +23,12 @@
     {
       "name": "3",
       "starting": false,
-      "accepting": true
+      "accepting": false
     },
     {
       "name": "4",
       "starting": false,
-      "accepting": false
+      "accepting": true
     },
     {
       "name": "5",
@@ -49,7 +48,7 @@
     {
       "name": "8",
       "starting": false,
-      "accepting": false
+      "accepting": true
     },
     {
       "name": "9",
@@ -74,30 +73,10 @@
     {
       "name": "13",
       "starting": false,
-      "accepting": true
+      "accepting": false
     },
     {
       "name": "14",
-      "starting": false,
-      "accepting": false
-    },
-    {
-      "name": "15",
-      "starting": false,
-      "accepting": false
-    },
-    {
-      "name": "16",
-      "starting": false,
-      "accepting": false
-    },
-    {
-      "name": "17",
-      "starting": false,
-      "accepting": false
-    },
-    {
-      "name": "18",
       "starting": false,
       "accepting": true
     }
@@ -106,92 +85,72 @@
     {
       "from": "0",
       "to": "1",
-      "input": "i"
+      "input": "e"
     },
     {
       "from": "1",
       "to": "2",
-      "input": "n"
+      "input": "v"
     },
     {
       "from": "2",
       "to": "3",
-      "input": "t"
+      "input": "a"
+    },
+    {
+      "from": "3",
+      "to": "4",
+      "input": "l"
     },
     {
       "from": "0",
-      "to": "4",
-      "input": "i"
-    },
-    {
-      "from": "4",
       "to": "5",
-      "input": "s"
+      "input": "e"
     },
     {
       "from": "5",
       "to": "6",
-      "input": "i"
+      "input": "x"
     },
     {
       "from": "6",
       "to": "7",
-      "input": "n"
+      "input": "e"
     },
     {
       "from": "7",
       "to": "8",
-      "input": "s"
+      "input": "c"
     },
     {
-      "from": "8",
+      "from": "0",
       "to": "9",
-      "input": "t"
+      "input": "e"
     },
     {
       "from": "9",
       "to": "10",
-      "input": "a"
+      "input": "x"
     },
     {
       "from": "10",
       "to": "11",
-      "input": "n"
+      "input": "t"
     },
     {
       "from": "11",
       "to": "12",
-      "input": "c"
+      "input": "e"
     },
     {
       "from": "12",
       "to": "13",
-      "input": "e"
-    },
-    {
-      "from": "0",
-      "to": "14",
-      "input": "i"
-    },
-    {
-      "from": "14",
-      "to": "15",
       "input": "n"
     },
     {
-      "from": "15",
-      "to": "16",
-      "input": "p"
-    },
-    {
-      "from": "16",
-      "to": "17",
-      "input": "u"
-    },
-    {
-      "from": "17",
-      "to": "18",
-      "input": "t"
+      "from": "13",
+      "to": "14",
+      "input": "d"
     }
   ]
 }

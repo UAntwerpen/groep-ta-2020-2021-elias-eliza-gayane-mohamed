@@ -1,0 +1,216 @@
+{
+  "type": "NFA",
+  "color": "#A973EA",
+  "alphabet": [
+    "a", "b", "p", "e", "n", "d", "s", "c", "i", "y", "l"
+  ],
+  "states": [
+    {
+      "name": "0",
+      "starting": true,
+      "accepting": false
+    },
+    {
+      "name": "1",
+      "starting": false,
+      "accepting": false
+    },
+    {
+      "name": "2",
+      "starting": false,
+      "accepting": false
+    },
+    {
+      "name": "3",
+      "starting": false,
+      "accepting": false
+    },
+    {
+      "name": "4",
+      "starting": false,
+      "accepting": false
+    },
+    {
+      "name": "5",
+      "starting": false,
+      "accepting": true
+    },
+    {
+      "name": "6",
+      "starting": false,
+      "accepting": false
+    },
+    {
+      "name": "7",
+      "starting": false,
+      "accepting": false
+    },
+    {
+      "name": "8",
+      "starting": false,
+      "accepting": true
+    },
+    {
+      "name": "9",
+      "starting": false,
+      "accepting": false
+    },
+    {
+      "name": "10",
+      "starting": false,
+      "accepting": false
+    },
+    {
+      "name": "11",
+      "starting": false,
+      "accepting": false
+    },
+    {
+      "name": "12",
+      "starting": false,
+      "accepting": false
+    },
+    {
+      "name": "13",
+      "starting": false,
+      "accepting": false
+    },
+    {
+      "name": "14",
+      "starting": false,
+      "accepting": true
+    },
+    {
+      "name": "15",
+      "starting": false,
+      "accepting": false
+    },
+    {
+      "name": "16",
+      "starting": false,
+      "accepting": false
+    },
+    {
+      "name": "17",
+      "starting": false,
+      "accepting": true
+    },
+    {
+      "name": "18",
+      "starting": false,
+      "accepting": false
+    },
+    {
+      "name": "19",
+      "starting": false,
+      "accepting": false
+    },
+    {
+      "name": "20",
+      "starting": false,
+      "accepting": true
+    }
+  ],
+  "transitions": [
+    {
+      "from": "0",
+      "to": "1",
+      "input": "a"
+    },
+    {
+      "from": "1",
+      "to": "2",
+      "input": "s"
+    },
+    {
+      "from": "2",
+      "to": "3",
+      "input": "c"
+    },
+    {
+      "from": "3",
+      "to": "4",
+      "input": "i"
+    },
+    {
+      "from": "4",
+      "to": "5",
+      "input": "i"
+    },
+    {
+      "from": "0",
+      "to": "6",
+      "input": "a"
+    },
+    {
+      "from": "6",
+      "to": "7",
+      "input": "b"
+    },
+    {
+      "from": "7",
+      "to": "8",
+      "input": "s"
+    },
+    {
+      "from": "0",
+      "to": "9",
+      "input": "a"
+    },
+    {
+      "from": "9",
+      "to": "10",
+      "input": "p"
+    },
+    {
+      "from": "10",
+      "to": "11",
+      "input": "p"
+    },
+    {
+      "from": "11",
+      "to": "12",
+      "input": "e"
+    },
+    {
+      "from": "12",
+      "to": "13",
+      "input": "n"
+    },
+    {
+      "from": "13",
+      "to": "14",
+      "input": "d"
+    },
+    {
+      "from": "0",
+      "to": "15",
+      "input": "a"
+    },
+    {
+      "from": "15",
+      "to": "16",
+      "input": "n"
+    },
+    {
+      "from": "16",
+      "to": "17",
+      "input": "y"
+    },
+    {
+      "from": "0",
+      "to": "18",
+      "input": "a"
+    },
+    {
+      "from": "18",
+      "to": "19",
+      "input": "l"
+    },
+    {
+      "from": "19",
+      "to": "20",
+      "input": "l"
+    }
+  ]
+}

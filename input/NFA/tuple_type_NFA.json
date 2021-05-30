@@ -2,7 +2,7 @@
   "type": "NFA",
   "color": "#A973EA",
   "alphabet": [
-    "s", "t", "r", "e"
+    "t", "u", "p", "l", "e", "y"
   ],
   "states": [
     {
@@ -23,7 +23,7 @@
     {
       "name": "3",
       "starting": false,
-      "accepting": true
+      "accepting": false
     },
     {
       "name": "4",
@@ -33,10 +33,25 @@
     {
       "name": "5",
       "starting": false,
-      "accepting": false
+      "accepting": true
     },
     {
       "name": "6",
+      "starting": false,
+      "accepting": false
+    },
+    {
+      "name": "7",
+      "starting": false,
+      "accepting": false
+    },
+    {
+      "name": "8",
+      "starting": false,
+      "accepting": false
+    },
+    {
+      "name": "9",
       "starting": false,
       "accepting": true
     }
@@ -45,22 +60,22 @@
     {
       "from": "0",
       "to": "1",
-      "input": "s"
+      "input": "t"
     },
     {
       "from": "1",
       "to": "2",
-      "input": "t"
+      "input": "u"
     },
     {
       "from": "2",
       "to": "3",
-      "input": "r"
+      "input": "p"
     },
     {
-      "from": "0",
+      "from": "3",
       "to": "4",
-      "input": "s"
+      "input": "l"
     },
     {
       "from": "4",
@@ -68,9 +83,24 @@
       "input": "e"
     },
     {
-      "from": "5",
+      "from": "0",
       "to": "6",
       "input": "t"
+    },
+    {
+      "from": "6",
+      "to": "7",
+      "input": "y"
+    },
+    {
+      "from": "7",
+      "to": "8",
+      "input": "p"
+    },
+    {
+      "from": "8",
+      "to": "9",
+      "input": "e"
     }
   ]
 }

@@ -1,0 +1,256 @@
+{
+  "type": "NFA",
+  "color": "#A973EA",
+  "alphabet": [
+    "s", "t", "r", "e", "o", "d", "u", "m", "p"
+  ],
+  "states": [
+    {
+      "name": "0",
+      "starting": true,
+      "accepting": false
+    },
+    {
+      "name": "1",
+      "starting": false,
+      "accepting": false
+    },
+    {
+      "name": "2",
+      "starting": false,
+      "accepting": false
+    },
+    {
+      "name": "3",
+      "starting": false,
+      "accepting": true
+    },
+    {
+      "name": "4",
+      "starting": false,
+      "accepting": false
+    },
+    {
+      "name": "5",
+      "starting": false,
+      "accepting": false
+    },
+    {
+      "name": "6",
+      "starting": false,
+      "accepting": true
+    },
+    {
+      "name": "7",
+      "starting": false,
+      "accepting": false
+    },
+    {
+      "name": "8",
+      "starting": false,
+      "accepting": false
+    },
+    {
+      "name": "9",
+      "starting": false,
+      "accepting": true
+    },
+    {
+      "name": "10",
+      "starting": false,
+      "accepting": false
+    },
+    {
+      "name": "11",
+      "starting": false,
+      "accepting": false
+    },
+    {
+      "name": "12",
+      "starting": false,
+      "accepting": false
+    },
+    {
+      "name": "13",
+      "starting": false,
+      "accepting": true
+    },
+    {
+      "name": "14",
+      "starting": false,
+      "accepting": false
+    },
+    {
+      "name": "15",
+      "starting": false,
+      "accepting": false
+    },
+    {
+      "name": "16",
+      "starting": false,
+      "accepting": false
+    },
+    {
+      "name": "17",
+      "starting": false,
+      "accepting": false
+    },
+    {
+      "name": "18",
+      "starting": false,
+      "accepting": false
+    },
+    {
+      "name": "19",
+      "starting": false,
+      "accepting": true
+    },
+    {
+      "name": "20",
+      "starting": false,
+      "accepting": false
+    },
+    {
+      "name": "21",
+      "starting": false,
+      "accepting": false
+    },
+    {
+      "name": "22",
+      "starting": false,
+      "accepting": false
+    },
+    {
+      "name": "23",
+      "starting": false,
+      "accepting": false
+    },
+    {
+      "name": "24",
+      "starting": false,
+      "accepting": true
+    }
+  ],
+  "transitions": [
+    {
+      "from": "0",
+      "to": "1",
+      "input": "s"
+    },
+    {
+      "from": "1",
+      "to": "2",
+      "input": "t"
+    },
+    {
+      "from": "2",
+      "to": "3",
+      "input": "r"
+    },
+    {
+      "from": "0",
+      "to": "4",
+      "input": "s"
+    },
+    {
+      "from": "4",
+      "to": "5",
+      "input": "e"
+    },
+    {
+      "from": "5",
+      "to": "6",
+      "input": "t"
+    },
+    {
+      "from": "0",
+      "to": "7",
+      "input": "s"
+    },
+    {
+      "from": "7",
+      "to": "8",
+      "input": "u"
+    },
+    {
+      "from": "8",
+      "to": "9",
+      "input": "m"
+    },
+    {
+      "from": "0",
+      "to": "10",
+      "input": "s"
+    },
+    {
+      "from": "10",
+      "to": "11",
+      "input": "o"
+    },
+    {
+      "from": "11",
+      "to": "12",
+      "input": "r"
+    },
+    {
+      "from": "12",
+      "to": "13",
+      "input": "t"
+    },
+    {
+      "from": "0",
+      "to": "14",
+      "input": "s"
+    },
+    {
+      "from": "14",
+      "to": "15",
+      "input": "o"
+    },
+    {
+      "from": "15",
+      "to": "16",
+      "input": "r"
+    },
+    {
+      "from": "16",
+      "to": "17",
+      "input": "t"
+    },
+    {
+      "from": "17",
+      "to": "18",
+      "input": "e"
+    },
+    {
+      "from": "18",
+      "to": "19",
+      "input": "d"
+    },
+    {
+      "from": "0",
+      "to": "20",
+      "input": "s"
+    },
+    {
+      "from": "20",
+      "to": "21",
+      "input": "u"
+    },
+    {
+      "from": "21",
+      "to": "22",
+      "input": "p"
+    },
+    {
+      "from": "22",
+      "to": "23",
+      "input": "e"
+    },
+    {
+      "from": "23",
+      "to": "24",
+      "input": "r"
+    }
+  ]
+}

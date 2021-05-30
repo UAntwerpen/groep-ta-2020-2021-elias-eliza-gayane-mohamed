@@ -26,23 +26,25 @@ int main(int argc, char const* argv[]) {
                                      "../NFA/for_from_NFA.json",
                                      "../NFA/return_NFA.json",
                                      "../NFA/while_NFA.json",
-                                     "../NFA/ascii_NFA.json",
+                                     "../NFA/eval_exec_extend_NFA.json",
+                                     "../NFA/abs_all_any_apppend_ascii_NFA.json",
                                      "../NFA/bool_NFA.json",
-                                     "../NFA/chr_NFA.json",
+                                     "../NFA/chr_clear_copy_count_NFA.json",
                                      "../NFA/dict_NFA.json",
                                      "../NFA/else_elif_NFA.json",
                                      "../NFA/False_NFA.json",
                                      "../NFA/float_NFA.json",
                                      "../NFA/if_in_import_NFA.json",
-                                     "../NFA/int_isinstance_input_NFA.json",
+                                     "../NFA/id_input_int_index_insert_isinstance_iter_NFA.json",
                                      "../NFA/list_len_NFA.json",
-                                     "../NFA/max_map_NFA.json",
+                                     "../NFA/max_min_map_NFA.json",
                                      "../NFA/ord_open_NFA.json",
-                                     "../NFA/print_pow_NFA.json",
-                                     "../NFA/range_NFA.json",
-                                     "../NFA/set_str_NFA.json",
+                                     "../NFA/print_pow_pop_NFA.json",
+                                     "../NFA/range_reverse_reversed_remove_round_NFA.json",
+                                     "../NFA/set_str_sort_sorted_sum_super_NFA.json",
                                      "../NFA/True_NFA.json",
-                                     "../NFA/tuple_NFA.json",
+                                     "../NFA/tuple_type_NFA.json",
+                                     "../NFA/hash_help_hex_NFA.json",
                                      "../NFA/getallen_NFA.json",
                                      "../NFA/string_quotes_NFA.json",
                                      "../NFA/comments_NFA.json"};
@@ -51,23 +53,24 @@ int main(int argc, char const* argv[]) {
     RE re2("f(or+rom)", 'E');
     RE re3("return", 'E');
     RE re4("while", 'E');
-    RE re5("ascii", 'E');
-    RE re6("bool", 'E');
-    RE re7("chr", 'E');
-    RE re8("dict",'E');
-    RE re9("el(if+se)", 'E');
-    RE re10("False", 'E');
-    RE re11("float", 'E');
-    RE re12("i(sinstance+nt+nput)", 'E');
-    RE re13("l(ist+en)", 'E');
-    RE re14("ma(x+p)", 'E');
-    RE re15("o(rd+pen)", 'E');
-    RE re16("p(rint+ow)", 'E');
-    RE re17("range", 'E');
-    RE re18("s(et+tr)", 'E');
-    RE re19("True", 'E');
-    RE re20("tuple", 'E');
-    RE re21("(0+1+2+3+4+5+6+7+8+9)*(E+.)(0+1+2+3+4+5+6+7+8+9)*", 'E');
+    RE re5("e(val+xec+xtend)", 'E');
+    RE re6("a(scii+bs+ll+ppend+ny)", 'E');
+    RE re7("bool", 'E');
+    RE re8("c(hr+lear+opy+ount)", 'E');
+    RE re9("dict",'E');
+    RE re10("el(if+se)", 'E');
+    RE re11("False", 'E');
+    RE re12("float", 'E');
+    RE re13("i(sinstance+nt+nput+d+ndex+nsert+ter)", 'E');
+    RE re14("l(ist+en)", 'E');
+    RE re15("m(ax+ap+in)", 'E');
+    RE re16("o(rd+pen)", 'E');
+    RE re17("p(rint+ow+op)", 'E');
+    RE re18("r(ange+everse+eversed+emove+ound)", 'E');
+    RE re19("s(et+tr+ort+orted+um+uper)", 'E');
+    RE re20("True", 'E');
+    RE re21("t(uple+ype)", 'E');
+    RE re22("h(elp+ash+ex)", 'E');
     vector<pair<RE, string>> test_save = {make_pair(re1, "#e07822"),
                                           make_pair(re2, "#e07822"),
                                           make_pair(re3, "#e07822"),
@@ -88,7 +91,8 @@ int main(int argc, char const* argv[]) {
                                           make_pair(re18, "#e07822"),
                                           make_pair(re19, "#e07822"),
                                           make_pair(re20, "#e07822"),
-                                          make_pair(re21, "#e07822")};
+                                          make_pair(re21, "#e07822"),
+                                          make_pair(re22, "#e07822")};
 
     vector<pair<DFA, string>> vergelijk_dfa_s;
     for(int i = 0; i < test_save.size(); i++) {
@@ -96,7 +100,7 @@ int main(int argc, char const* argv[]) {
         string color = test_save[i].second;
         ENFA e_nfa = regex.toENFA();
         DFA dfa = e_nfa.toDFA();
-        dfa = dfa.minimize();
+        dfa.minimize();
         vergelijk_dfa_s.push_back(make_pair(dfa, color));
     }
 

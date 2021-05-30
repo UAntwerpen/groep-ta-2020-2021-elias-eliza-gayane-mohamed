@@ -2,7 +2,7 @@
   "type": "NFA",
   "color": "#A973EA",
   "alphabet": [
-    "m", "a", "x", "p"
+    "m", "a", "x", "p", "i", "n"
   ],
   "states": [
     {
@@ -39,6 +39,21 @@
       "name": "6",
       "starting": false,
       "accepting": true
+    },
+    {
+      "name": "7",
+      "starting": false,
+      "accepting": false
+    },
+    {
+      "name": "8",
+      "starting": false,
+      "accepting": false
+    },
+    {
+      "name": "9",
+      "starting": false,
+      "accepting": true
     }
   ],
   "transitions": [
@@ -71,6 +86,21 @@
       "from": "5",
       "to": "6",
       "input": "p"
+    },
+    {
+      "from": "0",
+      "to": "7",
+      "input": "m"
+    },
+    {
+      "from": "7",
+      "to": "8",
+      "input": "i"
+    },
+    {
+      "from": "8",
+      "to": "9",
+      "input": "n"
     }
   ]
 }
