@@ -21,6 +21,21 @@ int main(int argc, char const* argv[]) {
         alle_files.push_back(argv[i]);
     }
 
+    if (alle_files.empty()) {
+        int file_count = 1;
+        bool exists = true;
+        while(exists){
+            string file_name = "python" + to_string(file_count) + ".txt";
+            ifstream infile(file_name);
+            if(infile.good()) {
+                alle_files.emplace_back(file_name);
+                file_count++;
+            } else {
+                exists = infile.good();
+            }
+        }
+    }
+
     /// het opstellen van de safe
     vector<const char*> alle_NFAs = {"../NFA/def_NFA.json",
                                      "../NFA/as_NFA.json",
@@ -129,9 +144,9 @@ int main(int argc, char const* argv[]) {
     }
 
     /// het parsen van de files
-    for(int i = 1; i < argc; i++){
-        Parser parser(argv[i]);
-        map<int, vector<string>> parsed_file = parser.getParsedFile();
+    for(const string &f : alle_files){
+    Parser parser(f.c_str());
+    map<int, vector<string>> parsed_file = parser.getParsedFile();
 
         map<int, vector<pair<string, string>>> text_for_html;
         /// halen de regexen uit de safe
@@ -160,10 +175,9 @@ int main(int argc, char const* argv[]) {
                 }
             }
         }
-
         /// genereert een html file met van de text
         /// om in de IDE te kunnen switchen naar meerdere files geef je ook een lijst met alle files mee
-        HTML html_file(text_for_html, argv[i] ,alle_files);
+        HTML html_file(text_for_html, f.c_str() ,alle_files);
     }
     return 0;
 }
