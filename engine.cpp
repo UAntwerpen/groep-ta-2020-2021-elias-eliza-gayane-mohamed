@@ -21,7 +21,7 @@ int main(int argc, char const* argv[]) {
         int file_count = 1;
         bool exists = true;
         while(exists){
-            string file_name = "python" + to_string(file_count) + ".txt";
+            string file_name = "../input/txt_files/python" + to_string(file_count) + ".txt";
             ifstream infile(file_name);
             if(infile.good()) {
                 alle_files.emplace_back(file_name);
@@ -33,34 +33,34 @@ int main(int argc, char const* argv[]) {
     }
 
     /// het opstellen van de safe
-    vector<const char*> alle_NFAs = {"../NFA/def_NFA.json",
-                                     "../NFA/as_NFA.json",
-                                     "../NFA/for_from_NFA.json",
-                                     "../NFA/return_NFA.json",
-                                     "../NFA/while_NFA.json",
-                                     "../NFA/eval_exec_extend_NFA.json",
-                                     "../NFA/abs_all_any_apppend_ascii_NFA.json",
-                                     "../NFA/bool_NFA.json",
-                                     "../NFA/chr_clear_copy_count_NFA.json",
-                                     "../NFA/dict_NFA.json",
-                                     "../NFA/else_elif_NFA.json",
-                                     "../NFA/False_NFA.json",
-                                     "../NFA/float_NFA.json",
-                                     "../NFA/if_in_import_NFA.json",
-                                     "../NFA/id_input_int_index_insert_isinstance_iter_NFA.json",
-                                     "../NFA/list_len_NFA.json",
-                                     "../NFA/max_min_map_NFA.json",
-                                     "../NFA/ord_open_NFA.json",
-                                     "../NFA/print_pow_pop_NFA.json",
-                                     "../NFA/range_reverse_reversed_remove_round_NFA.json",
-                                     "../NFA/set_str_sort_sorted_sum_super_NFA.json",
-                                     "../NFA/True_NFA.json",
-                                     "../NFA/tuple_type_NFA.json",
-                                     "../NFA/hash_help_hex_NFA.json",
-                                     "../NFA/getallen_NFA.json",
-                                     "../NFA/string_quotes_NFA.json",
-                                     "../NFA/comments_NFA.json",
-                                     "../NFA/char_quotes_NFA.json"};
+    vector<const char*> alle_NFAs = {"input/NFA/def_NFA.json",
+                                     "input/NFA/as_NFA.json",
+                                     "input/NFA/for_from_NFA.json",
+                                     "input/NFA/return_NFA.json",
+                                     "input/NFA/while_NFA.json",
+                                     "input/NFA/eval_exec_extend_NFA.json",
+                                     "input/NFA/abs_all_any_apppend_ascii_NFA.json",
+                                     "input/NFA/bool_NFA.json",
+                                     "input/NFA/chr_clear_copy_count_NFA.json",
+                                     "input/NFA/dict_NFA.json",
+                                     "input/NFA/else_elif_NFA.json",
+                                     "input/NFA/False_NFA.json",
+                                     "input/NFA/float_NFA.json",
+                                     "input/NFA/if_in_import_NFA.json",
+                                     "input/NFA/id_input_int_index_insert_isinstance_iter_NFA.json",
+                                     "input/NFA/list_len_NFA.json",
+                                     "input/NFA/max_min_map_NFA.json",
+                                     "input/NFA/ord_open_NFA.json",
+                                     "input/NFA/print_pow_pop_NFA.json",
+                                     "input/NFA/range_reverse_reversed_remove_round_NFA.json",
+                                     "input/NFA/set_str_sort_sorted_sum_super_NFA.json",
+                                     "input/NFA/True_NFA.json",
+                                     "input/NFA/tuple_type_NFA.json",
+                                     "input/NFA/hash_help_hex_NFA.json",
+                                     "input/NFA/getallen_NFA.json",
+                                     "input/NFA/string_quotes_NFA.json",
+                                     "input/NFA/comments_NFA.json",
+                                     "input/NFA/char_quotes_NFA.json"};
 
     RE re1("def", 'E');
     RE re2("as", 'E');
