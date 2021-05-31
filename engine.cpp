@@ -1,9 +1,5 @@
-#include <fstream>
 #include <iostream>
-#include <stdexcept>
 #include <string>
-#include <iostream>
-#include <cmath>
 #include "automata/wrappers/wrapper_DFA.h"
 #include "automata/wrappers/wrapper_NFA.h"
 #include "automata/wrappers/wrapper_ENFA.h"

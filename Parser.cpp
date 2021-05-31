@@ -50,9 +50,7 @@ vector<string> Parser::split_line(string &s) {
         else if(s[i] == '\'' && !slinge_quotes && !dubble_quotes){
             slinge_quotes = true;
         }
-        if(s[i] != '\r'){
-            word += s[i];
-        }
+        word += s[i];
         if(i == s.size() - 1) words.emplace_back(word);
     }
     for(int i = 0; i < words.size(); i++){
