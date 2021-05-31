@@ -22,9 +22,12 @@ void replace_spaces(string &word){
 void HTML::make_HTML_file(const map<int, vector<pair<string, string>>> &text, string filename, const vector<string> &alleFiles){
     // de vele \t en \n zijn om de html file die gegenereerd wordt nog leesbaar te maken
     std::ofstream html_file;
+
+    size_t backslash = filename.find_last_of("/");
     size_t lastindex = filename.find_last_of(".");
-    string filename_ = filename.substr(0, lastindex);
-    string file = "../../output/" + filename_ + ".html";
+    string filename_ = filename.substr(backslash, lastindex - backslash);
+    string file = "output" + filename_ + ".html";
+    cout << file << endl;
     html_file.open(file);
     if (html_file.is_open()) {
         html_file << "<!DOCTYPE html>\n<html>\n<head>\n<link href=\"file.css\" rel=\"stylesheet\" type=\"text/css\">\n<title>PYDE</title>\n</head>\n<body style=\"background-color:#232323;\">\n";
@@ -40,8 +43,9 @@ void HTML::make_HTML_file(const map<int, vector<pair<string, string>>> &text, st
             string html = ".html\">";
             string py = ".py</a>";
             string argv_ = alleFiles[i];
+            size_t backslash = argv_.find_last_of("/");
             size_t lastindex = argv_.find_last_of(".");
-            string naam = argv_.substr(0, lastindex);
+            string naam = argv_.substr(backslash + 1, lastindex - backslash - 1);
             string herf_ = herf+naam+html+naam+py;
             html_file << "\n\t\t\t" + herf_;
             html_file << "\n\t\t</td>";

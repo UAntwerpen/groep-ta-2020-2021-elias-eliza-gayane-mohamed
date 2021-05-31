@@ -21,7 +21,7 @@ int main(int argc, char const* argv[]) {
         int file_count = 1;
         bool exists = true;
         while(exists){
-            string file_name = "../input/txt_files/python" + to_string(file_count) + ".txt";
+            string file_name = "input/txt_files/python" + to_string(file_count) + ".txt";
             ifstream infile(file_name);
             if(infile.good()) {
                 alle_files.emplace_back(file_name);
