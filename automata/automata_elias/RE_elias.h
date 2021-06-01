@@ -40,6 +40,8 @@ public:
 
     char getEpsilon() const;
 
+    void printStats();
+
 private:
     void make_transitions();
     void print(node* current, vector<int> staten);

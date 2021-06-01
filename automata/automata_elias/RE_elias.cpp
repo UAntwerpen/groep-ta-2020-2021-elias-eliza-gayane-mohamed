@@ -464,3 +464,47 @@ char RE_elias::getEpsilon() const {
 }
 
 RE_elias::RE_elias() {}
+
+void RE_elias::printStats(){
+    cout << "no_of_states=" << aantal_states << endl;
+    vector<string> alphabet = get_alphabet(regex, epsilon);
+    map<string,int> aantal_per_alphabet;
+
+    for(int i = 0; i < alphabet.size(); ++i){
+        aantal_per_alphabet[alphabet[i]] = 0;
+    }
+
+    vector<vector<string>> transitions;
+    get_transitions(regextree,transitions);
+
+    for(int i = 0; i < transitions.size(); ++i){
+        aantal_per_alphabet[transitions[i][2]] += 1;
+    }
+
+    for (std::map<string,int>::iterator it=aantal_per_alphabet.begin(); it!=aantal_per_alphabet.end(); ++it){
+        cout << "no_of_transitions[" << it->first << "]=" << it->second << endl;
+    }
+
+    map<string,int> transitions_amount;
+    for(int i = 0; i < transitions.size(); ++i){
+        transitions_amount[transitions[i][0]] = 0;
+    }
+
+    for(int i = 0; i < transitions.size(); ++i) {
+        transitions_amount[transitions[i][0]] += 1;
+    }
+    int degree0 = 1;
+    int degree1 = 0;
+    int degree2 = 0;
+    for(int i = 0; i < transitions.size(); ++i) {
+        if (transitions_amount[transitions[i][0]] == 1){
+            degree1 += 1;
+        }
+        if (transitions_amount[transitions[i][0]] == 2){
+            degree2 += 1;
+        }
+    }
+    cout << "degree[0]=" << degree0 << endl;
+    cout << "degree[1]=" << degree1 << endl;
+    cout << "degree[2]=" << degree2 << endl;
+}

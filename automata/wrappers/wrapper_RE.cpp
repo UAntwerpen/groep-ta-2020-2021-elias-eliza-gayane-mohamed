@@ -10,3 +10,7 @@ ENFA RE::toENFA(){
     ENFA return_enfa(enfaElias);
     return return_enfa;
 }
+
+void RE::printStats(){
+    reElias.printStats();
+}

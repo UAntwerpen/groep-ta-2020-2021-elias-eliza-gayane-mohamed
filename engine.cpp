@@ -21,7 +21,7 @@ int main(int argc, char const* argv[]) {
         int file_count = 1;
         bool exists = true;
         while(exists){
-            string file_name = "input/txt_files/python" + to_string(file_count) + ".txt";
+            string file_name = "python" + to_string(file_count) + ".txt";
             ifstream infile(file_name);
             if(infile.good()) {
                 alle_files.emplace_back(file_name);
@@ -141,8 +141,10 @@ int main(int argc, char const* argv[]) {
 
     /// het parsen van de files
     for(const string &f : alle_files){
-    Parser parser(f.c_str());
-    map<int, vector<string>> parsed_file = parser.getParsedFile();
+        string output = "input/txt_files/" + f;
+        const char* path = output.c_str();
+        Parser parser(path);
+        map<int, vector<string>> parsed_file = parser.getParsedFile();
 
         map<int, vector<pair<string, string>>> text_for_html;
         /// halen de regexen uit de safe

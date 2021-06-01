@@ -22,6 +22,7 @@ public:
 
     ENFA toENFA();
 
+    void printStats();
 };
 
 
