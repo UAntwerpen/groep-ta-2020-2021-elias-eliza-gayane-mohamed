@@ -147,7 +147,7 @@ int main(int argc, char const* argv[]) {
         map<int, vector<string>> parsed_file = parser.getParsedFile();
 
         map<int, vector<pair<string, string>>> text_for_html;
-        /// halen de regexen uit de safe
+        /// herkennen van woorden door DFA
         for(int j = 0; j < parsed_file.size(); j++){ // j is de lijn waaruit we lezen
             bool def = false;
             for(int k= 0; k < parsed_file[j].size(); k++) {
