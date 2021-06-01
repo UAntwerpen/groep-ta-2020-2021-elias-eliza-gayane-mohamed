@@ -83,7 +83,6 @@ pond = euro * 0.855529446488
 print(pond)
 
 #Oef 5
-#°F=(°C*(9/5))+32
 Celsius = 15
 Fahrenheit = (Celsius * (9/5) + 32)
 print(Fahrenheit)
